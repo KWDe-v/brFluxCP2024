@@ -9,7 +9,7 @@ Painel de controle Flux (FluxCP) para servidores rAthena.
 
 Requisitos
 ---------
-*PHP 8.2
+*PHP 7.2
 * Extensões PDO e PDO-MYSQL para PHP5 (incluindo suporte PHP_MYSQL)
 * MySQL 8
 *Opcional: GD2 (para emblemas de guilda e CAPTCHA de registro)
