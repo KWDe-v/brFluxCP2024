@@ -3,14 +3,14 @@ if (!defined('FLUX_ROOT')) exit;
 
 include 'status.php';
 $dom  = new DomDocument('1.0', 'utf-8');
-$root = $dom->createElement('ServerStatus'); // Root element.
+$root = $dom->createElement('ServerStatus'); // Elemento raiz.
 
 foreach ($serverStatus as $privServerName => $gameServers) {
 	$group  = $dom->createElement('Group');
 	$name   = $dom->createAttribute('name');
 	$name->nodeValue = $privServerName;
 	
-	// Append server name element.
+	// Acrescenta o elemento do nome do servidor.
 	$group->appendChild($name);
 	
 	foreach ($gameServers as $serverName => $gameServer) {

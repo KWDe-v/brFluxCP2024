@@ -5,10 +5,10 @@
 <?php endif ?>
 <?php if ($account): ?>
 <?php if (Flux::config('PincodeEnabled') && $session->account->pincode == NULL): ?>
-	<p class="red">There is no pincode set! Please login via the game client now to secure your account.</p>
+	<p class="red">Não há um código PIN! Faça login através do cliente do jogo agora para proteger sua conta.</p>
 <?php endif ?>
 <table class="vertical-table">
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('UsernameLabel')) ?></th>
 		<td><?php echo htmlspecialchars($account->userid) ?></td>
 		<th><?php echo htmlspecialchars(Flux::message('AccountIdLabel')) ?></th>
@@ -20,7 +20,7 @@
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('EmailAddressLabel')) ?></th>
 		<td>
 			<?php if ($account->email): ?>
@@ -36,7 +36,7 @@
 		<th><?php echo htmlspecialchars(Flux::message('AccountGroupIDLabel')) ?></th>
 		<td><?php echo (int)$account->group_id ?></td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('GenderLabel')) ?></th>
 		<td>
 			<?php if ($gender = $this->genderText($account->sex)): ?>
@@ -62,7 +62,7 @@
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('LoginCountLabel')) ?></th>
 		<td><?php echo number_format((int)$account->logincount) ?></td>
 		<th><?php echo htmlspecialchars(Flux::message('CreditBalanceLabel')) ?></th>
@@ -81,7 +81,7 @@
 			<?php echo $vipexpires ?>
 		</td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('LastLoginDateLabel')) ?></th>
 		<td colspan="3">
 			<?php if (!$account->lastlogin || $account->lastlogin <= '1000-01-01 00:00:00'): ?>
@@ -91,7 +91,7 @@
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th><?php echo htmlspecialchars(Flux::message('LastUsedIpLabel')) ?></th>
 		<td colspan="3">
 			<?php if ($account->last_ip): ?>
@@ -163,8 +163,8 @@
 		<th><?php echo htmlspecialchars(Flux::message('BanLogBannedByLabel')) ?></th>
 	</tr>
 	<?php foreach ($banInfo as $ban): ?>
-	<tr>
-		<td align="right"><?php echo htmlspecialchars($this->banTypeText($ban->ban_type)) ?></td>
+	<tr align="center">
+		<td><?php echo htmlspecialchars($this->banTypeText($ban->ban_type)) ?></td>
 		<td><?php echo htmlspecialchars($this->formatDateTime($ban->ban_date)) ?></td>
 		<td><?php echo nl2br(htmlspecialchars($ban->ban_reason)) ?></td>
 		<td>
@@ -190,7 +190,8 @@
 		<tr>
 			<th><?php echo htmlspecialchars(Flux::message('AccountViewSlotLabel')) ?></th>
 			<th><?php echo htmlspecialchars(Flux::message('AccountViewCharLabel')) ?></th>
-			<th><?php echo htmlspecialchars(Flux::message('AccountViewClassLabel')) ?></th>
+			<th colspan="2"><?php echo htmlspecialchars(Flux::message('AccountViewClassLabel')) ?></th>
+		
 			<th><?php echo htmlspecialchars(Flux::message('AccountViewLvlLabel')) ?></th>
 			<th><?php echo htmlspecialchars(Flux::message('AccountViewJlvlLabel')) ?></th>
 			<th><?php echo htmlspecialchars(Flux::message('AccountViewZenyLabel')) ?></th>
@@ -204,8 +205,8 @@
 			<th><?php echo htmlspecialchars(Flux::message('ResetMap')) ?></th>
 		</tr>
 		<?php foreach ($chars as $char): $zeny += $char->zeny; ?>
-		<tr>
-			<td align="right"><?php echo $char->char_num+1 ?></td>
+		<tr align="center">
+			<td><?php echo $char->char_num+1 ?></td>
 			<td>
 				<?php if ($auth->actionAllowed('character', 'view') && ($isMine || (!$isMine && $auth->allowedToViewCharacter))): ?>
 					<?php echo $this->linkToCharacter($char->char_id, $char->name, $serverName) ?>
@@ -213,7 +214,8 @@
 					<?php echo htmlspecialchars($char->name) ?>
 				<?php endif ?>
 			</td>
-			<td><?php echo htmlspecialchars($this->jobClassText($char->class)) ?></td>
+			<td ><?php echo htmlspecialchars($this->jobClassText($char->class)) ?></td>
+			<td ><img src="<?php echo $this->iconJob($char->class) ?>" /></td>
 			<td><?php echo (int)$char->base_level ?></td>
 			<td><?php echo (int)$char->job_level ?></td>
 			<td><?php echo number_format((int)$char->zeny) ?></td>
@@ -289,8 +291,8 @@
 		</tr>
 		<?php foreach ($items AS $item): ?>
 		<?php $icon = $this->iconImage($item->nameid) ?>
-		<tr>
-			<td align="right">
+		<tr align="center">
+			<td>
 				<?php if ($auth->actionAllowed('item', 'view')): ?>
 					<?php echo $this->linkToItem($item->nameid, $item->nameid) ?>
 				<?php else: ?>

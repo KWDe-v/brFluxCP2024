@@ -1,14 +1,14 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Viewing Monster';
+$title = 'Visualizando Monstro';
 $mobID = $params->get('id');
 
 require_once 'Flux/TemporaryTable.php';
 
-// Monsters table.
+//Tabela de monstros.
 $mobDB      = "{$server->charMapDatabase}.monsters";
-//here needs the same check if the server is renewal or not, I'm just lazy to do it by myself
+//aqui precisa da mesma verificação se o servidor está em renovação ou não, só estou com preguiça de fazer isso sozinho
 if($server->isRenewal) {
 	$fromTables = array("{$server->charMapDatabase}.mob_db_re", "{$server->charMapDatabase}.mob_db2_re");
 } else {
@@ -16,7 +16,7 @@ if($server->isRenewal) {
 }
 $tempMobs   = new Flux_TemporaryTable($server->connection, $mobDB, $fromTables);
 
-// Monster Skills table.
+// Tabela de Habilidades dos Monstros.
 $skillDB    = "{$server->charMapDatabase}.mobskills";
 if($server->isRenewal) {
 	$fromTables = array("{$server->charMapDatabase}.mob_skill_db_re", "{$server->charMapDatabase}.mob_skill_db2_re");
@@ -26,7 +26,7 @@ if($server->isRenewal) {
 
 $tempSkills = new Flux_TemporaryTable($server->connection, $skillDB, $fromTables);
 
-// Items table.
+//Tabela de itens.
 if($server->isRenewal) {
 	$fromTables = array("{$server->charMapDatabase}.item_db_re", "{$server->charMapDatabase}.item_db2_re");
 } else {
@@ -46,7 +46,7 @@ $col .= 'walk_speed, attack_delay, attack_motion, damage_motion, ';
 $col .= 'mvp_exp, ai, ';
 $col .= implode(', ', $mode_list).', ';		// Mode list
 
-// Item drops.
+// Itens descartados.
 $col .= 'drop1_item, drop1_rate, drop1_nosteal, ';
 $col .= 'drop2_item, drop2_rate, drop2_nosteal, ';
 $col .= 'drop3_item, drop3_rate, drop3_nosteal, ';
@@ -58,7 +58,7 @@ $col .= 'drop8_item, drop8_rate, drop8_nosteal, ';
 $col .= 'drop9_item, drop9_rate, drop9_nosteal, ';
 $col .= 'drop10_item, drop10_rate, drop10_nosteal, ';
 
-// MVP drops.
+// MVP cai.
 $col .= 'mvpdrop1_item, mvpdrop1_rate, ';
 $col .= 'mvpdrop2_item, mvpdrop2_rate, ';
 $col .= 'mvpdrop3_item, mvpdrop3_rate ';
@@ -70,9 +70,9 @@ $monster = $sth->fetch();
 
 
 if ($monster) {
-	$title   = "Viewing Monster ({$monster->name_english})";
+	$title   = "Visualizando Monstro ({$monster->name_english})";
 
-	// Mode
+	// Modo
 	$modes = array();
 	foreach($mode_list as $mode) if($monster->$mode) $modes[] = $mode;
 	

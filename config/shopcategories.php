@@ -1,16 +1,16 @@
 <?php
-// These are categories for the item shop. Pay close attention to the numbers,
-// as these numbers are stored in the database when you add an item to a specific
-// category, so it knows which category the item belongs to.
-// You may add/remove categories from here as you see fit.
-return array(
-	0 => 'Headgears',      // Headgears category, most likely doesn't include wings.
-	1 => 'Wings',          // Wings category, though most of the time wings are headgear, this is more dedicated.
-	2 => 'Armors',         // Armors category, most likely doesn't include headgears.
-	3 => 'Weapons',        // Weapons category.
-	4 => 'Healing Items',  // Good category to place healing items under, e.g., Yggdrasil Berries and the like.
-	5 => 'Pets',           // Some people may choose to sell pet eggs or pet-related items under here.
-	6 => 'Miscellaneous',  // Anything you can't really categorize, you can put under this category.
-	7 => 'Cards'           // Cards category.
-);
+// Estas são categorias para a loja de itens. Preste atenção nos números,
+// pois esses números são armazenados no banco de dados quando você adiciona um item a uma categoria específica,
+// para que ele saiba a qual categoria o item pertence.
+// Você pode adicionar/remover categorias daqui conforme necessário.
+return [
+	0 => 'Equipamentos de Cabeça',      // Categoria de equipamentos de cabeça, provavelmente não inclui asas.
+	1 => 'Asas',                        // Categoria de asas, embora na maioria das vezes as asas sejam equipamentos de cabeça, essa categoria é mais específica.
+	2 => 'Armaduras',                   // Categoria de armaduras, provavelmente não inclui equipamentos de cabeça.
+	3 => 'Armas',                       // Categoria de armas.
+	4 => 'Itens de cura',               // Boa categoria para colocar itens de cura, como Bagas de Yggdrasil e similares.
+	5 => 'Pets',        				// Algumas pessoas podem optar por vender ovos de animais de estimação ou itens relacionados a animais de estimação aqui.
+	6 => 'Diversos',               		// Qualquer coisa que você não consiga realmente categorizar, pode colocar nesta categoria.
+	7 => 'Cartas'                   	// Categoria de cartas.
+];
 ?>

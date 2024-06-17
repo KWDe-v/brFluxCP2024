@@ -13,15 +13,17 @@ foreach($ticketlist as $trow){
 $catsql = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.$tblcat WHERE cat_id = ?");
 $catsql->execute(array($trow->category));
 $catlist = $catsql->fetch();
-
-$rowoutput.='<tr >
+if($trow->status == 'Closed'){
+	$status = 'Fechado';
+}
+$rowoutput.='<tr  align="center">
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->ticket_id .'</a></td>
 				<td>'. $trow->account_id .'</td>
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->subject .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >
 					'. $catlist->name .'</a></td>
 				<td>
-					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $trow->status .'</strong></font>
+					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $status .'</strong></font>
 				</td>
 				<td width="50">';
 				if($trow->lastreply=='0'){$rowoutput.='<i>None</i>';} else {$rowoutput.= $trow->lastreply;}

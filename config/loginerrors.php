@@ -1,12 +1,12 @@
 <?php
-return array(
-	0 => 'Unexpected Error',
-	1 => 'Invalid Server',
-	2 => 'Invalid Credentials',
-	3 => 'Temporarily Banned',
-	4 => 'Permanently Banned',
-	5 => 'IP Banned',
-	6 => 'Invalid Security Code',
-	7 => 'Pending Confirmation'
-)
+return [
+	0 => 'Erro Inesperado',
+	1 => 'Servidor Inválido',
+	2 => 'Credenciais Inválidas',
+	3 => 'Banimento Temporário',
+	4 => 'Banimento Permanente',
+	5 => 'IP Banido',
+	6 => 'Código de Segurança Inválido',
+	7 => 'Confirmação Pendente'
+];
 ?>

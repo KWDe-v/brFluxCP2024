@@ -168,7 +168,7 @@ catch (Exception $e) {
 		$eLog  = new Flux_LogFile("$exceptionDir/$today.log");
 
 		// Log exception.
-		$eLog->puts('(%s) Exception %s: %s', get_class($e), get_class($e), $e->getMessage());
+		$eLog->puts('(%s) Exceção %s: %s', get_class($e), get_class($e), $e->getMessage());
 		foreach (explode("\n", $e->getTraceAsString()) as $traceLine) {
 			$eLog->puts('(%s) **TRACE** %s', get_class($e), $traceLine);
 		}
@@ -178,9 +178,9 @@ catch (Exception $e) {
 		if(Flux::config('DiscordSendOnErrorException')) {
 			sendtodiscord(Flux::config('DiscordWebhookURL'), '```ansi
 [2;31mERROR[0m
-Error: '. get_class($e) .'
-Exception: '. $e->getMessage() .'
-File: '. $e->getFile() .':'. $e->getLine() .'```');
+Erro: '. get_class($e) .'
+Exceção: '. $e->getMessage() .'
+Arquivo: '. $e->getFile() .':'. $e->getLine() .'```');
 		}
 	}
 

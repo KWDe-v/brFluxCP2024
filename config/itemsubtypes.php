@@ -1,43 +1,43 @@
 <?php
-return array(
-	'weapon' => array(
-		'1haxe'			=> 'One-Handed Axe',
-		'1hspear'		=> 'One-Handed Spear',
-		'1hsword'		=> 'One-Handed Sword',
-		'2haxe'			=> 'Two-Handed Axe',
-		'2hspear'		=> 'Two-Handed Spear',
-		'2hstaff'		=> 'Two-Handed Staff',
-		'2hsword'		=> 'Two-Handed Sword',
-		'book'			=> 'Book',
-		'bow'			=> 'Bow',
-		'dagger'		=> 'Dagger',
-		'gatling'		=> 'Gatling Gun',
-		'grenade'		=> 'Grenade Launcher',
-		'huuma'			=> 'Fuuma Shuriken',
+return [
+	'weapon' => [
+		'1haxe'			=> 'Machado de Uma Mão',
+		'1hspear'		=> 'Lança de Uma Mão',
+		'1hsword'		=> 'Espada de Uma Mão',
+		'2haxe'			=> 'Machado de Duas Mãos',
+		'2hspear'		=> 'Lança de Duas Mãos',
+		'2hstaff'		=> 'Cajado de Duas Mãos',
+		'2hsword'		=> 'Espada de Duas Mãos',
+		'book'			=> 'Livro',
+		'bow'			=> 'Arco',
+		'dagger'		=> 'Adaga',
+		'gatling'		=> 'Metralhadora Gatling',
+		'grenade'		=> 'Lança-Granadas',
+		'huuma'			=> 'Shuriken Huuma',
 		'katar'			=> 'Katar',
-		'knuckle'		=> 'Knuckle',
-		'mace'			=> 'Mace',
-		'musical'		=> 'Musical Instrument',
-		'revolver'		=> 'Revolver',
+		'knuckle'		=> 'Punho',
+		'mace'			=> 'Maça',
+		'musical'		=> 'Instrumento Musical',
+		'revolver'		=> 'Revólver',
 		'rifle'			=> 'Rifle',
-		'shotgun'		=> 'Shotgun',
-		'staff'			=> 'Staff',
-		'whip'			=> 'Whip'
-	),
-	'ammo' => array(
-		'arrow'			=> 'Arrow',
-		'bullet'		=> 'Bullet',
-		'dagger'		=> 'Throwing Dagger',
-		'cannonball'	=> 'Cannonball',
-		'grenade'		=> 'Grenade',
+		'shotgun'		=> 'Espingarda',
+		'staff'			=> 'Cajado',
+		'whip'			=> 'Chicote'
+	],
+	'ammo' => [
+		'arrow'			=> 'Flecha',
+		'bullet'		=> 'Bala',
+		'dagger'		=> 'Adaga Arremessável',
+		'cannonball'	=> 'Bala de Canhão',
+		'grenade'		=> 'Granada',
 		'kunai'			=> 'Kunai',
-		'shell'			=> 'Shell',
+		'shell'			=> 'Concha',
 		'shuriken'		=> 'Shuriken',
-		'throwweapon'	=> 'Throwable Item (Sling Item)'
-	),
-	'card' => array(
-		'normal'			=> 'Card',
-		'enchant'			=> 'Enchant'
-	)
-)
+		'throwweapon'	=> 'Arremessável'
+	],
+	'card' => [
+		'normal'		=> 'Carta',
+		'enchant'		=> 'Encantamento'
+	]
+];
 ?>

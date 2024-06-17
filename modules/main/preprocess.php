@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-// Check for "special" date fields.
+// Verificar campos de data "especiais".
 $__dates = array();
 foreach ($params->toArray() as $key => $value) {
 	if (preg_match('&^(.+?)_(year|month|day|hour|minute|second)$&', $key, $m)) {
@@ -9,8 +9,8 @@ foreach ($params->toArray() as $key => $value) {
 		$__dateType  = $m[2];
 		
 		if (!array_key_exists($__dateParam, $__dates)) {
-			// Not too sure why, but if I don't create a separate index for this array,
-			// It will use the previous iteration's reference.
+			// Não tenho certeza do porquê, mas se eu não criar um índice separado para este array,
+			// ele usará a referência da iteração anterior.
 			$__dateArray[$__dateParam] = array();
 			$__dates[$__dateParam] = new Flux_Config($__dateArray[$__dateParam]);
 		}
@@ -27,10 +27,10 @@ foreach ($__dates as $__dateName => $__date) {
 	$_minute = $__date->get('minute');
 	$_second = $__date->get('second');
 	
-	// Construct DATE.
+	// Construir DATA.
 	if (!is_null($_year) && !is_null($_month) && !is_null($_day)) {
 		$_format = sprintf('%04d-%02d-%02d', $_year, $_month, $_day);
-		// Construct DATETIME.
+		// Construir DATA E HORA.
 		if (!is_null($_hour) && !is_null($_minute) && !is_null($_second)) {
 			$_format .= sprintf(' %02d:%02d:%02d', $_hour, $_minute, $_second);
 		}
@@ -68,7 +68,7 @@ if ($params->get('merchant_return_link') && $ppReturn['txn_id'] && $ppReturn['tx
 }
 
 
-// Update preferred server.
+//Atualiza o servidor preferencial.
 if (($preferred_server = $params->get('preferred_server')) && $session->getAthenaServer($preferred_server)) {
 	$session->setAthenaServerNameData($params->get('preferred_server'));
 	if (!array_key_exists('preferred_server', $_GET)) {
@@ -85,10 +85,10 @@ if (($preferred_theme = $params->get('preferred_theme'))) {
 	}
 }
 
-// Preferred server.
+// Servidor preferido.
 $server = $session->getAthenaServer();
 
-// WoE-based authorization.
+// Autorização baseada em WoE.
 $_thisModule = $params->get('module');
 $_thisAction = $params->get('action');
 

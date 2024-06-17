@@ -1,9 +1,9 @@
 <?php
-// rA attributes.
-return array(
-	1 => 'Ice',
-	2 => 'Earth',
-	3 => 'Fire',
-	4 => 'Wind',
-);
+// Atributos do rA.
+return [
+    1 => 'Gelo',
+    2 => 'Terra',
+    3 => 'Fogo',
+    4 => 'Vento',
+];
 ?>

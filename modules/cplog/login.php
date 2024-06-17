@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'List Logins';
+$title = 'Lista de logins';
 
 $loginLogTable = Flux::config('FluxTables.LoginLogTable');
 $sqlpartial    = "WHERE 1=1 ";

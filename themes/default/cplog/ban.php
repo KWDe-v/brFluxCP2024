@@ -1,16 +1,16 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Account Bans</h2>
-<p class="toggler"><a href="javascript:toggleSearchForm()">Search...</a></p>
+<h2>Banimentos de conta</h2>
+<p class="toggler"><a href="javascript:toggleSearchForm()">Procurar...</a></p>
 <form action="<?php echo $this->url ?>" method="get" class="search-form">
 	<?php echo $this->moduleActionFormInputs($params->get('module'), $params->get('action')) ?>
 	<p>
 		<label for="account">Account:</label>
 		<input type="text" name="account" id="account" value="<?php echo htmlspecialchars($params->get('account') ?: '') ?>" />
 		...
-		<label for="banned_by">Banned By:</label>
+		<label for="banned_by">Banido Por:</label>
 		<input type="text" name="banned_by" id="banned_by" value="<?php echo htmlspecialchars($params->get('banned_by') ?: '') ?>" />
 		...
-		<label for="ban_type">Ban Type:</label>
+		<label for="ban_type">Tipo do Banimento:</label>
 		<select name="ban_type" id="ban_type">
 			<option value=""<?php if (!($ban_type=$params->get('ban_type'))) echo ' selected="selected"' ?>><?php echo htmlspecialchars(Flux::message('AllLabel')) ?></option>
 			<option value="unban"<?php if ($ban_type == 'unban') echo ' selected="selected"' ?>>Unban</option>
@@ -18,17 +18,17 @@
 		</select>
 	</p>
 	<p>
-		<label for="use_ban">Ban Date:</label>
+		<label for="use_ban">Data do Banimento:</label>
 		<input type="checkbox" name="use_ban" id="use_ban"<?php if ($params->get('use_ban')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateTimeField('ban') ?>
 		...
-		<label for="use_ban_until">Ban Until:</label>
+		<label for="use_ban_until">Banido Até:</label>
 		<input type="checkbox" name="use_ban_until" id="use_ban_until"<?php if ($params->get('use_ban_until')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateTimeField('ban_until') ?>
 	</p>
 	<p>
-		<input type="submit" value="Search" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Procurar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 	</p>
 </form>
 <?php if ($bans): ?>
@@ -36,15 +36,15 @@
 <table class="horizontal-table">
 	<tr>
 		<th><?php echo $paginator->sortableColumn('account', 'Account') ?></th>
-		<th><?php echo $paginator->sortableColumn('banned_by', 'Banned By') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_type', 'Ban Type') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_date', 'Ban Date') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_until', 'Ban Until') ?></th>
-		<th>Ban Reason</th>
+		<th><?php echo $paginator->sortableColumn('banned_by', 'Banido Por') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_type', 'Tipo do Banimento') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_date', 'Data do Banimento') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_until', 'Banido Até') ?></th>
+		<th>Motivo do Banimento</th>
 	</tr>
 	<?php foreach ($bans as $ban): ?>
-	<tr>
-		<td align="right">
+	<tr align="center">
+		<td >
 			<?php if ($auth->actionAllowed('account', 'view') && $auth->allowedToViewAccount): ?>
 				<?php echo $this->linkToAccount($ban->account_id, $ban->banned_userid) ?>
 			<?php else: ?>
@@ -60,13 +60,13 @@
 		</td>
 		<td>
 			<?php if (!$ban->ban_type): ?>
-				Unban
+				Desbanido
 			<?php elseif ($ban->ban_type == 1): ?>
-				<span class="account-state state-banned">Temporary Ban</span>
+				<span class="account-state state-banned">Banimento temporário</span>
 			<?php elseif ($ban->ban_type == 2): ?>
-				<span class="account-state state-permanently-banned">Permanent Ban</span>
+				<span class="account-state state-permanently-banned">Banimento Permanente</span>
 			<?php else: ?>
-				<span class="not-applicable">Unknown</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 		<td>
@@ -85,7 +85,7 @@
 		</td>
 		<td>
 			<?php if ($ban->ban_reason == ''): ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php else: ?>
 				<?php echo htmlspecialchars($ban->ban_reason) ?>
 			<?php endif ?>
@@ -95,5 +95,5 @@
 </table>
 <?php echo $paginator->getHTML() ?>
 <?php else: ?>
-<p>No logs were found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhum registro foi encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

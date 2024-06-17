@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Viewing Item';
+$title = 'Visualizando Item';
 
 require_once 'Flux/TemporaryTable.php';
 
@@ -27,10 +27,10 @@ $col .= 'name_english AS name, type, subtype, ';
 $col .= 'price_buy, price_sell, weight/10 AS weight, attack, defense, `range`, slots, gender, ';
 $col .= 'weapon_level, equip_level_min, equip_level_max, refineable, view, alias_name, ';
 $col .= 'script, equip_script, unequip_script, origin_table, ';
-$col .= implode(', ', $job_list).', ';		// Job list
-$col .= implode(', ', $class_list).', ';	// Class list
+$col .= implode(', ', $job_list).', ';		// Lista de job
+$col .= implode(', ', $class_list).', ';	// lista de classe
 $col .= implode(', ', $equip_list).', ';
-$col .= implode(', ', $trade_list).', ';	// Trade restriction list
+$col .= implode(', ', $trade_list).', ';	// Lista de restrições comerciais
 
 $col .= "$shopTable.cost, $shopTable.id AS shop_item_id, ";
 if(Flux::config('ShowItemDesc')){
@@ -53,7 +53,7 @@ $item = $sth->fetch();
 $isCustom = null;
 
 if ($item) {
-	$title = "Viewing Item ($item->name)";
+	$title = "Visualizando Item ($item->name)";
 	$isCustom = (bool)preg_match('/item_db2$/', $item->origin_table);
 
 	// Jobs
@@ -80,7 +80,7 @@ if ($item) {
 	$col  = 'id AS monster_id, name_english AS monster_name, level AS monster_level, ';
 	$col .= 'race AS monster_race, element AS monster_element, element_level AS monster_ele_lv, mvp_exp, `class` as boss, mode_mvp, ';
 
-	// Normal drops.
+	// Drops Normais.
 	$col .= 'drop1_item, drop1_rate, drop1_nosteal, drop1_option, drop1_index, ';
 	$col .= 'drop2_item, drop2_rate, drop2_nosteal, drop2_option, drop2_index, ';
 	$col .= 'drop3_item, drop3_rate, drop3_nosteal, drop3_option, drop3_index, ';
@@ -92,14 +92,14 @@ if ($item) {
 	$col .= 'drop9_item, drop9_rate, drop9_nosteal, drop9_option, drop9_index, ';
 	$col .= 'drop10_item, drop10_rate, drop10_nosteal, drop10_option, drop10_index, ';
 
-	// MVP rewards.
+	// Recompensa de MVP.
 	$col .= 'mvpdrop1_item, mvpdrop1_rate, mvpdrop1_option, mvpdrop1_index, ';
 	$col .= 'mvpdrop2_item, mvpdrop2_rate, mvpdrop2_option, mvpdrop2_index, ';
 	$col .= 'mvpdrop3_item, mvpdrop3_rate, mvpdrop3_option, mvpdrop3_index ';
 
 	$sql  = "SELECT $col FROM $mobDB WHERE ";
 
-	// Normal drops.
+	// Drops Normais.
 	$sql .= 'drop1_item = ? OR ';
 	$sql .= 'drop2_item = ? OR ';
 	$sql .= 'drop3_item = ? OR ';
@@ -111,7 +111,7 @@ if ($item) {
 	$sql .= 'drop9_item = ? OR ';
 	$sql .= 'drop10_item = ? OR ';
 
-	// MVP rewards.
+	// Recompensa de MVP.
 	$sql .= 'mvpdrop1_item = ? OR ';
 	$sql .= 'mvpdrop2_item = ? OR ';
 	$sql .= 'mvpdrop3_item = ? ';
@@ -126,7 +126,7 @@ if ($item) {
 		'mvpdrop1', 'mvpdrop2', 'mvpdrop3'
 	);
 
-	// Sort callback.
+	// Classifica o retorno de chamada.
 	function __tmpSortDrops($arr1, $arr2)
 	{
 		if ($arr1['drop_rate'] == $arr2['drop_rate']) {
@@ -222,7 +222,7 @@ if ($item) {
 		}
 	}
 
-	// Sort so that monsters are ordered by drop chance and name.
+// Classifique para que os monstros sejam ordenados por chance de drop e nome.
 	usort($itemDrops, '__tmpSortDrops');
 }
 ?>

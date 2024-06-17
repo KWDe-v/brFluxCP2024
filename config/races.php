@@ -1,15 +1,15 @@
 <?php
-// rA monster races.
-return array(
-	 'Formless'		=> 'Formless',
-	 'Undead'		=> 'Undead',
-	 'Brute'		=> 'Brute',
-	 'Plant'		=> 'Plant',
-	 'Insect'		=> 'Insect',
-	 'Fish'			=> 'Fish',
-	 'Demon'		=> 'Demon',
-	 'Demihuman'	=> 'Demi-Human',
-	 'Angel'		=> 'Angel',
-	 'Dragon'		=> 'Dragon'
-)
+// Raças de monstros rA.
+return [
+	 'Formless'		=> 'Amorfo',
+	 'Undead'		=> 'Morto-vivo',
+	 'Brute'		=> 'Bruto',
+	 'Plant'		=> 'Planta',
+	 'Insect'		=> 'Inseto',
+	 'Fish'			=> 'Peixe',
+	 'Demon'		=> 'Demônio',
+	 'Demihuman'	=> 'Demi-humano',
+	 'Angel'		=> 'Anjo',
+	 'Dragon'		=> 'Dragão'
+];
 ?>

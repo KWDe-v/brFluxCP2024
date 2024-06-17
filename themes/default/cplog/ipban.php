@@ -1,50 +1,50 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>IP Bans</h2>
-<p class="toggler"><a href="javascript:toggleSearchForm()">Search...</a></p>
+<h2>Banimetos de IP</h2>
+<p class="toggler"><a href="javascript:toggleSearchForm()">Procurar...</a></p>
 <form action="<?php echo $this->url ?>" method="get" class="search-form">
 	<?php echo $this->moduleActionFormInputs($params->get('module'), $params->get('action')) ?>
 	<p>
-		<label for="ip">IP Address:</label>
+		<label for="ip">Endereço de IP:</label>
 		<input type="text" name="ip" id="ip" value="<?php echo htmlspecialchars($params->get('ip') ?: '') ?>" />
 		...
-		<label for="banned_by">Banned By:</label>
+		<label for="banned_by">Banido Por:</label>
 		<input type="text" name="banned_by" id="banned_by" value="<?php echo htmlspecialchars($params->get('banned_by') ?: '') ?>" />
 		...
-		<label for="ban_type">Ban Type:</label>
+		<label for="ban_type">Tipo do Banimento:</label>
 		<select name="ban_type" id="ban_type">
 			<option value=""<?php if (!($ban_type=$params->get('ban_type'))) echo ' selected="selected"' ?>><?php echo htmlspecialchars(Flux::message('AllLabel')) ?></option>
-			<option value="unban"<?php if ($ban_type == 'unban') echo ' selected="selected"' ?>>Unban</option>
-			<option value="ban"<?php if ($ban_type == 'ban') echo ' selected="selected"' ?>>Ban</option>
+			<option value="unban"<?php if ($ban_type == 'unban') echo ' selected="selected"' ?>>Desbanido</option>
+			<option value="ban"<?php if ($ban_type == 'ban') echo ' selected="selected"' ?>>Banido</option>
 		</select>
 	</p>
 	<p>
-		<label for="use_ban">Ban Date:</label>
+		<label for="use_ban">Data do Banimento:</label>
 		<input type="checkbox" name="use_ban" id="use_ban"<?php if ($params->get('use_ban')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateTimeField('ban') ?>
 		...
-		<label for="use_ban_until">Ban Until:</label>
+		<label for="use_ban_until">Banido Até:</label>
 		<input type="checkbox" name="use_ban_until" id="use_ban_until"<?php if ($params->get('use_ban_until')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateTimeField('ban_until') ?>
 	</p>
 	<p>
-		<input type="submit" value="Search" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Procurar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 	</p>
 </form>
 <?php if ($ipbans): ?>
 <?php echo $paginator->infoText() ?>
 <table class="horizontal-table">
 	<tr>
-		<th><?php echo $paginator->sortableColumn('ip', 'IP Address') ?></th>
-		<th><?php echo $paginator->sortableColumn('banned_by', 'Banned By') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_type', 'Ban Type') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_date', 'Ban Date') ?></th>
-		<th><?php echo $paginator->sortableColumn('ban_until', 'Ban Until') ?></th>
-		<th>Ban Reason</th>
+		<th><?php echo $paginator->sortableColumn('ip', 'Endereço de IP') ?></th>
+		<th><?php echo $paginator->sortableColumn('banned_by', 'Banido Por') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_type', 'Tipo do Banimento') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_date', 'Data do Banimento') ?></th>
+		<th><?php echo $paginator->sortableColumn('ban_until', 'Banido Até') ?></th>
+		<th>Motivo do Banimento</th>
 	</tr>
 	<?php foreach ($ipbans as $ipban): ?>
-	<tr>
-		<td align="right">
+	<tr align="center">
+		<td>
 			<?php if ($auth->actionAllowed('account', 'index')): ?>
 				<?php echo $this->linkToAccountSearch(array('last_ip' => $ipban->ip_address), $ipban->ip_address) ?>
 			<?php else: ?>
@@ -60,11 +60,11 @@
 		</td>
 		<td>
 			<?php if (!$ipban->ban_type): ?>
-				Unban
+				Desbanido
 			<?php elseif ($ipban->ban_type == 1): ?>
-				<span class="account-state state-banned">Ban</span>
+				<span class="account-state state-banned">Banido</span>
 			<?php else: ?>
-				<span class="not-applicable">Unknown</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 		<td>
@@ -93,5 +93,5 @@
 </table>
 <?php echo $paginator->getHTML() ?>
 <?php else: ?>
-<p>No logs were found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhum registro foi encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

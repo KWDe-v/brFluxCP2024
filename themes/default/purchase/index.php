@@ -1,6 +1,7 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Purchase</h2>
-<p>Items in this shop are purchased using <span class="keyword">donation credits</span> and not real money.  Donation Credits are rewarded to players who <a href="<?php echo $this->url('donate') ?>">make a donation to our server</a>, helping us cover the costs of maintaining and running the server.</p>
+<h2>Compra</h2>
+<p>Os itens desta loja são adquiridos usando <span class="keyword">créditos de doação</span> e não dinheiro real. Créditos de Doação são recompensados aos jogadores que <a href="<?php echo $this->url('donate') ?>">fazem uma doação para o nosso servidor</a>, nos ajudando a cobrir os custos de manutenção e operação do servidor.</p>
+
 <h2><span class="shop-server-name"><?php echo htmlspecialchars($server->serverName) ?></span> Item Shop</h2>
 <p class="action">
 	<a href="<?php echo $this->url('purchase', 'index') ?>"<?php if (is_null($category)) echo ' class="current-shop-category"' ?>>
@@ -18,9 +19,9 @@
 <?php endif ?>
 <?php if ($items): ?>
 <?php if ($session->isLoggedIn()): ?>
-	<?php if ($cartItems=$server->cart->getCartItemNames()): ?><p class="cart-items-text">Items in your cart: <span class="cart-item-name"><?php echo implode('</span>, <span class="cart-item-name">', array_map('htmlspecialchars', $cartItems)) ?></span>.</p><?php endif ?>
-	<p class="cart-info-text">You have <span class="cart-item-count"><?php echo number_format(count($cartItems)) ?></span> item(s) in your cart.</p>
-	<p class="cart-total-text">Your current subtotal is <span class="cart-sub-total"><?php echo number_format($server->cart->getTotal()) ?></span> credit(s).</p>
+	<?php if ($cartItems=$server->cart->getCartItemNames()): ?><p class="cart-items-text">Itens no Seu Carrinho: <span class="cart-item-name"><?php echo implode('</span>, <span class="cart-item-name">', array_map('htmlspecialchars', $cartItems)) ?></span>.</p><?php endif ?>
+	<p class="cart-info-text">Você tem <span class="cart-item-count"><?php echo number_format(count($cartItems)) ?></span> item(s) no seu carrinho.</p>
+	<p class="cart-total-text">Seu subtotal atual é <span class="cart-sub-total"><?php echo number_format($server->cart->getTotal()) ?></span> credito(s).</p>
 <?php endif ?>
 <?php echo $paginator->infoText() ?>
 <table class="shop-table">
@@ -41,22 +42,22 @@
 			<p class="shop-item-info"><?php echo $item->shop_item_info ?></p>
 			<p class="shop-item-action">
 				<?php if ($auth->actionAllowed('item', 'view')): ?>
-				<?php echo $this->linkToItem($item->shop_item_nameid, 'View Item') ?>
+				<?php echo $this->linkToItem($item->shop_item_nameid, 'Ver Item') ?>
 				<?php endif ?>
 				<?php if ($auth->allowedToEditShopItem): ?>
-				/ <a href="<?php echo $this->url('itemshop', 'edit', array('id' => $item->shop_item_id)) ?>">Modify</a>
+				/ <a href="<?php echo $this->url('itemshop', 'edit', array('id' => $item->shop_item_id)) ?>">Modificar</a>
 				<?php endif ?>
 				<?php if ($auth->allowedToDeleteShopItem): ?>
 				/ <a href="<?php echo $this->url('itemshop', 'delete', array('id' => $item->shop_item_id)) ?>"
-					onclick="return confirm('Are you sure you want to remove this item from the item shop?')">Delete</a>
+					onclick="return confirm('Are you sure you want to remove this item from the item shop?')">Deletar</a>
 				<?php endif ?>
 			</p>
 		</td>
 		<td class="shop-item-cost-qty">
-			<p><span class="cost"><?php echo number_format($item->shop_item_cost) ?></span> credits.</p>
+			<p><span class="cost"><?php echo number_format($item->shop_item_cost) ?></span> créditos.</p>
 			<p class="shop-item-action">
 				<?php if ($auth->actionAllowed('purchase', 'add')): ?>
-				<a href="<?php echo $this->url('purchase', 'add', array('id' => $item->shop_item_id)) ?>"><strong>Add to Cart</strong></a>
+				<a href="<?php echo $this->url('purchase', 'add', array('id' => $item->shop_item_id)) ?>"><strong>Adicionar ao Carrinho</strong></a>
 				<?php endif ?>
 			</p>
 		</td>
@@ -65,5 +66,5 @@
 </table>
 <?php echo $paginator->getHTML() ?>
 <?php else: ?>
-<p>There are currently no items for sale.</p>
+<p>No momento não há itens à venda.</p>
 <?php endif ?>

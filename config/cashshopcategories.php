@@ -1,19 +1,19 @@
 <?php
-// These are categories for the cash shop. Pay close attention to the numbers,
-// as these numbers are stored in the database when you add an item to a specific
-// category, so it knows which category the item belongs to.
+// Estas são categorias para a loja de itens. Preste atenção aos números,
+// pois esses números são armazenados no banco de dados quando você adiciona um item a uma categoria específica,
+// para que saiba a qual categoria o item pertence.
 
-// Keep in mind that different texture files will display different categories in-game.
-// These are the same used in rAthena's db files.
-return array(
-	0 => 'New',
-	1 => 'Hot',
-	2 => 'Limited',
-	3 => 'Rental',
-	4 => 'Gear',
-	5 => 'Buff',
-	6 => 'Heal',
-	7 => 'Other',
-	8 => 'Sale'
-);
+// Tenha em mente que diferentes arquivos de textura exibirão diferentes categorias no jogo.
+// Estas são as mesmas usadas nos arquivos de banco de dados do rAthena.
+return [
+    0 => 'Novo',
+    1 => 'Quente',
+    2 => 'Limitado',
+    3 => 'Aluguel',
+    4 => 'Equipamento',
+    5 => 'Buff',
+    6 => 'Cura',
+    7 => 'Outros',
+    8 => 'Venda'
+];
 ?>

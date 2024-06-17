@@ -8,7 +8,7 @@ require_once 'Flux/TemporaryTable.php';
 
 if (trim($mvpdata) === '') { $mvpdata = null; }
 
-// List MVPS
+// Lista de MVPS
 $tableName  = "{$server->charMapDatabase}.monsters";
 if($server->isRenewal) {
     $fromTables = array("{$server->charMapDatabase}.mob_db_re", "{$server->charMapDatabase}.mob_db2_re");
@@ -17,7 +17,7 @@ if($server->isRenewal) {
 }
 $tempTable  = new Flux_TemporaryTable($server->connection, $tableName, $fromTables);
 
-// Get all group_id based on killer_char_id
+// Pega todos group_id baseados em killer_char_id
 $sql = "SELECT DISTINCT(`kill_char_id`) FROM {$server->logsDatabase}.`mvplog`";
 $sql_params = array();
 if ($mvpdata) {
@@ -30,7 +30,7 @@ $killer_char_ids = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
 
 $char_ids_filter = [];
 if(count($killer_char_ids)) {
-    // Get group id of the killer and filter -_-
+    // Obtém o ID do grupo do assassino e filtra -_-
     $groups = AccountLevel::getGroupID((int)Flux::config('RankingHideGroupLevel'), '<');
     $sql = "SELECT `char`.`char_id` FROM {$server->charMapDatabase}.`char`";
     $sql .= " LEFT JOIN {$server->loginDatabase}.`login` ON `char`.`account_id` = `login`.`account_id`";
@@ -52,7 +52,7 @@ $char_ids = array();
 $monsters = array();
 
 if($mvpdata){
-    // Players with most kills
+    //Jogadores com mais mortes
     $bind[] = $mvpdata;
     $col = "mlog.kill_char_id, mlog.monster_id, count(*) AS count ";
     $sql = "SELECT $col FROM {$server->logsDatabase}.`mvplog` AS mlog ";
@@ -71,7 +71,7 @@ if($mvpdata){
     }
 } else {
 
-    // Latest x Kills
+    // Últimas x mortes
     $col = "mlog.mvp_id, mlog.mvp_date, mlog.kill_char_id, mlog.monster_id, mlog.mvpexp, mlog.map ";
     $sql = "SELECT $col FROM {$server->logsDatabase}.`mvplog` AS mlog ";
     if (count($char_ids_filter)) {

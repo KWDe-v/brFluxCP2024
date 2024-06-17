@@ -10,9 +10,9 @@ $charsql->execute(array($session->account->account_id));
 $charlist = $charsql->fetchAll();
 $charselect=NULL;
 if(!$charlist){
-	$charselect='<option value="-1">No Chars Available</option>';
+	$charselect='<option value="-1">Nenhum personagens disponível</option>';
 } else {
-	$charselect='<option value="0">All Characters</option>';
+	$charselect='<option value="0">Todos os personagens</option>';
 	foreach($charlist as $char){$charselect.='<option value="'. $char->char_id .'">'. $char->name .'</option>';}
 }
 
@@ -37,7 +37,7 @@ if(isset($_POST['account_id'])){
 
 	if(Flux::config('DiscordUseWebhook')) {
 		if(Flux::config('DiscordSendOnNewTicket')) {
-			sendtodiscord(Flux::config('DiscordWebhookURL'), 'New Ticket Created: '. $subject);
+			sendtodiscord(Flux::config('DiscordWebhookURL'), 'Novo Ticket Aberto: '. $subject);
 		}
 	}
 	
@@ -58,10 +58,12 @@ if(isset($_POST['account_id'])){
 			require_once 'Flux/Mailer.php';
 			$name = $session->loginAthenaGroup->serverName;
 			$mail = new Flux_Mailer();
-			$sent = $mail->send($email, 'New Ticket Created', 'newticket', array(
+			$link = $this->url('servicedesk', 'staffindex', array('_host' => true));
+			$sent = $mail->send($email, 'Novo Ticket Aberto', 'newticket', array(
 				'Category'		=> $catlist->name,
 				'Subject'		=> $subject,
-				'Text'			=> $text
+				'Text'			=> $text,
+				'ViewTicket'	=> htmlspecialchars($link)
 			));
 		}
 	}

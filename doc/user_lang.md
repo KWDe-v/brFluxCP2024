@@ -1,18 +1,18 @@
-Language Files
+Arquivos de idioma
 ======
 
-How do they work?
+Como eles funcionam?
 ---------
-The **lang/** directory contains translations for use with FluxCP. The language used is controlled by the 'DefaultLanguage' setting in config/application.php.
+O diretório **lang/** contém traduções para uso com FluxCP. O idioma usado é controlado pela configuração 'DefaultLanguage' em config/application.php.
 
-Simply put, `'DefaultLanguage' => 'en_us'` will load the American English language file and use the contained strings wherever `Flux::message()` is used within theme files. There are a few others within the `lang/` directory, but unfortunately they aren't maintained.
+Simplificando, `'DefaultLanguage' => 'en_us'` carregará o arquivo do idioma inglês americano e usará as strings contidas sempre que `Flux::message()` for usado nos arquivos de tema. Existem alguns outros no diretório `lang/`, mas infelizmente eles não são mantidos.
 
 
-How do we use them?
+Como os usamos?
 ---------
-For example, in a theme file that is displaying whether a players' character is male or female, you would see `<?php echo Flux::message('GenderTypeMale') ?>` or `<?php echo Flux::message('GenderTypeFemale') ?>`.
+Por exemplo, em um arquivo de tema que mostra se o personagem de um jogador é masculino ou feminino, você veria `<?php echo Flux::message('GenderTypeMale') ?>` ou `<?php echo Flux::message ('GenderTypeFemale') ?>`.
 
-The menus that are defined in `config/application.php` are set to automatically use the language files. For example, lets look at this specific menu:
+Os menus definidos em `config/application.php` são configurados para usar automaticamente os arquivos de idioma. Por exemplo, vejamos este menu específico:
 
 ```
 'MenuItems'		=> array(
@@ -23,10 +23,10 @@ The menus that are defined in `config/application.php` are set to automatically 
 ),
 ```
 
-When the page is rendered, you will see that these strings are replaced with their counterparts from the language file.
-'MainMenuLabel' becomes 'Main Menu', 'HomeLabel' becomes 'Home', 'NewsLabel' becomes 'News'.
+Quando a página for renderizada, você verá que essas strings são substituídas por suas contrapartes no arquivo de idioma.
+'MainMenuLabel' torna-se 'Menu Principal', 'HomeLabel' torna-se 'Home', 'NewsLabel' torna-se 'Notícias'.
 
 
-Common Misuse
+Uso Indevido Comum
 ---------
-Many people still think that the 'Label' portion of these strings should be removed within the config file as it's outputting 'HomeLabel' to the page instead of 'Home'. **This is incorrect.** This simply means that the theme you're using was built earlier than August 2014 and you shouldn't be using it.
+Muitas pessoas ainda pensam que a parte 'Label' dessas strings deve ser removida do arquivo de configuração, pois está gerando 'HomeLabel' para a página em vez de 'Home'. **Isso está incorreto.** Isso significa simplesmente que o tema que você está usando foi criado antes de agosto de 2014 e você não deveria usá-lo.

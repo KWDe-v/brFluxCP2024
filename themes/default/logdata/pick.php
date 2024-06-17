@@ -17,8 +17,8 @@
 		<th><?php echo $paginator->sortableColumn('map', Flux::message('PickLogMapLabel')) ?></th>
 	</tr>
 	<?php foreach ($picks as $pick): ?>
-	<tr>
-		<td align="right"><?php echo $this->formatDateTime($pick->time) ?></td>
+	<tr  align="center">
+		<td><?php echo $this->formatDateTime($pick->time) ?></td>
 		<td>
 			<?php if ($pick->char_name): ?>
 				<?php if ($pick->type == 'M' || $pick->type == 'L'): ?>

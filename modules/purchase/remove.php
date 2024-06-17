@@ -12,20 +12,20 @@ if (!is_null($num)) {
 	$nRemoved = $server->cart->deleteByItemNum($num);
 	if ($nRemoved) {
 		if (!$server->cart->isEmpty()) {
-			$session->setMessageData("Removed $nRemoved item(s) from your cart.");
+			$session->setMessageData("Removido(s) $nRemoved item(ns) do seu carrinho..");
 			$this->redirect($this->url('purchase', 'cart'));
 		}
 		else {
-			$session->setMessageData("Removed $nRemoved item(s) from your cart. Your cart is now empty.");
+			$session->setMessageData("Removido(s) $nRemoved item(ns) do seu carrinho. Seu carrinho agora está vazio.");
 		}
 	}
 	else {
-		$session->setMessageData("There were no items to remove from your cart.");
+		$session->setMessageData("Não havia itens para remover do seu carrinho..");
 	}
 	
 	$this->redirect($this->url('purchase'));
 }
 
-$session->setMessageData('No items were removed from your cart because none were selected.');
+$session->setMessageData('Nenhum item foi removido do seu carrinho porque nenhum foi selecionado..');
 $this->redirect($this->url('purchase', 'cart'));
 ?>

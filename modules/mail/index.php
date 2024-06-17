@@ -7,54 +7,66 @@ $template = trim($params->get('template') ?: '');
 $subject = trim($params->get('subject') ?: '');
 $selectedtemplate = $template.'.php';
 
-
-// Select Template
+// Seleciona o Template
 $template_dir = FLUX_DATA_DIR."/templates/";
 $myDirectory = opendir($template_dir);
-while($entryName = readdir($myDirectory)) {$dirArray[] = $entryName;}
+$dirArray = [];
+while($entryName = readdir($myDirectory)) {
+    if (substr($entryName, 0, 1) != "." &&
+        substr($entryName, 0, 5) != "index" &&
+        substr($entryName, 0, 10) != "changemail" &&
+        substr($entryName, 0, 7) != "confirm" &&
+        substr($entryName, 0, 11) != "contactform" &&
+        substr($entryName, 0, 7) != "newpass" &&
+        substr($entryName, 0, 9) != "newticket" &&
+        substr($entryName, 0, 9) != "resetpass" &&
+        substr($entryName, 0, 11) != "ticketreply" &&
+        substr($entryName, 0, 15) != "ticketresolvido" && 
+        substr($entryName, 0, 18) != "ticketfechadostaff"  
+    ) {
+        $dirArray[] = $entryName;
+    }
+}
 closedir($myDirectory);
-$indexCount	= count($dirArray);
+$indexCount = count($dirArray);
 sort($dirArray);
 
 if (count($_POST)) {
-	//<input type="radio" name="whoto" id="whoto" value="1" checked="checked"> No one<br />
-	//<input type="radio" name="whoto" id="whoto" value="2"> Admins Only<br />
-	//<input type="radio" name="whoto" id="whoto" value="3"> Staff Only<br />
-	//<input type="radio" name="whoto" id="whoto" value="4"> Everyone<br />
-	//<input type="radio" name="whoto" id="whoto" value="5"> VIPs<br />
+    if ($whoto == '1') {
+        $type = 'Níguém';
+    } elseif ($whoto == '2') {
+        $sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login WHERE `group_id` = '99'");
+        $type = 'Somente Administradores';
+    } elseif ($whoto == '3') {
+        $sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login WHERE (group_id=2 OR group_id=99)");
+        $type = ' Somente Equipe';
+    } elseif ($whoto == '4') {
+        $sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login");
+        $type = 'Todos';
+    } elseif ($whoto == '5') {
+        $type = 'Vip\'s';
+    }
 
-	if($whoto == '1'){
-		// please leave blank
-	}elseif($whoto == '2'){
-		$sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login WHERE `group_id` = '99'");
-	}elseif($whoto == '3'){
-		$sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login WHERE (group_id=2 OR group_id=99)");
-	}elseif($whoto == '4'){
-		$sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.login");
-	}elseif($whoto == '5'){
-	}
+    $sth->execute();
+    $list = $sth->fetchAll();
 
-	$sth->execute();
-	$list = $sth->fetchAll();
+    foreach ($list as $lrow) {
+        $email = $lrow->email;
+        require_once 'Flux/Mailer.php';
+        $mail = new Flux_Mailer();
+        $sent = $mail->send($email, $subject, $template, array(
+            'emailtitle' => $subject,
+            'username'   => $lrow->userid,
+            'email'      => $lrow->email,
+        ));
+    }
 
-	foreach($list as $lrow){
-		$email = $lrow->email;
-		require_once 'Flux/Mailer.php';
-		$mail = new Flux_Mailer();
-		$sent = $mail->send($email, $subject, $template, array(
-			'emailtitle'		=> $subject,
-			'username'		=> $lrow->userid,
-			'email'		=> $lrow->email,
-		));
-	}
-	
-	$session->setMessageData(Flux::message('MailerEmailHasBeenSent'));
-	
-	if(Flux::config('DiscordUseWebhook')) {
-		if(Flux::config('DiscordSendOnMarketing')) {
-			sendtodiscord(Flux::config('DiscordWebhookURL'), 'Mass Email Sent: '. $subject);
-		}
-	}
+    $session->setMessageData(sprintf(Flux::message('MailerEmailHasBeenSent'), $type));
 
+    if (Flux::config('DiscordUseWebhook')) {
+        if (Flux::config('DiscordSendOnMarketing')) {
+            sendtodiscord(Flux::config('DiscordWebhookURL'), 'E-mail em massa enviado: ' . $subject);
+        }
+    }
 }
 ?>

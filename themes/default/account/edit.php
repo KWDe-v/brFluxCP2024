@@ -76,7 +76,7 @@
 			<tr>
 				<th><label for="use_vip_time"><?php echo htmlspecialchars(Flux::message('VIPTimeDateLabel')) ?></label></th>
 				<td colspan="3">
-					You will need to login via the client to change the VIP time.
+					Você precisará fazer login através do cliente para alterar o horário VIP.
 				</td>
 			</tr>
 			<tr>

@@ -1,12 +1,12 @@
-<?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>War of Emperium Hours</h2>
+<?php if (!definido('FLUX_ROOT')) saída; ?>
+<h2>Horas da Guerra do Emperium</h2>
 <?php if ($woeTimes): ?>
-<p>Below are the WoE hours for <?php echo htmlspecialchars($session->loginAthenaGroup->serverName) ?>.</p>
-<p>These hours are subject to change at anytime, but let's hope not.</p>
+<p>Abaixo estão os horários de WoE para <?php echo htmlspecialchars($session->loginAthenaGroup->serverName) ?>.</p>
+<p>Esses horários estão sujeitos a alterações a qualquer momento, mas esperamos que não.</p>
 <table class="woe-table">
 	<tr>
-		<th>Servers</th>
-		<th colspan="3">War of Emperium Times</th>
+		<th>Servidores</th>
+		<th colspan="3">Horários da Guerra do Emperium</th>
 	</tr>
 	<?php foreach ($woeTimes as $serverName => $times): ?>
 	<tr>
@@ -30,5 +30,5 @@
 	<?php endforeach ?>
 </table>
 <?php else: ?>
-<p>There are no scheduled WoE hours.</p>
+<p>Não há horários de WoE programados.</p>
 <?php endif ?>

@@ -1,14 +1,14 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Password Changes';
+$title = 'Alterações de senha';
 
 $changeTable  = Flux::config('FluxTables.ChangePasswordTable');
 $sqlpartial  = "LEFT JOIN {$server->loginDatabase}.login ON login.account_id = log.account_id ";
 $sqlpartial .= 'WHERE 1=1 ';
 $bind        = array();
 
-// Password change searching.
+// Pesquisa de alteração de senha.
 $changeAfter   = $params->get('change_after_date');
 $changeBefore  = $params->get('change_before_date');
 $accountID     = trim($params->get('account_id'));

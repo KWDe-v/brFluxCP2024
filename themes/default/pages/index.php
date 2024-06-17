@@ -12,7 +12,7 @@ $this->loginRequired();
 		</tr>
 		<?php foreach($pages as $prow):?>
 			<tr >
-				<td><a href="<?php echo $this->url('pages', 'content', array('path' => $prow->path))?>" title="View the <?php echo $prow->title?> Page"><?php echo $prow->title?></a></td>
+				<td><a href="<?php echo $this->url('pages', 'content', array('path' => $prow->path))?>" title="Ver a Página <?php echo $prow->title?>"><?php echo $prow->title?></a></td>
 				<td align="center">
 					<a href="<?php echo $this->url('pages', 'edit', array('id' => $prow->id)); ?>"><?php echo htmlspecialchars(Flux::message('CMSEdit')) ?></a> |
 					<a href="<?php echo $this->url('pages', 'delete', array('id' => $prow->id)); ?>" onclick="return confirm('<?php echo htmlspecialchars(Flux::message('CMSConfirmDelete')) ?>');"><?php echo htmlspecialchars(Flux::message('CMSDelete')) ?></a>

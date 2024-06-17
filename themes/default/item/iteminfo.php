@@ -5,11 +5,11 @@
     <p class="green"><?php echo htmlspecialchars($successMessage) ?></p>
 <?php endif ?>
 
-<h3>PHP Configuration</h3>
-<p>These values must be larger than the size of your itemInfo file.</p>
+<h3>Configuração do PHP</h3>
+<p>Esses valores devem ser maiores que o tamanho do seu arquivo itemInfo.</p>
 <table class="vertical-table">
 	<tr>
-		<th>PHP Configs</th><td>Value</td>
+		<th>Configs do PHP</th><td>Valor</td>
 	</tr>
 	<tr>
 		<th>post_max_size</th><td><?php echo ini_get('post_max_size') ?></td>
@@ -18,13 +18,13 @@
 		<th>upload_max_filesize</th><td><?php echo ini_get('upload_max_filesize') ?></td>
 	</tr>
 </table>
-<p>ShowItemDesc is <?php if(Flux::config('ShowItemDesc')):?>enabled<?php else: ?>disabled<?php endif ?> in your configuration file.</p>
+<p>ShowItemDesc está <?php if(Flux::config('ShowItemDesc')):?>habilitado<?php else: ?>desabilitado<?php endif ?> no seu arquivo de configuração.</p>
 
-<h3>Upload itemInfo.lua</h3>
+<h3>Enviar itemInfo.lua</h3>
 <form class="forms" method="post" enctype="multipart/form-data">
     <input type="file" name="iteminfo"><br>
     <input class="btn" type="submit">
 </form>
 
-<h3>Current Count</h3>
-<p>There are currently <?php echo number_format($return->count) ?> item descriptions in the database</p>
+<h3>Contagem Atual</h3>
+<p>Atualmente, há <?php echo number_format($return->count) ?> descrições de itens no banco de dados</p>

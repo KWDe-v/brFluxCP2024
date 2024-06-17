@@ -11,27 +11,27 @@ require_once 'Flux/Addon.php';
 require_once 'functions/getReposVersion.php';
 require_once 'functions/discordwebhook.php';
 
-// Get the SVN revision or GIT hash of the top-level directory (FLUX_ROOT).
+// Obter a revisão do SVN ou o hash do GIT do diretório de nível superior (FLUX_ROOT).
 define('FLUX_REPOSVERSION', getReposVersion());
 
 /**
- * The Flux class contains methods related to the application on the larger
- * scale. For the most part, it handles application initialization such as
- * parsing the configuration files and whatnot.
+ * A classe Flux contém métodos relacionados à aplicação em uma escala maior.
+ * Em sua maior parte, ela lida com a inicialização da aplicação, como 
+ * a análise dos arquivos de configuração e outras funcionalidades.
  */
 class Flux {
 	/**
-	 * Current version.
+	 * Versão Atual.
 	 */
 	const VERSION = '2.0.0';
 
 	/**
-	 * Repository SVN version or GIT hash of the top-level revision.
+	 * Versão do repositório SVN ou hash GIT da revisão de nível superior.
 	 */
 	const REPOSVERSION = FLUX_REPOSVERSION;
 
 	/**
-	 * Application-specific configuration object.
+	 * Objeto de configuração específico do aplicativo.
 	 *
 	 * @access public
 	 * @var Flux_Config
@@ -39,7 +39,7 @@ class Flux {
 	public static $appConfig;
 
 	/**
-	 * Servers configuration object.
+	 * Objeto de configuração dos servidores.
 	 *
 	 * @access public
 	 * @var Flux_Config
@@ -47,7 +47,7 @@ class Flux {
 	public static $serversConfig;
 
 	/**
-	 * Messages configuration object.
+	 * Objeto de configuração de mensagens.
 	 *
 	 * @access public
 	 * @var Flux_Config
@@ -55,7 +55,7 @@ class Flux {
 	public static $messagesConfig;
 
 	/**
-	 * Collection of Flux_Athena objects.
+	 * Coleção de objetos Flux_Athena.
 	 *
 	 * @access public
 	 * @var array
@@ -63,8 +63,8 @@ class Flux {
 	public static $servers = array();
 
 	/**
-	 * Registry where Flux_LoginAthenaGroup instances are kept for easy
-	 * searching.
+	 * Registro onde as instâncias Flux_LoginAthenaGroup são mantidas para fácil 
+	 * busca.
 	 *
 	 * @access public
 	 * @var array
@@ -72,7 +72,7 @@ class Flux {
 	public static $loginAthenaGroupRegistry = array();
 
 	/**
-	 * Registry where Flux_Athena instances are kept for easy searching.
+	 * Registro onde as instâncias Flux_Athena são mantidas para fácil busca.
 	 *
 	 * @access public
 	 * @var array
@@ -80,7 +80,7 @@ class Flux {
 	public static $athenaServerRegistry = array();
 
 	/**
-	 * Object containing all of Flux's session data.
+	 * Objeto contendo todos os dados de sessão do Flux.
 	 *
 	 * @access public
 	 * @var Flux_SessionData
@@ -98,8 +98,8 @@ class Flux {
 	public static $addons = array();
 
 	/**
-	 * Initialize Flux application. This will handle configuration parsing and
-	 * instanciating of objects crucial to the control panel.
+	 * Inicialize a aplicação Flux. Isso irá lidar com a análise de configuração e
+	 * instanciação de objetos cruciais para o painel de controle.
 	 *
 	 * @param array $options Options to pass to initializer.
 	 * @throws Flux_Error Raised when missing required options.
@@ -110,13 +110,13 @@ class Flux {
 		$required = array('appConfigFile', 'serversConfigFile');
 		foreach ($required as $option) {
 			if (!array_key_exists($option, $options)) {
-				self::raise("Missing required option `$option' in Flux::initialize()");
+				self::raise("Faltando a opção necessária `$option` em Flux::initialize()");
 			}
 		}
 
-		// Parse application and server configuration files, this will also
-		// handle configuration file normalization. See the source for the
-		// below methods for more details on what's being done.
+		// Analisar os arquivos de configuração da aplicação e do servidor, isso também
+		// lidará com a normalização dos arquivos de configuração. Veja o código fonte
+		// dos métodos abaixo para mais detalhes sobre o que está sendo feito.
 		self::$appConfig      = self::parseAppConfigFile($options['appConfigFile']);
 		self::$serversConfig  = self::parseServersConfigFile($options['serversConfigFile']);
 
@@ -125,27 +125,27 @@ class Flux {
 			self::$appConfig->merge($importAppConfig, true, true);
 		}
 
-		// Server configuration files are not merged, instead they replace the original.
+		// Os arquivos de configuração do servidor não são mesclados, em vez disso, substituem o original.
 		if (array_key_exists('serversConfigFileImport', $options) && file_exists($options['serversConfigFileImport'])) {
 			$importServersConfig = self::parseServersConfigFile($options['serversConfigFileImport'], true);
 			self::$serversConfig = $importServersConfig;
 		}
 
-		// Using newer language system.
+		// Usando o sistema de linguagem mais recente.
 		self::$messagesConfig = self::parseLanguageConfigFile();
 
-		// Initialize server objects.
+		// Inicializar objetos do servidor.
 		self::initializeServerObjects();
 
-		// Initialize add-ons.
+		// Inicializar complementos.
 		self::initializeAddons();
 	}
 
 	/**
-	 * Initialize each Login/Char/Map server object and contain them in their
-	 * own collective Athena object.
+	 * Inicialize cada objeto de servidor de Login/Char/Map e os contenha em seu
+	 * próprio objeto Athena coletivo.
 	 *
-	 * This is also part of the Flux initialization phase.
+	 * Isso também faz parte da fase de inicialização do Flux.
 	 *
 	 * @access public
 	 */
@@ -155,22 +155,22 @@ class Flux {
 			$connection  = new Flux_Connection($config->getDbConfig(), $config->getLogsDbConfig(), $config->getWebDbConfig());
 			$loginServer = new Flux_LoginServer($config->getLoginServer());
 
-			// LoginAthenaGroup maintains the grouping of a central login
-			// server and its underlying Athena objects.
+			// LoginAthenaGroup mantém a agrupação de um servidor de login central
+			// e seus objetos Athena subjacentes.
 			self::$servers[$key] = new Flux_LoginAthenaGroup($config->getServerName(), $connection, $loginServer);
 
-			// Add into registry.
+			// Adicionar ao registro.
 			self::registerServerGroup($config->getServerName(), self::$servers[$key]);
 
 			foreach ($config->getCharMapServers()->getChildrenConfigs() as $charMapServer) {
 				$charServer = new Flux_CharServer($charMapServer->getCharServer());
 				$mapServer  = new Flux_MapServer($charMapServer->getMapServer());
 
-				// Create the collective server object, Flux_Athena.
+				// Criar o objeto servidor coletivo, Flux_Athena.
 				$athena = new Flux_Athena($charMapServer, $loginServer, $charServer, $mapServer);
 				self::$servers[$key]->addAthenaServer($athena);
 
-				// Add into registry.
+				// Adicionar ao registro.
 				self::registerAthenaServer($config->getServerName(), $charMapServer->getServerName(), $athena);
 			}
 		}
@@ -191,7 +191,7 @@ class Flux {
 				$addonObject = new Flux_Addon($addonName, $addonDir);
 				self::$addons[$addonName] = $addonObject;
 
-				// Merge configurations.
+				// Mesclar configurações.
 				self::$appConfig->merge($addonObject->addonConfig);
 				self::$messagesConfig->merge($addonObject->messagesConfig, false);
 			}
@@ -199,7 +199,7 @@ class Flux {
 	}
 
 	/**
-	 * Wrapper method for setting and getting values from the appConfig.
+	 * Método de envoltório para definir e obter valores do appConfig.
 	 *
 	 * @param string $key
 	 * @param mixed $value
@@ -217,7 +217,7 @@ class Flux {
 	}
 
 	/**
-	 * Wrapper method for setting and getting values from the messagesConfig.
+	 * Método de envoltório para definir e obter valores do messagesConfig.
 	 *
 	 * @param string $key
 	 * @param mixed $value
@@ -236,9 +236,9 @@ class Flux {
 	}
 
 	/**
-	 * Convenience method for raising Flux_Error exceptions.
+	 * Método de conveniência para gerar exceções Flux_Error.
 	 *
-	 * @param string $message Message to pass to constructor.
+	 * @param $string $message Mensagem para passar para o construtor.
 	 * @throws Flux_Error
 	 * @access public
 	 */
@@ -248,7 +248,7 @@ class Flux {
 	}
 
 	/**
-	 * Parse PHP array into Flux_Config instance.
+	 * Analisar matriz PHP em uma instância Flux_Config.
 	 *
 	 * @param array $configArr
 	 * @access public
@@ -259,8 +259,8 @@ class Flux {
 	}
 
 	/**
-	 * Parse a PHP array returned as the result of an included file into a
-	 * Flux_Config configuration object.
+	 * Analisar uma matriz PHP retornada como resultado de um arquivo incluído em um
+	 * objeto de configuração Flux_Config.
 	 *
 	 * @param string $filename
 	 * @access public
@@ -277,17 +277,17 @@ class Flux {
 		}
 		else {
 			ob_start();
-			// Uses require, thus assumes the file returns an array.
+			// Usa require, portanto assume que o arquivo retorna um array.
 			$config = require $filename;
 			ob_end_clean();
 
-			// Cache config file.
+			// Cache do arquivo de configuração.
 			$cf = self::parseConfig($config);
 
 			if ($cache) {
 				$fp = fopen($cachefile, 'w');
 				if ( !$fp ){
-					self::raise("Failed to write ".$cachefile." permission error or data/tmp not exist in Flux::parseConfigFile()");
+					self::raise("Falha ao gravar ".$cachefile." erro de permissão ou data/tmp não existe em Flux::parseConfigFile()");
 				}
 				fwrite($fp, '<?php exit("Forbidden."); ?>');
 				fwrite($fp, $s=serialize($cf), strlen($s));
@@ -299,7 +299,7 @@ class Flux {
 	}
 
 	/**
-	 * Parse a file in an application-config specific manner.
+	 * Analisar um arquivo de maneira específica para a configuração da aplicação.
 	 *
 	 * @param string $filename
 	 * @param bool $import Whether this is an import config or not
@@ -310,25 +310,25 @@ class Flux {
 		$config = self::parseConfigFile($filename, false);
 
 		if (!$config->getServerAddress() && !$import) {
-			self::raise("ServerAddress must be specified in your application config.");
+			self::raise("O endereço do servidor deve ser especificado na configuração da sua aplicação.");
 		}
 		$themes = $config->get('ThemeName', false);
 		if ((!$themes || count($themes) < 1) && !$import) {
-			self::raise('ThemeName is required in application configuration.');
+			self::raise('ThemeName é obrigatório na configuração do aplicativo.');
 		}
 		if ($themes) {
 			foreach ($themes as $themeName) {
 				if (!self::themeExists($themeName)) {
-					self::raise("The selected theme '$themeName' does not exist.");
+					self::raise("O tema selecionado '$themeName' não existe.");
 				}
 			}
 		}
 		if (!($config->getPayPalReceiverEmails() instanceof Flux_Config)
 			&& !($import && $config->getPayPalReceiverEmails() === null)) {
-			self::raise("PayPalReceiverEmails must be an array.");
+			self::raise("PayPalReceiverEmails deve ser um array.");
 		}
 
-		// Sanitize BaseURI. (leading forward slash is mandatory.)
+		// Sanitizar BaseURI. (a barra inicial é obrigatória.)
 		$baseURI = $config->get('BaseURI');
 		if (!is_null($baseURI)) {
 			if (strlen($baseURI) && $baseURI[0] != '/') {
@@ -343,8 +343,8 @@ class Flux {
 	}
 
 	/**
-	 * Parse a file in a servers-config specific manner. This method gets a bit
-	 * nasty so beware of ugly code ;)
+	 * Analisar um arquivo de maneira específica para a configuração dos servidores. Este método fica um pouco
+	 * complicado, então tenha cuidado com o código feio ;)
 	 *
 	 * @param string $filename
 	 * @param bool $import Whether this is an import config or not
@@ -353,24 +353,24 @@ class Flux {
 	public static function parseServersConfigFile($filename, $import = false)
 	{
 		$config            = self::parseConfigFile($filename);
-		$options           = array('overwrite' => false, 'force' => true); // Config::set() options.
+		$options           = array('overwrite' => false, 'force' => true); // Opções de Config::set().
 		$serverNames       = array();
 		$athenaServerNames = array();
 
 		if (!count($config->toArray()) && !$import) {
-			self::raise('At least one server configuration must be present.');
+			self::raise('Pelo menos uma configuração de servidor deve estar presente.');
 		}
 
 		foreach ($config->getChildrenConfigs() as $topConfig) {
 			//
-			// Top-level normalization.
+			// Normalização de nível superior.
 			//
 
 			if (!($serverName = $topConfig->getServerName())) {
-				self::raise('ServerName is required for each top-level server configuration, check your servers configuration file.');
+				self::raise('ServerName é obrigatório para cada configuração de servidor de nível superior, verifique seu arquivo de configuração de servidores.');
 			}
 			elseif (in_array($serverName, $serverNames)) {
-				self::raise("The server name '$serverName' has already been configured. Please use another name.");
+				self::raise("O nome do servidor '$serverName' já foi configurado. Por favor, use outro nome.");
 			}
 
 			$serverNames[] = $serverName;
@@ -397,21 +397,21 @@ class Flux {
 			$loginServer->setDatabase($dbConfig->getDatabase(), $options);
 			$loginServer->setUseMD5(true, $options);
 
-			// Raise error if missing essential configuration directives.
+			// Gerar erro se faltar diretrizes de configuração essenciais.
 			if (!$loginServer->getAddress()) {
-				self::raise('Address is required for each LoginServer section in your servers configuration.');
+				self::raise('Address é obrigatório para cada seção LoginServer na configuração dos seus servidores.');
 			}
 			elseif (!$loginServer->getPort()) {
-				self::raise('Port is required for each LoginServer section in your servers configuration.');
+				self::raise('Port é obrigatório para cada seção LoginServer na configuração dos seus servidores.');
 			}
 
 			if (!$topConfig->getCharMapServers() || !count($topConfig->getCharMapServers()->toArray())) {
-				self::raise('CharMapServers must be an array and contain at least 1 char/map server entry.');
+				self::raise('CharMapServers deve ser um array e conter pelo menos 1 entrada de servidor char/map.');
 			}
 
 			foreach ($topConfig->getCharMapServers()->getChildrenConfigs() as $charMapServer) {
 				//
-				// Char/Map normalization.
+				// Normalização Char/Map.
 				//
 				$expRates = array(
 					'Base'        => 100,
@@ -458,28 +458,28 @@ class Flux {
 				$charMapServer->setDatabase($dbConfig->getDatabase(), $options);
 
 				if (!($athenaServerName = $charMapServer->getServerName())) {
-					self::raise('ServerName is required for each CharMapServers pair in your servers configuration.');
+					self::raise('ServerName é obrigatório para cada par CharMapServers na configuração dos seus servidores.');
 				}
 				elseif (in_array($athenaServerName, $athenaServerNames[$serverName])) {
-					self::raise("The server name '$athenaServerName' under '$serverName' has already been configured. Please use another name.");
+					self::raise("O nome do servidor '$athenaServerName' sob '$serverName' já foi configurado. Por favor, use outro nome.");
 				}
 
 				$athenaServerNames[$serverName][] = $athenaServerName;
 				$charServer = $charMapServer->getCharServer();
 
 				if (!$charServer->getAddress()) {
-					self::raise('Address is required for each CharServer section in your servers configuration.');
+					self::raise('Address é obrigatório para cada seção CharServer na configuração dos seus servidores.');
 				}
 				elseif (!$charServer->getPort()) {
-					self::raise('Port is required for each CharServer section in your servers configuration.');
+					self::raise('Port é obrigatório para cada seção CharServer na configuração dos seus servidores.');
 				}
 
 				$mapServer = $charMapServer->getMapServer();
 				if (!$mapServer->getAddress()) {
-					self::raise('Address is required for each MapServer section in your servers configuration.');
+					self::raise('Address é obrigatório para cada seção MapServer na configuração dos seus servidores.');
 				}
 				elseif (!$mapServer->getPort()) {
-					self::raise('Port is required for each MapServer section in your servers configuration.');
+					self::raise('Port é obrigatório para cada seção MapServer na configuração dos seus servidores.');
 				}
 			}
 		}
@@ -488,7 +488,7 @@ class Flux {
 	}
 
 	/**
-	 * Parses a messages configuration file. (Deprecated)
+	 * Analisar um arquivo de configuração de mensagens. (Descontinuado)
 	 *
 	 * @param string $filename
 	 * @access public
@@ -496,13 +496,13 @@ class Flux {
 	public static function parseMessagesConfigFile($filename)
 	{
 		$config = self::parseConfigFile($filename);
-		// Nothing yet.
+		// Nada ainda.
 		return $config;
 	}
 
 	/**
-	 * Parses a language configuration file, can also parse a language config
-	 * for any addon.
+	 * Analisar um arquivo de configuração de idioma, também pode analisar um configuração de idioma
+	 * para qualquer complemento.
 	 *
 	 * @param string $addonName
 	 * @access public
@@ -541,7 +541,7 @@ class Flux {
 	}
 
 	/**
-	 * Check whether or not a theme exists.
+	 * Verificar se um tema existe.
 	 *
 	 * @return bool
 	 * @access public
@@ -552,7 +552,7 @@ class Flux {
 	}
 
 	/**
-	 * Register the server group into the registry.
+	 * Registrar o grupo de servidor no registro.
 	 *
 	 * @param string $serverName Server group's name.
 	 * @param Flux_LoginAthenaGroup Server group object.
@@ -566,7 +566,7 @@ class Flux {
 	}
 
 	/**
-	 * Register the Athena server into the registry.
+	 * Registrar o servidor Athena no registro.
 	 *
 	 * @param string $serverName Server group's name.
 	 * @param string $athenaServerName Athena server's name.
@@ -585,7 +585,7 @@ class Flux {
 	}
 
 	/**
-	 * Get Flux_LoginAthenaGroup server object by its ServerName.
+	 * Obter o objeto do servidor Flux_LoginAthenaGroup pelo seu ServerName.
 	 *
 	 * @param string $serverName Server group name.
 	 * @return mixed Returns Flux_LoginAthenaGroup instance or false on failure.
@@ -604,7 +604,7 @@ class Flux {
 	}
 
 	/**
-	 * Get Flux_Athena instance by its group/server names.
+	 * Obter a instância Flux_Athena pelo seu nome de grupo/servidor.
 	 *
 	 * @param string $serverName Server group name.
 	 * @param string $athenaServerName Athena server name.
@@ -625,7 +625,7 @@ class Flux {
 	}
 
 	/**
-	 * Hashes a password for use in comparison with the login.user_pass column.
+	 * Criptografa uma senha para uso na comparação com a coluna login.user_pass.
 	 *
 	 * @param string $password Plain text password.
 	 * @return string Returns hashed password.
@@ -633,12 +633,12 @@ class Flux {
 	 */
 	public static function hashPassword($password)
 	{
-		// Default hashing schema is MD5.
+		// O esquema de hashing padrão é MD5.
 		return md5($password);
 	}
 
 	/**
-	 * Get the job class name from a job ID.
+	 * Obter o nome da classe de trabalho a partir de um ID de trabalho.
 	 *
 	 * @param int $id
 	 * @return mixed Job class or false.
@@ -658,7 +658,7 @@ class Flux {
 	}
 
 	/**
-	 * Get the job ID from a job class name.
+	 * Obter o ID de trabalho a partir de um nome de classe de trabalho.
 	 *
 	 * @param string $class
 	 * @return mixed Job ID or false.
@@ -676,7 +676,7 @@ class Flux {
 	}
 
 	/**
-	 * Get the homunculus class name from a homun class ID.
+	 * Obter o nome da classe de homúnculo a partir de um ID de classe de homúnculo.
 	 *
 	 * @param int $id
 	 * @return mixed Class name or false.
@@ -696,7 +696,7 @@ class Flux {
 	}
 
 	/**
-	 * Get the item type name from an item type.
+	 * Obter o nome do tipo de item a partir de um tipo de item.
 	 *
 	 * @return Item Type or false.
 	 * @access public
@@ -729,7 +729,7 @@ class Flux {
 	}
 
 	/**
-	 * return random option description.
+	 * Descrição da opção aleatória.
 	 */
 	public static function getRandOption($id1)
 	{
@@ -745,7 +745,7 @@ class Flux {
 	}
 
 	/**
-	 * Get the equip location combination name from an equip location combination type.
+	 * Obter o nome da combinação de localização de equipamento a partir de uma combinação de localização de equipamento.
 	 *
 	 * @param int $id
 	 * @return mixed Equip Location Combination or false.
@@ -758,7 +758,7 @@ class Flux {
 	}
 
 	/**
-	 * Process donations that have been put on hold.
+	 * Processar doações que foram colocadas em espera.
 	 */
 	public static function processHeldCredits()
 	{
@@ -848,7 +848,7 @@ class Flux {
 	}
 
 	/**
-	 * Get array of equip_location bits. (bit => loc_name pairs)
+	 * Obter array de bits de equip_location. (pares bit => loc_name)
 	 * @return array
 	 */
 	public static function getEquipLocationList()
@@ -858,7 +858,7 @@ class Flux {
 	}
 
 	/**
-	 * Get array of equip_upper bits. (bit => upper_name pairs)
+	 * Obter array de bits de equip_upper. (pares bit => upper_name)
 	 * @return array
 	 */
 	public static function getEquipUpperList($isRenewal = 1)
@@ -872,7 +872,7 @@ class Flux {
 	}
 
 	/**
-	 * Get array of equip_jobs bits. (bit => job_name pairs)
+	 * Obter array de bits de equip_jobs. (pares bit => job_name)
 	 */
 	public static function getEquipJobsList($isRenewal = 1)
 	{
@@ -885,7 +885,7 @@ class Flux {
 	}
 
 	/**
-	 * Get array of trade restrictions
+	 * Obter array de restrições de troca
 	 */
 	public static function getTradeRestrictionList()
 	{
@@ -894,7 +894,7 @@ class Flux {
 	}
 
 	/**
-	 * Get array of item flags
+	 * Obter array de flags de item
 	 */
 	public static function getItemFlagList()
 	{
@@ -903,7 +903,7 @@ class Flux {
 	}
 
 	/**
-	 * Check whether a particular item type is stackable.
+	 * Verificar se um determinado tipo de item é empilhável.
 	 * @param int $type
 	 * @return bool
 	 */
@@ -914,8 +914,8 @@ class Flux {
 	}
 
 	/**
-	 * Perform a bitwise AND from each bit in getEquipUpperList() on $bitmask
-	 * to determine which bits have been set.
+	 * Executar uma operação AND bit a bit de cada bit em getEquipUpperList() em $bitmask
+	 * para determinar quais bits foram definidos.
 	 * @param int $bitmask
 	 * @return array
 	 */
@@ -934,8 +934,8 @@ class Flux {
 	}
 
 	/**
-	 * Perform a bitwise AND from each bit in getEquipJobsList() on $bitmask
-	 * to determine which bits have been set.
+	 * Executar uma operação AND bit a bit de cada bit em getEquipJobsList() em $bitmask
+	 * para determinar quais bits foram definidos.
 	 * @param int $bitmask
 	 * @return array
 	 */

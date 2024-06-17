@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'List Monsters';
+$title = 'Lista de Monstros';
 
 require_once 'Flux/TemporaryTable.php';
 
@@ -14,7 +14,7 @@ try {
 	}
 	$tempTable  = new Flux_TemporaryTable($server->connection, $tableName, $fromTables);
 	
-	// Statement parameters, joins and conditions.
+	// Parâmetros de instrução, junções e condições.
 	$bind        = array();
 	$sqlpartial  = "WHERE 1=1 ";
 	$monsterID   = $params->get('monster_id');
@@ -133,7 +133,7 @@ try {
 		}
 	}
 	
-	// Get total count and feed back to the paginator.
+	// Obtém a contagem total e retorna ao paginador.
 	$sth = $server->connection->getStatement("SELECT COUNT(monsters.ID) AS total FROM $tableName $sqlpartial");
 	$sth->execute($bind);
 	
@@ -160,11 +160,11 @@ try {
 }
 catch (Exception $e) {
 	if (isset($tempTable) && $tempTable) {
-		// Ensure table gets dropped.
+		//Garante que a tabela seja descartada.
 		$tempTable->drop();
 	}
 	
-	// Raise the original exception.
+	// Levanta a exceção original.
 	$class = get_class($e);
 	throw new $class($e->getMessage());
 }

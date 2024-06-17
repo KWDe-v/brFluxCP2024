@@ -7,16 +7,16 @@
 <?php if ($guilds): ?>
 	<table class="horizontal-table">
 		<tr>
-			<th>Rank</th>
-			<th colspan="2">Guild Name</th>
-			<th>Guild Level</th>
-			<th>Castles Owned</th>
-			<th>Members</th>
-			<th>Average Level</th>
-			<th>Experience</th>
+			<th>Posição no Rank</th>
+			<th colspan="2">Nome do Clã</th>
+			<th>Nível do Clã</th>
+			<th>Castelos de propriedade</th>
+			<th>Membros</th>
+			<th>Média de Nível</th>
+			<th>Experiência</th>
 		</tr>
 		<?php for ($i = 0; $i < $limit; ++$i): ?>
-		<tr<?php if (!isset($guilds[$i])) echo ' class="empty-row"'; if ($i === 0) echo ' class="top-ranked" title="<strong>'.htmlspecialchars($guilds[$i]->name).'</strong> is the top ranked guild!"' ?>>
+		<tr<?php if (!isset($guilds[$i])) echo ' class="empty-row"'; if ($i === 0) echo ' class="top-ranked" title="<strong>'.htmlspecialchars($guilds[$i]->name).'</strong> é o TOP clã!"' ?>>
 			<td align="right"><?php echo number_format($i + 1) ?></td>
 			<?php if (isset($guilds[$i])): ?>
 			<?php if ($guilds[$i]->emblem): ?>
@@ -41,5 +41,5 @@
 		<?php endfor ?>
 	</table>
 <?php else: ?>
-<p>No guilds found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhum clã encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

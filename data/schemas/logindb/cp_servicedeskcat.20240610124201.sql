@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS `cp_servicedeskcat` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 INSERT INTO `cp_servicedeskcat` (`cat_id`, `name`, `display`) VALUES
-(1, 'Technical Support', 1),
-(2, 'General Support', 1),
-(3, 'Report an Abuse', 1);
+(1, 'Suporte Técnico', 1),
+(2, 'Suporte Geral', 1),
+(3, 'Reportar um Abuso', 1);

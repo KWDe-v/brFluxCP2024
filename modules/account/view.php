@@ -67,10 +67,10 @@ $showUnban   = !$isMine && ($tempBanned && $auth->allowedToTempUnbanAccount) || 
 if($account->vip_time != '0'){
 $vipexpiretime = $account->vip_time;
 	$dt = new DateTime("@$vipexpiretime");
-	$vipexpires = 'Expires '.$dt->format('Y-m-d');
+	$vipexpires = 'Expira em '.$dt->format('Y-m-d');
 } elseif ($account->vip_time == '0'){
-	$vipexpires = 'Standard Account';
-} else {$vipexpires = 'Unknown';}
+	$vipexpires = 'Conta Padrão';
+} else {$vipexpires = 'N/A';}
 
 if (count($_POST) && $account) {
 	$reason = (string)$params->get('reason');
@@ -79,7 +79,7 @@ if (count($_POST) && $account) {
 		if ($canTempBan) {
 			if ($server->loginServer->temporarilyBan($session->account->account_id, $reason, $account->account_id, $tempBanDate)) {
 				$formattedDate = $this->formatDateTime($tempBanDate);
-				$session->setMessageData("Account has been temporarily banned until $formattedDate.");
+				$session->setMessageData("A conta foi temporariamente banida até $formattedDate.");
 				$this->redirect($this->url('account', 'view', array('id' => $account->account_id)));
 			}
 			else {
@@ -93,7 +93,7 @@ if (count($_POST) && $account) {
 	elseif ($params->get('permban')) {
 		if ($canPermBan) {
 			if ($server->loginServer->permanentlyBan($session->account->account_id, $reason, $account->account_id)) {
-				$session->setMessageData("Account has been permanently banned.");
+				$session->setMessageData("A conta foi banida permanentemente.");
 				$this->redirect($this->url('account', 'view', array('id' => $account->account_id)));
 			}
 			else {

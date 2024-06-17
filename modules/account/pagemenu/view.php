@@ -1,7 +1,7 @@
 <?php
-// Module variables are available in page menus.
-// However, access group_id checking must be done directly from the page menu.
-// Minimal access checking such as $auth->actionAllowed('moduleName', 'actionName') should be performed.
+// As variáveis do módulo estão disponíveis nos menus das páginas.
+// Porém, a verificação do group_id de acesso deve ser feita diretamente no menu da página.
+// Verificação mínima de acesso como $auth->actionAllowed('moduleName', 'actionName') deve ser realizada.
 $groups  = AccountLevel::getArray();
 
 $pageMenu = array();

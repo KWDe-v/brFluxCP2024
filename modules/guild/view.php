@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'Viewing Guild';
+$title = 'Visualizando Guilda';
 
 require_once 'Flux/TemporaryTable.php';
 
@@ -51,7 +51,7 @@ $sth->execute(array($guildID));
 $oppositions = $sth->fetchAll();
 
 if ($guild) {
-	$title = "Viewing Guild ({$guild->name})";
+	$title = "Visualizando Guilda ({$guild->name})";
 }
 
 $col  = "ch.account_id, ch.char_id, ch.name, ch.class, ch.base_level, ch.job_level, ";

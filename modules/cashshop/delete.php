@@ -14,7 +14,7 @@ $shopItemID = $params->get('id');
 $deleted    = $shopItemID ? $shop->delete($shopItemID) : false;
 
 if ($deleted) {
-	$session->setMessageData('Item successfully deleted from the CashShop. You will need to reload your itemdb for this to take effect in-game.');
+	$session->setMessageData('Item excluído com sucesso do CashShop. Você precisará recarregar seu itemdb para que isso tenha efeito no jogo.');
 	$this->redirect($this->url('cashshop'));
 }
 ?>

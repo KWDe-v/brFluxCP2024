@@ -33,7 +33,7 @@ if(isset($_POST['account_id'])){
 	$sth = $server->connection->getStatement("SELECT account_id FROM {$server->loginDatabase}.$tbl WHERE account_id = ?");
 	$sth->execute(array($_POST['account_id']));
 	$fetch = $sth->fetch();
-	if($fetch){	$session->setMessageData('Account already exists!'); } else {
+	if($fetch){	$session->setMessageData('essa conta já existe!'); } else {
 	if(!$_POST['emailalerts']){$_POST['emailalerts'] = 0;}
 	$sql = "INSERT INTO {$server->loginDatabase}.$tbl (account_id, account_name, prefered_name, team, emailalerts)";
 	$sql .= "VALUES (?, ?, ?, ?, ?)";

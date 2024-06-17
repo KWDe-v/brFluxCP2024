@@ -9,7 +9,7 @@
 		<th><?php echo $paginator->sortableColumn('error_code', Flux::message('HistoryErrorCodeLabel')) ?></th>
 	</tr>
 	<?php foreach ($logins as $login): ?>
-	<tr>
+	<tr align="center">
 		<td><?php echo $this->formatDateTime($login->login_date) ?></td>
 		<td>
 		<?php if ($auth->actionAllowed('account', 'index')): ?>

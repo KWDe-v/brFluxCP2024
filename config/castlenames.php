@@ -1,8 +1,8 @@
 <?php
-// Commenting out a castle's entry will remove it from the castles page
-// and exclude it from being a factor in the guild ranking.
-return array(
-	// iRO Names
+// Comentar a entrada de um castelo irá removê-lo da página de castelos
+// e excluí-lo de ser um fator no ranking da guilda.
+return [
+	//  Nomes iRO
 	 0 => 'Neuschwanstein',
 	 1 => 'Hohenschwangau',
 	 2 => 'Nuenberg',
@@ -47,7 +47,7 @@ return array(
 	41 => 'Wigner',
 	42 => 'Heine',
 	43 => 'Nerious'
-	// kRO Names
+	// Nomes kRO
 	/**
 	 * 0 => 'Noisyubantian',
 	 * 1 => 'Hohensyubangawoo',
@@ -94,5 +94,5 @@ return array(
 	 *42 => 'Gloria 4',
 	 *43 => 'Gloria 5'
 	 */
-)
+]
 ?>

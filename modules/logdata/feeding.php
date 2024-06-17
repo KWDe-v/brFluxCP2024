@@ -111,7 +111,7 @@ if ($feeds) {
 
 		$ids = $sth->fetchAll();
 
-		// Map char_id to name.
+		// Mapeia char_id para nome.
 		foreach ($ids as $id) {
 			if(array_key_exists($id->char_id, $charIDs)) {
 				$charIDs[$id->char_id] = $id->name;

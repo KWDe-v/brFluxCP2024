@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'List Items';
+$title = 'Lista de Itens';
 
 require_once 'Flux/TemporaryTable.php';
 
@@ -17,7 +17,7 @@ try {
 	$tempTable = new Flux_TemporaryTable($server->connection, $tableName, $fromTables);
 	$shopTable = Flux::config('FluxTables.ItemShopTable');
 	
-	// Statement parameters, joins and conditions.
+	// Parâmetros de instrução, junções e condições.
 	$bind        = array();
 	$sqlpartial  = "LEFT OUTER JOIN {$server->charMapDatabase}.$shopTable ON $shopTable.nameid = items.id ";
 	$sqlpartial .= "WHERE 1=1 ";
@@ -223,7 +223,7 @@ try {
 		}
 	}
 	
-	// Get total count and feed back to the paginator.
+	// Obtém a contagem total e retorna ao paginador.
 	$sth = $server->connection->getStatement("SELECT COUNT(DISTINCT items.id) AS total FROM $tableName $sqlpartial");
 	$sth->execute($bind);
 	
@@ -254,7 +254,7 @@ try {
 	$authorized = $auth->actionAllowed('item', 'view');
 	
 	foreach ($items as $item) {
-		// Equip location
+		//localização do Equipamento
 		$equip_location = array();
 		$item->equip_location = array();
 		foreach($equip_list as $eq_loc) if($item->$eq_loc) $equip_location[] = $eq_loc;
@@ -267,11 +267,11 @@ try {
 }
 catch (Exception $e) {
 	if (isset($tempTable) && $tempTable) {
-		// Ensure table gets dropped.
+		//Garante que a tabela seja descartada.
 		$tempTable->drop();
 	}
 	
-	// Raise the original exception.
+	// Levanta a exceção original.
 	$class = get_class($e);
 	throw new $class($e->getMessage());
 }

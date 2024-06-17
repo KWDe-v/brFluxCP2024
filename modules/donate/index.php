@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired(Flux::message('LoginToDonate'));
 
-$title = 'Make a Donation';
+$title = 'Faça uma Doação';
 
 $donationAmount = false;
 
@@ -12,7 +12,7 @@ if (count($_POST) && $params->get('setamount')) {
 	$amount  = (float)$params->get('amount');
 	
 	if (!$amount || $amount < $minimum) {
-		$errorMessage = sprintf('Donation amount must be greater than or equal to %s %s!',
+		$errorMessage = sprintf('O valor da doação deve ser maior ou igual a %s %s!',
 			$this->formatCurrency($minimum), Flux::config('DonationCurrency'));
 	}
 	else {

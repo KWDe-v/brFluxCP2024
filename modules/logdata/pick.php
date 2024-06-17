@@ -60,7 +60,7 @@ if ($picks) {
 
 		$ids = $sth->fetchAll();
 
-		// Map char_id to name.
+		// Mapeia char_id para nome.
 		foreach ($ids as $id) {
 			$charIDs[$id->char_id] = $id->name;
 		}
@@ -84,7 +84,7 @@ if ($picks) {
 
 		$ids = $sth->fetchAll();
 
-		// Map id to name.
+		//Mapeia o id para o nome.
 		foreach ($ids as $id) {
 			$mobIDs[$id->id] = $id->name_english;
 		}
@@ -107,7 +107,7 @@ if ($picks) {
 
 		$ids = $sth->fetchAll();
 
-		// Map nameid to name.
+		// Mapeia nameid para nome.
 		foreach ($ids as $id) {
 			$itemIDs[$id->id] = $id->name_english;
 		}

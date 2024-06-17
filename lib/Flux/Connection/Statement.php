@@ -28,39 +28,40 @@ class Flux_Connection_Statement {
 		return PDO::PARAM_STR;
 	}
 
-	public function execute(array $inputParameters = array(), $bind_param = false)
-	{
-		if ($bind_param) {
-			foreach ($inputParameters as $key => &$param) {
-				if ($key[0] == ":") {
-					if (is_array($param)) {
-						// $params = [ :param => [ val, PDO::PARAM_ ], ... ];
-						$this->stmt->bindParam($key, $param[0], $param[1]);
-					} else {
-						// $params = [ :param => val, ... ];
-						$this->stmt->bindParam($key, $param, $this->getParamType($param));
-					}
-				} else {
-					// $params = [ val, ... ];
-					$this->stmt->bindParam($key+1, $param, $this->getParamType($param));
-				}
-			}
-			$res = $this->stmt->execute();
-		} else {
-			$res = $this->stmt->execute(empty($inputParameters) ? null : $inputParameters);
-		}
+			public function execute(array $inputParameters = array(), $bind_param = false)
+			{
+			    if ($bind_param) {
+			        foreach ($inputParameters as $key => &$param) {
+			            if (is_string($key) && $key[0] == ":") { 
+			                if (is_array($param)) {
+			                    // $params = [ :param => [ val, PDO::PARAM_ ], ... ];
+			                    $this->stmt->bindParam($key, $param[0], $param[1]);
+			                } else {
+			                    // $params = [ :param => val, ... ];
+			                    $this->stmt->bindParam($key, $param, $this->getParamType($param));
+			                }
+			            } else {
+			                // $params = [ val, ... ];
+			                $this->stmt->bindParam($key + 1, $param, $this->getParamType($param));
+			            }
+			        }
+			        $res = $this->stmt->execute();
+			    } else {
+			        $res = $this->stmt->execute(empty($inputParameters) ? null : $inputParameters);
+			    }
 
-		Flux::$numberOfQueries++;
-		if ((int)$this->stmt->errorCode()) {
-			$info = $this->stmt->errorInfo();
-			self::$errorLog->puts('[SQLSTATE=%s] Err %s: %s', $info[0], $info[1], $info[2]);
-			if (Flux::config('DebugMode')) {
-				$message = sprintf('MySQL error (SQLSTATE: %s, ERROR: %s): %s', $info[0], $info[1], $info[2]);
-				throw new Flux_Error($message);
+			    Flux::$numberOfQueries++;
+			    if ((int)$this->stmt->errorCode()) {
+			        $info = $this->stmt->errorInfo();
+			        self::$errorLog->puts('[SQLSTATE=%s] Err %s: %s', $info[0], $info[1], $info[2]);
+			        if (Flux::config('DebugMode')) {
+			            $message = sprintf('MySQL error (SQLSTATE: %s, ERROR: %s): %s', $info[0], $info[1], $info[2]);
+			            throw new Flux_Error($message);
+			        }
+			    }
+			    return $res;
 			}
-		}
-		return $res;
-	}
+
 
 	public function __call($method, $args)
 	{

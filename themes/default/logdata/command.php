@@ -12,8 +12,8 @@
 		<th><?php echo $paginator->sortableColumn('map', Flux::message('CommandLogMapLabel')) ?></th>
 	</tr>
 	<?php foreach ($commands as $command): ?>
-	<tr>
-		<td align="right"><?php echo $this->formatDateTime($command->atcommand_date) ?></td>
+	<tr  align="center">
+		<td><?php echo $this->formatDateTime($command->atcommand_date) ?></td>
 		<td>
 			<?php if ($command->account_id): ?>
 				<?php if ($auth->actionAllowed('account', 'view') && $auth->allowedToViewAccount): ?>

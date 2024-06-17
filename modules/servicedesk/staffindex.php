@@ -14,17 +14,33 @@ $catsql = $server->connection->getStatement("SELECT * FROM {$server->loginDataba
 $catsql->execute(array($trow->category));
 $catlist = $catsql->fetch();
 
-$rowoutput.='<tr >
+
+if ($trow->status == 'Pending'){
+	$status = 'Pendente';
+}else{
+	if ($trow->status == 'Resolved'){
+		$status = 'Resolvido';
+	}else{
+		if ($trow->status == 'Closed'){
+			$status = 'Fechado';
+		}else{
+			$status = 'N/A';
+		}
+	}
+}
+
+
+$rowoutput.='<tr  align="center">
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->ticket_id .'</a></td>
 				<td>'. $trow->account_id .'</td>
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->subject .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'staffview', array('ticketid' => $trow->ticket_id)) .'" >
 					'. $catlist->name .'</a></td>
 				<td>
-					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $trow->status .'</strong></font>
+					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $status .'</strong></font>
 				</td>
 				<td width="50">';
-					if($trow->lastreply=='0'){$rowoutput.='<i>None</i>';} else {$rowoutput.= $trow->lastreply;}
+					if($trow->lastreply=='0'){$rowoutput.='<i>N/A</i>';} else {$rowoutput.= $trow->lastreply;}
 $rowoutput.='</td>
 				<td>
 					'. Flux::message('SDGroup'. $trow->team) .'

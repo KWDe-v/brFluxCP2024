@@ -9,12 +9,12 @@
 		<th><?php echo $paginator->sortableColumn('monster_id', Flux::message('MVPLogMonsterLabel')) ?></th>
 		<th><?php echo $paginator->sortableColumn('prize', Flux::message('MVPLogPrizeLabel')) ?></th>
 		<th><?php echo $paginator->sortableColumn('mvpexp', Flux::message('MVPLogExpLabel')) ?></th>
-		<th><?php echo $paginator->sortableColumn('map', Flux::message('MVPLogMapLabel')) ?></th
+		<th><?php echo $paginator->sortableColumn('map', Flux::message('MVPLogMapLabel')) ?></th>
 	</tr>
 	<?php foreach ($mvps as $mvp): ?>
-	<tr>
-		<td align="center"><?php echo $this->formatDateTime($mvp->mvp_date) ?></td>
-		<td align="center">
+	<tr align="center">
+		<td><?php echo $this->formatDateTime($mvp->mvp_date) ?></td>
+		<td>
 			<?php if ($mvp->kill_char_id): ?>
 				<?php if ($auth->actionAllowed('character', 'view') && $auth->allowedToViewCharacter): ?>
 					<?php echo $this->linkToCharacter($mvp->kill_char_id, $mvp->kill_char_id) ?>

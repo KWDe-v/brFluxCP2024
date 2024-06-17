@@ -1,6 +1,6 @@
 <?php
-return array(
+return [
     'P' => 'Pet',
     'H' => 'Homunculus',
-    'O' => 'Other',
-);
+    'O' => 'Outros',
+];

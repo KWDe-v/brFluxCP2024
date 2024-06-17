@@ -4,7 +4,7 @@
 
 .loginbox-admin-menu {
 	padding-top: 5px;
-	color: #94b4d5;
+	color: white;
 }
 
 body {
@@ -13,7 +13,7 @@ body {
 	font-family: "Lucida Grande", "Lucida Sans", Verdana, Tahoma, sans-serif;
 	font-size: 9pt;
 	color: #000;
-	background-color: #fff;
+	background-color: yellow;
 }
 
 table {
@@ -35,7 +35,7 @@ tr, td, th {
 }
 
 h2 {
-	color: #444;
+	color: #fff;
 	letter-spacing: -1px;
 }
 
@@ -43,7 +43,7 @@ h3 {
 	/*font-style: italic;*/
 	font-weight: normal;
 	font-size: 120%;
-	color: #444;
+	color: #fff;
 	border-bottom: 1px dotted #ddd;
 	text-transform: uppercase;
 }
@@ -62,17 +62,27 @@ a img {
 }
 
 a {
-	color: #4083c6;
+	color: #fff;
 	text-decoration: none;
+	transition: all 0.5s ease;
+}
+a:hover {
+	color: #fff;
+	text-decoration: none;
+	transition: all 0.5s ease;
+
+	text-shadow: 0px 2px 2px white;
+	
 }
 
 input[type=text], input[type=password], input[type=file], textarea {
 	font-family: "Lucida Grande", "Lucida Sans", Verdana, Tahoma, sans-serif;
 	padding: 4px;
 	font-size: 10pt;
-	color: #444;
-	border: 1px solid #ddd;
+	color: #000;
+	border: 1px solid yellow;
 	outline-width: 0;
+	border-radius: 7px;
 }
 
 label:hover {
@@ -146,7 +156,7 @@ label:hover {
 	font-size: 100%;
 	text-align: center;
 	color: #fff;
-	border-bottom: 1px solid #555;
+	border-bottom: 1px solid #000;
 }
 
 #admin_sidebar td.menuitem a {
@@ -179,12 +189,13 @@ label:hover {
 	font-size: 10pt;
 	border-width: 0 13px 0 11px;
 	border-style: solid;
-	border-color: #c4d9ee;
+	border-color: #269b37;
 }
 
 
 #sidebar th.menuitem {
-	background-color: #94b4d5;
+	background-color: #016c03;
+
 }
 
 #sidebar th.menuitem strong {
@@ -194,7 +205,7 @@ label:hover {
 	font-size: 100%;
 	text-align: center;
 	color: #fff;
-	border-bottom: 1px solid #c4d9ee;
+	border-bottom: 1px solid #269b37;
 }
 
 #sidebar td.menuitem a {
@@ -202,20 +213,27 @@ label:hover {
 	display: block;
 	padding: 2px 5px 4px 18px;
 	color: #fff;
-	background-color: #94b4d5;
+	background-color: #016c03;
 	text-align: left;
 	text-shadow: #708fae 1pt 1pt;
 	text-decoration: none;
+	
+
 }
 
 #sidebar td.menuitem a:hover {
 	color: #fff;
-	background-color: #708fae;
-	text-shadow: #708fae 1pt 1pt;
+	background-color: #016c03;
+	text-shadow: #016c03 1pt 1pt;
+	transform: scale(1.01);
+	transition: all 0.1s ease;
+
+
 }
 
 #sidebar td.menuitem a span {
 	display: block;
+	
 }
 
 .request, .fs-path {
@@ -238,7 +256,8 @@ label:hover {
 	font-weight: bold;
 	font-size: 120%;
 	color: #fff;
-	background-color: #f00;
+	background-color: #ff5555;
+	border-radius: 7px;
 }
 
 .green {
@@ -247,12 +266,22 @@ label:hover {
 	font-weight: bold;
 	font-size: 120%;
 	color: #fff;
-	background-color: #0c0;
+	background-color: #008800;
+	border-radius: 7px;
+}
+.yellow {
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 120%;
+	color: #fff;
+	background-color: #ffa500;
+	border-radius: 7px;
 }
 
 .note {
 	padding: 5px;
-	color: #444;
+	color: #fff;
 	background-color: #eaeaea;
 	font-style: italic;
 }
@@ -272,20 +301,30 @@ label:hover {
 	display: block;
 	margin: 10px;
 	padding: 5px;
-	background-color: #eee;
-	border: 1px solid #ccc;
+	color: white;
+	background-color: #3d34c0;
+	border: none;
+	border-radius: 7px;
+	transition: all 0.5s ease;
+
 }
+a .submit_button  {
+	color: white;
+
+}
+
 
 .submit_button:hover {
 	color: #fff;
-	background-color: #333;
-	border: 1px solid #111;
+	background-color: #2d2699;
 	cursor: pointer;
+	transition: all 0.5s ease;
+	transform: scale(1.03);
 }
 
 .install_table th, .install_table td {
 	padding: 5px 10px;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
 }
 
 .install_table th {
@@ -316,7 +355,7 @@ label:hover {
 }
 
 .pages .page-prev, .pages .page-next {
-	color: #94b4d5;
+	color: white;
 }
 
 .pages .page-num {
@@ -332,21 +371,25 @@ label:hover {
 	border-spacing: 0;
 	border-collapse: collapse;
 	width: 100%;
+
 }
 
 .horizontal-table th {
 	padding: 5px 10px;
-	background-color: #eee;
+	background-color: #5c5cd7;
 }
 
 .horizontal-table td {
 	padding: 5px 10px;
-	background-color: #fff;
+	background-color: #6e74b9;
+
 }
 
 .horizontal-table th, .horizontal-table td {
 	font-size: 9pt;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
+	color: white;
+
 }
 
 .vertical-table {
@@ -356,17 +399,19 @@ label:hover {
 
 .vertical-table th {
 	padding: 5px 10px;
-	background-color: #eee;
+	background-color: #5c5cd7;
+	color: white;
 }
 
 .vertical-table td {
 	padding: 5px 12px;
-	background-color: #fff;
+	background-color: #6e74b9;
+	color: white;
 }
 
 .vertical-table th, .vertical-table td {
 	font-size: 9pt;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
 }
 
 .vertical-table label {
@@ -418,7 +463,7 @@ label:hover {
 	padding: 10px;
 	font-family: "Monaco", "Lucida Console", "Courier New", monospace;
 	background-color: #fff;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
 	width: 96%;
 	overflow: scroll;
 }
@@ -442,10 +487,11 @@ label:hover {
 .info-text {
 	margin-bottom: 6px;
 	padding: 5px;
-	color: #666;
-	background-color: #fff;
-	border: 1px solid #ccc;
+	color: #fff;
+	background-color: #6e74b9;
+	border: 1px solid yellow;
 	text-align: center;
+	border-radius: 9px;
 }
 
 .toggler {
@@ -454,7 +500,7 @@ label:hover {
 }
 
 .toggler a {
-	color: #26a;
+	color: #fff;
 }
 
 .search-form, search-form2 {
@@ -477,7 +523,7 @@ label:hover {
 	margin: 0 0 3px 0;
 	font-size: 8pt;
 	font-style: italic;
-	color: #222;
+	color: #fff;
 }
 
 .search-form input[type=text], .search-form2 input[type=text] {
@@ -510,24 +556,25 @@ label:hover {
 .search-form select, .search-form2 select {
 	display: inline-block;
 	margin: 2px 0;
+	border-radius: 7px;
 }
 
 #submenu {
-	color: #bbb;
+	color: #fff;
 }
 
 #pagemenu {
 	margin-top: 5px;
 	padding: 5px 0;
 	font-size: 8pt;
-	color: #888;
+	color: #fff;
 	border-width: 1px 0;
 	border-style: dotted;
 	border-color: #ddd;
 }
 
 #pagemenu a {
-	color: #777974;
+	color: #fff;
 	text-decoration: underline;
 }
 
@@ -537,11 +584,11 @@ label:hover {
 
 #loginbox {
 	margin-bottom: 10px;
-	color: #555;
+	color: #fff;
 }
 
 #content {
-	color: #555;
+	color: #000;
 }
 
 #register_form table td, #login_form table td {
@@ -572,7 +619,7 @@ label:hover {
 	border-spacing: 0;
 	border-collapse: collapse;
 	background-color: #fff;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
 }
 
 #server_status .server {
@@ -588,7 +635,7 @@ label:hover {
 	margin-bottom: 0px;
 	font-style: italic;
 	font-size: 8pt;
-	color: #ccc;
+	color: #000;
 	text-align: right;
 }
 
@@ -597,17 +644,18 @@ label:hover {
 	margin-bottom: 0px;
 	font-style: italic;
 	font-size: 8pt;
-	color: #aaa;
+	color: #000;
 	text-align: right;
 }
 
 .sortable {
-	color: #444;
+	color: #fff;
 	text-decoration: underline;
 }
 
 .sortable:hover {
-	color: #000;
+
+	text-shadow: 0px 2px 2px #fff;
 }
 
 .character-stats {
@@ -623,26 +671,27 @@ label:hover {
 }
 
 .character-stats .stat-name {
-	color: #666;
+	color: #fff;
 }
 
 .character-stats .stat-value {
-	color: #000;
+	color: #fff;
 }
 
 .credit-balance {
 	float: right;
 	display: inline-block;
 	padding: 10px;
-	color: #000;
-	background-color: #eee;
-	border: 1px dotted #ddd;
+	color: #fff;
+	border-radius: 7px;
+	background-color: #8888f9;
+	border: 1px solid yellow;
 }
 
 .credit-balance .balance-text {
 	display: inline-block;
 	margin-right: 5px;
-	color: #bbb;
+	color: #fff;
 	text-transform: uppercase;
 }
 
@@ -679,8 +728,9 @@ label:hover {
 	display: inline-block;
 	margin: 0;
 	padding: 5px;
-	background-color: #eee;
-	border-right: 1px solid #ddd;
+	color: white;
+	background-color: #222;
+	border-right: 1px solid #222;
 }
 
 .script-line-code {
@@ -698,8 +748,8 @@ label:hover {
 
 .shop-table td {
 	padding: 10px;
-	background-color: #fff;
-	border: 1px solid #ddd;
+	background-color: #6e74b9;
+	border: 1px solid yellow;
 }
 
 .shop-item-image {
@@ -738,7 +788,7 @@ label:hover {
 }
 
 .shop-item-action a {
-	color: #80a2c8;
+	color: #fff;
 	border-bottom: 1px solid #eee;
 }
 
@@ -844,7 +894,7 @@ textarea {
 .credit-amount-text {
 	font-size: 8pt;
 	text-transform: uppercase;
-	color: #bbb;
+	color: #000;
 	text-align: center;
 	letter-spacing: 1px;
 }
@@ -855,7 +905,7 @@ textarea {
 }
 
 .credit-amount {
-	color: #555;
+	color: #000;
 }
 
 .reset-amount-text {
@@ -891,15 +941,16 @@ textarea {
 
 .generic-form {
 	padding: 10px;
-	background-color: #fff;
-	border: 1px solid #ddd;
+	color: white;
+	background-color: #6e74b9;
+	border: 1px solid yellow;
 	width: auto;
 }
 
 .generic-form-div {
 	padding: 10px;
-	background-color: #fff;
-	border: 1px solid #ddd;
+	background-color: #5c5cd7;
+	border: 1px solid yellow;
 	width: auto;
 }
 .generic-form-table th label {
@@ -938,7 +989,7 @@ textarea {
 }
 
 .action a, .action span.anchor {
-	color: #80a2c8;
+	color: #fff;
 	border-bottom: 1px solid #eee;
 	cursor: pointer;
 }
@@ -946,7 +997,7 @@ textarea {
 .block-link {
 	display: block;
 	padding: 3px;
-	color: #80a2c8;
+	color: #f5f5f5;
 	border-bottom: 1px solid #eee;
 }
 
@@ -959,7 +1010,7 @@ textarea {
 	border-spacing: 0;
 	border-collapse: collapse;
 	background-color: #fff;
-	border: 1px solid #ddd;
+	border: 1px solid yellow;
 }
 
 .woe-table th, .woe-table td {
@@ -1047,7 +1098,7 @@ textarea {
 }
 
 .equipped td {
-	background-color: #f1ffff;
+	background-color: #6e74b9;
 }
 
 .job-classes {
@@ -1086,4 +1137,53 @@ textarea {
 .hold-hours {
 	color: #ffba00;
 	font-style: italic;
+}
+.sendDonate {
+    margin: 0 auto; 
+    text-align: center; 
+    transition: all 0.5s ease;
+    display: block; 
+}
+.sendDonate:hover{
+
+	transform: scale(1.01);
+	transition: all 0.5s ease;
+    z-index: 5;
+    filter: blur(0px);
+    -webkit-filter: drop-shadow(0px 0px 10px #3a86ff);
+    filter: drop-shadow(0px 0px 10px #3a86ff);
+}
+
+.sendDonate:active{
+
+	transform: scale(1.0);
+	z-index: 5;
+    filter: blur(0px);
+    -webkit-filter: drop-shadow(0px 0px 10px #00a8ff);
+    filter: drop-shadow(0px 0px 10px #00a8ff);
+}
+
+.sendDonatePaypal {
+    margin: 0 auto; 
+    text-align: center; 
+    transition: all 0.5s ease;
+    display: block; 
+}
+.sendDonatePaypal:hover{
+
+	transform: scale(1.05);
+	transition: all 0.5s ease;
+    z-index: 5;
+    filter: blur(0px);
+    -webkit-filter: drop-shadow(0px 0px 10px orange);
+    filter: drop-shadow(0px 0px 10px orange);
+}
+
+.sendDonatePaypal:active{
+
+	transform: scale(1.0);
+	z-index: 5;
+    filter: blur(0px);
+    -webkit-filter: drop-shadow(0px 0px 10px orange);
+    filter: drop-shadow(0px 0px 10px orange);
 }

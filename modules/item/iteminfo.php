@@ -5,7 +5,7 @@ $itemDescTable = Flux::config('FluxTables.ItemDescTable');
 $title = 'Item Info';
 $fileLoad = new FileLoad();
 
-// upload and parse map.
+// carrega e analisa o mapa.
 if($files->get('iteminfo')) {
     $itemInfo = FLUX_ROOT . '/itemInfo.lua';
     $is_loaded = $fileLoad->load($files->get('iteminfo'), $itemInfo);
@@ -14,7 +14,7 @@ if($files->get('iteminfo')) {
         if($fp){ $array = explode("\n", fread($fp, filesize($itemInfo))); }
         fclose($fp);
         $ca = count($array);
-        $check = false; // True: execute query
+        $check = false; // True: executar consulta
         $checkingdesc = false;
         $desccomplete = false;
         $last_setid = 0;
@@ -38,7 +38,7 @@ if($files->get('iteminfo')) {
                 $setid = $matches[1];
             }
 
-            // Description Inline type
+            // Descrição Tipo embutido
             // identifiedDescriptionName = { "desc1", "desc2" },
             if (preg_match('/^identifiedDescriptionName[ ]=[ ]\{(.*)\},/', $array[$i], $matches)) {
                 $tmp = trim($matches[1]);
@@ -46,14 +46,14 @@ if($files->get('iteminfo')) {
                 $str = preg_split('/(",|"$)/', $tmp);
                 foreach ($str as $x => $de) {
                     $de = trim($de);
-                    $p = strtok($de,'"'); // Remove first quote
+                    $p = strtok($de,'"'); // Remover a primeira cotação
                     $desc .= $p."<br />";
                 }
                 $check = true;
                 $desccomplete = true;
             }
 
-            // Description Multiline type
+            // Descrição Tipo multilinha
             // identifiedDescriptionName = {
             //     "desc1",
             //     "desc2"

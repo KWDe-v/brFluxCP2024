@@ -17,4 +17,6 @@ if($newstype == '1'){
 		$xml = new SimpleXmlElement($content);
 	}
 }
+
+
 ?>

@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'List Guilds';
+$title = 'Lista de Guildas';
 
 $bind        = array();
 $sqlpartial  = "LEFT JOIN {$server->charMapDatabase}.`char` ON `char`.char_id = guild.char_id ";

@@ -1,15 +1,15 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Vendors</h2>
+<h2>Vendedores</h2>
 
 <?php if ($vendings): ?>
     <?php echo $paginator->infoText() ?>
     <table class="horizontal-table">
         <thead>
             <tr>
-                <th><?php echo $paginator->sortableColumn('id', 'Vendor ID') ?></th>
-                <th> <?php echo $paginator->sortableColumn('char_name', 'Vendor Name') ?></th>
+                <th><?php echo $paginator->sortableColumn('id', 'ID do Vendedor') ?></th>
+                <th> <?php echo $paginator->sortableColumn('char_name', 'Nome do Vendedor') ?></th>
                 <th>Title</th>
-                <th><?php echo $paginator->sortableColumn('map', 'Map') ?></th>
+                <th><?php echo $paginator->sortableColumn('map', 'Mapa') ?></th>
                 <th>X</th>
                 <th>Y</th>
                 <th>Gender</th>
@@ -59,5 +59,5 @@
     </table>
     <?php echo $paginator->getHTML() ?>
 <?php else: ?>
-    <p>No Vendors found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+    <p>Nenhum Vendedor encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

@@ -1,13 +1,13 @@
 <?php
-return array(
-	'trade_nodrop'			=> 'Can\'t be dropped',
-	'trade_notrade'			=> 'Can\'t be traded with player',
-	'trade_tradepartner'	=> 'Can\'t be traded with partner',
-	'trade_nosell'			=> 'Can\'t be sold to NPC',
-	'trade_nocart'			=> 'Can\'t be put in Cart',
-	'trade_nostorage'		=> 'Can\'t be put in Storage',
-	'trade_noguildstorage'	=> 'Can\'t be put in Guild Storage',
-	'trade_nomail'			=> 'Can\'t be attached in Mail',
-	'trade_noauction'		=> 'Can\'t be auctioned'
-)
+return [
+	'trade_nodrop' => 'Não pode ser descartado',
+	'trade_notrade' => 'Não pode ser negociado com jogadores',
+	'trade_tradepartner' => 'Não pode ser negociado com parceiro',
+	'trade_nosell' => 'Não pode ser vendido para NPC',
+	'trade_nocart' => 'Não pode ser colocado no Carrinho',
+	'trade_nostorage' => 'Não pode ser colocado no Armazenamento',
+	'trade_noguildstorage' => 'Não pode ser colocado no Armazenamento da Guilda',
+	'trade_nomail' => 'Não pode ser anexado ao Correio',
+	'trade_noauction' => 'Não pode ser leiloado'
+];
 ?>

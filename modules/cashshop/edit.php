@@ -6,7 +6,7 @@ $this->loginRequired();
 if (!$auth->allowedToManageCashShop) {
 	$this->deny();
 }
-$title = 'Modify Item in the CashShop';
+$title = 'Modificar item no CashShop';
 
 require_once 'Flux/TemporaryTable.php';
 require_once 'Flux/CashShop.php';
@@ -37,13 +37,13 @@ if ($item) {
 		$price  = (int)$params->get('price');
 
 		if (!$price) {
-			$errorMessage = 'You must input a cash point cost greater than zero.';
+			$errorMessage = 'Você deve inserir um custo de céredito maior que zero.';
 		} else {
 			if ($shop->edit($shopItemID, $tab, $price)) {
-				$session->setMessageData('Item has been successfully modified.');
+				$session->setMessageData('O item foi modificado com sucesso.');
 				$this->redirect($this->url('cashshop'));
 			} else {
-				$errorMessage = 'Failed to modify the item.';
+				$errorMessage = 'Falha ao modificar o item.';
 			}
 		}
 	}

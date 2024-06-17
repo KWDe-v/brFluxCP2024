@@ -34,7 +34,7 @@ $this->loginRequired();
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="Update" /></td>
+			<td colspan="2"><input type="submit" value="Atualizar" /></td>
 		</tr>
     </table>
 </form>

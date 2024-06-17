@@ -1,5 +1,5 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Buyers</h2>
+<h2>Compradores</h2>
 
 <?php if ($stores): ?>
 	<?php echo $paginator->infoText() ?>
@@ -65,5 +65,5 @@
 	</table>
 	<?php echo $paginator->getHTML() ?>
 <?php else: ?>
-	<p>No Buyers found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+	<p>Nenhum comprador encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

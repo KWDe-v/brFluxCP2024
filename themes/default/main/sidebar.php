@@ -17,7 +17,7 @@ $menuItems = $this->getMenuItems();
 		<td class="menuitem">
 			<a href="<?php echo $this->url($menuItem['module'], $menuItem['action']) ?>"<?php
 				if ($menuItem['module'] == 'account' && $menuItem['action'] == 'logout')
-					echo ' onclick="return confirm(\'Are you sure you want to logout?\')"' ?>>
+					echo ' onclick="return confirm(\'Tem certeza que deseja sair?\')"' ?>>
 				<span><?php echo htmlspecialchars(Flux::message($menuItem['name'])) ?></span>
 			</a>
 		</td>
@@ -44,7 +44,7 @@ $menuItems = $this->getMenuItems();
 		<td class="menuitem">
 			<a href="<?php echo $menuItem['url'] ?>"<?php
 				if ($menuItem['module'] == 'account' && $menuItem['action'] == 'logout')
-					echo ' onclick="return confirm(\'Are you sure you want to logout?\')"' ?>>
+					echo ' onclick="return confirm(\'Tem certeza que deseja sair?\')"' ?>>
 				<span><?php echo htmlspecialchars(Flux::message($menuItem['name'])) ?></span>
 			</a>
 		</td>

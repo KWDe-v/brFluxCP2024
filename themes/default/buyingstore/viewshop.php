@@ -9,9 +9,9 @@
 			<thead>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
-					<th>Price</th>
-					<th>Amount</th>
+					<th>Nome</th>
+					<th>Preço</th>
+					<th>Quantidade</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,8 +46,8 @@
 			</tbody>
 		</table>
 	<?php else: ?>
-		<p>No Items found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+		<p>Nenhum item encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 	<?php endif ?>
 <?php else: ?>
-	<p>No Buyer found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+	<p>Nenhum comprador encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

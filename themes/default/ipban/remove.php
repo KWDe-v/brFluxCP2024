@@ -29,5 +29,5 @@
 		</table>
 	</form>
 <?php else: ?>
-<p>No such IP ban. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Não existe Banimentos de IP. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

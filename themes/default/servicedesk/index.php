@@ -32,7 +32,7 @@ $this->loginRequired();
 <?php if($oldrowoutput): ?>
 	<table class="horizontal-table" width="100%"> 
 		<tbody>
-		<tr>
+		<tr align="center">
 			<th><?php  echo htmlspecialchars(Flux::message('SDHeaderID')) ?></th>
 			<th><?php  echo htmlspecialchars(Flux::message('SDHeaderSubject')) ?></th>    
 			<th><?php  echo htmlspecialchars(Flux::message('SDHeaderCategory')) ?></th>    

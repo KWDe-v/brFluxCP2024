@@ -40,12 +40,12 @@ if (count($_POST)) {
 				$name = $session->loginAthenaGroup->serverName;
 				$link = $this->url('account', 'confirm', array('_host' => true, 'code' => $code, 'user' => $username, 'login' => $name));
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($email, 'Account Confirmation', 'confirm', array('AccountUsername' => $username, 'ConfirmationLink' => htmlspecialchars($link)));
+				$sent = $mail->send($email, 'Confirmação de Conta', 'confirm', array('AccountUsername' => $username, 'ConfirmationLink' => htmlspecialchars($link)));
 				
 				$createTable = Flux::config('FluxTables.AccountCreateTable');
 				$bind = array($code);
 				
-				// Insert confirmation code.
+				// Insira o código de confirmação.
 				$sql  = "UPDATE {$server->loginDatabase}.{$createTable} SET ";
 				$sql .= "confirm_code = ?, confirmed = 0 ";
 				if ($expire=Flux::config('EmailConfirmExpire')) {
@@ -63,11 +63,11 @@ if (count($_POST)) {
 				
 				if ($sent) {
 					$message  = Flux::message('AccountCreateEmailSent');
-					$discordMessage = 'Confirmation email has been sent.';
+					$discordMessage = 'O e-mail de confirmação foi enviado.';
 				}
 				else {
 					$message  = Flux::message('AccountCreateFailed');
-					$discordMessage = 'Failed to send the Confirmation email.';
+					$discordMessage = 'Falha ao enviar o e-mail de confirmação.';
 				}
 				
 				$session->setMessageData($message);
@@ -75,17 +75,17 @@ if (count($_POST)) {
 			else {
 				$session->login($server->serverName, $username, $password, $code);
 				$session->setMessageData(Flux::message('AccountCreated'));
-				$discordMessage = 'Account Created.';
+				$discordMessage = 'Conta criada.';
 			}
 			if(Flux::config('DiscordUseWebhook')) {
 				if(Flux::config('DiscordSendOnRegister')) {
-					sendtodiscord(Flux::config('DiscordWebhookURL'), 'New User registration: "'. $username . '" , ' . $discordMessage);
+					sendtodiscord(Flux::config('DiscordWebhookURL'), 'Registro de Novo Usuário: "'. $username . '" , ' . $discordMessage);
 				}
 			}
 			$this->redirect();
 		}
 		else {
-			exit('Uh oh, what happened?');
+			exit('Ah, o que aconteceu?');
 		}
 	}
 	catch (Flux_RegisterError $e) {

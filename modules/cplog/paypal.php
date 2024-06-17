@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'List PayPal Transactions';
+$title = 'Listar transações do PayPal';
 
 $txnLogTable = Flux::config('FluxTables.TransactionTable');
 $sqlpartial  = "{$server->loginDatabase}.{$txnLogTable} AS p ";

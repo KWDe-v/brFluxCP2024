@@ -1,7 +1,7 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <?php $menus = array() ?>
 <?php if (!empty($pageMenuItems)): ?>
-	<div id="pagemenu"><?php echo empty($title) ? 'Actions for this page' : htmlspecialchars($title) ?>:
+	<div id="pagemenu"><?php echo empty($title) ? 'Ações para esta página' : htmlspecialchars($title) ?>:
 	<?php foreach ($pageMenuItems as $menuItemName => $menuItemLink): ?>
 		<?php $menus[] = sprintf('<a href="%s" class="page-menu-item">%s</a>', $menuItemLink, htmlspecialchars($menuItemName)) ?>
 	<?php endforeach ?>

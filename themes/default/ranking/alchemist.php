@@ -1,7 +1,7 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Alchemist Ranking</h2>
+<h2>Ranking de Alquimista</h2>
 <h3>
-	Top <?php echo number_format($limit=(int)Flux::config('AlchemistRankingLimit')) ?> Alchemist Characters
+	Top <?php echo number_format($limit=(int)Flux::config('AlchemistRankingLimit')) ?> Classe Alquimista com maior Fama
 	<?php if (!is_null($jobClass)): ?>
 	(<?php echo htmlspecialchars($className=$this->jobClassText($jobClass)) ?>)
 	<?php endif ?>
@@ -11,9 +11,9 @@
 <form action="" method="get" class="search-form2">
 	<?php echo $this->moduleActionFormInputs('ranking', 'alchemist') ?>
 	<p>
-		<label for="jobclass">Filter by job class:</label>
+		<label for="jobclass">Pesquisar por classe:</label>
 		<select name="jobclass" id="jobclass">
-			<option value=""<?php if (is_null($jobClass)) echo 'selected="selected"' ?>>All</option>
+			<option value=""<?php if (is_null($jobClass)) echo 'selected="selected"' ?>>Todas</option>
 		<?php foreach ($alchemistJobs as $jobClassIndex => $jobClassName): ?>
 			<option value="<?php echo $jobClassIndex ?>"
 				<?php if (!is_null($jobClass) && $jobClass == $jobClassIndex) echo ' selected="selected"' ?>>
@@ -22,24 +22,24 @@
 		<?php endforeach ?>
 		</select>
 		
-		<input type="submit" value="Filter" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Filtrar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 	</p>
 </form>
 <table class="horizontal-table">
 	<tr>
-		<th>Rank</th>
-		<th>Character Name</th>
-		<th>Fame Points</th>
-		<th>Job Class</th>
-		<th>Base Level</th>
-		<th>Job Level</th>
-		<th colspan="2">Guild Name</th>
+		<th>Posição no Rank</th>
+		<th>Nome do Personagem</th>
+		<th>Pontos de Fama</th>
+		<th>Classe</th>
+		<th>Nível de Base</th>
+		<th>Nível de Job</th>
+		<th colspan="2">Nome do Clã</th>
 	</tr>
 	<?php $topRankType = !is_null($jobClass) ? $className : 'character' ?>
 	<?php for ($i = 0; $i < $limit; ++$i): ?>
-	<tr<?php if (!isset($chars[$i])) echo ' class="empty-row"'; if ($i === 0) echo ' class="top-ranked" title="<strong>'.htmlspecialchars($chars[$i]->char_name).'</strong> is the richest '.$topRankType.'!"' ?>>
-		<td align="right"><?php echo number_format($i + 1) ?></td>
+	<tr align="center"<?php if (!isset($chars[$i])) echo ' class="empty-row"'; if ($i === 0) echo ' class="top-ranked" title="<strong>'.htmlspecialchars($chars[$i]->char_name).'</strong> é o mais rico '.$topRankType.'!"' ?>>
+		<td><?php echo number_format($i + 1) ?></td>
 		<?php if (isset($chars[$i])): ?>
 		<td><strong>
 			<?php if ($auth->actionAllowed('character', 'view') && $auth->allowedToViewCharacter): ?>
@@ -64,7 +64,7 @@
 			<?php endif ?>
 		</td>
 		<?php else: ?>
-		<td colspan="2"><span class="not-applicable">None</span></td>
+		<td colspan="2"><span class="not-applicable">N/A</span></td>
 		<?php endif ?>
 		<?php else: ?>
 		<td colspan="8"></td>
@@ -73,5 +73,5 @@
 	<?php endfor ?>
 </table>
 <?php else: ?>
-<p>There are no characters. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Não há nenhum Personagem. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

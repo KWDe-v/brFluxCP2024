@@ -1,10 +1,10 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Password Resets</h2>
-<p class="toggler"><a href="javascript:toggleSearchForm()">Search...</a></p>
+<h2>Redefinições de senha</h2>
+<p class="toggler"><a href="javascript:toggleSearchForm()">Procurar...</a></p>
 <form action="<?php echo $this->url ?>" method="get" class="search-form">
 	<?php echo $this->moduleActionFormInputs($params->get('module'), $params->get('action')) ?>
 	<p>
-		<label for="use_request_after">Request Date Between:</label>
+		<label for="use_request_after">Data da solicitação entre:</label>
 		<input type="checkbox" name="use_request_after" id="use_request_after"<?php if ($params->get('use_request_after')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateField('request_after') ?>
 		<label for="use_request_before">&mdash;</label>
@@ -12,7 +12,7 @@
 		<?php echo $this->dateField('request_before') ?>
 	</p>
 	<p>
-		<label for="use_reset_after">Reset Date Between:</label>
+		<label for="use_reset_after">Data da redefinição entre:</label>
 		<input type="checkbox" name="use_reset_after" id="use_reset_after"<?php if ($params->get('use_reset_after')) echo ' checked="checked"' ?> />
 		<?php echo $this->dateField('reset_after') ?>
 		<label for="use_reset_before">&mdash;</label>
@@ -20,33 +20,33 @@
 		<?php echo $this->dateField('reset_before') ?>
 	</p>
 	<p>
-		<label for="account_id">Account ID:</label>
+		<label for="account_id">ID da Conta:</label>
 		<input type="text" name="account_id" id="account_id" value="<?php echo htmlspecialchars($params->get('account_id') ?: '') ?>" />
 		...
-		<label for="username">Username:</label>
+		<label for="username">Usuário:</label>
 		<input type="text" name="username" id="username" value="<?php echo htmlspecialchars($params->get('username') ?: '') ?>" />
 		...
-		<label for="request_ip">Request IP:</label>
+		<label for="request_ip">IP de Solicitação:</label>
 		<input type="text" name="request_ip" id="request_ip" value="<?php echo htmlspecialchars($params->get('request_ip') ?: '') ?>" />
 		...
-		<label for="reset_ip">Reset IP:</label>
+		<label for="reset_ip">IP de Redefinição:</label>
 		<input type="text" name="reset_ip" id="reset_ip" value="<?php echo htmlspecialchars($params->get('reset_ip') ?: '') ?>" />
 		
 		<?php if (!$auth->allowedToSearchCpResetPass): ?>
-		<input type="submit" value="Search" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Procurar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 		<?php endif ?>
 	</p>
 	<?php if ($auth->allowedToSearchCpResetPass): ?>
 	<p>
-		<label for="old_password">Old Password:</label>
+		<label for="old_password">Senha Antiga:</label>
 		<input type="text" name="old_password" id="old_password" value="<?php echo htmlspecialchars($params->get('old_password') ?: '') ?>" />
 		...
-		<label for="new_password">New Password:</label>
+		<label for="new_password">Senha Nova:</label>
 		<input type="text" name="new_password" id="new_password" value="<?php echo htmlspecialchars($params->get('new_password') ?: '') ?>" />
 		
-		<input type="submit" value="Search" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Procurar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 	</p>
 	<?php endif ?>
 </form>
@@ -54,20 +54,20 @@
 <?php echo $paginator->infoText() ?>
 <table class="horizontal-table">
 	<tr>
-		<th><?php echo $paginator->sortableColumn('log.account_id', 'Account ID') ?></th>
-		<th><?php echo $paginator->sortableColumn('userid', 'Username') ?></th>
+		<th><?php echo $paginator->sortableColumn('log.account_id', 'ID da Conta') ?></th>
+		<th><?php echo $paginator->sortableColumn('userid', 'Usuário') ?></th>
 		<?php if (Flux::config('CpResetLogShowPassword') && $auth->allowedToSeeCpResetPass): ?>
-		<th><?php echo $paginator->sortableColumn('old_password', 'Old Password') ?></th>
-		<th><?php echo $paginator->sortableColumn('new_password', 'New Password') ?></th>
+		<th><?php echo $paginator->sortableColumn('old_password', 'Senha Antiga') ?></th>
+		<th><?php echo $paginator->sortableColumn('new_password', 'Senha Nova') ?></th>
 		<?php endif ?>
-		<th><?php echo $paginator->sortableColumn('request_date', 'Request Date') ?></th>
-		<th><?php echo $paginator->sortableColumn('request_ip', 'Request IP') ?></th>
-		<th><?php echo $paginator->sortableColumn('reset_date', 'Reset Date') ?></th>
-		<th><?php echo $paginator->sortableColumn('reset_ip', 'Reset IP') ?></th>
+		<th><?php echo $paginator->sortableColumn('request_date', 'Data da Mudança') ?></th>
+		<th><?php echo $paginator->sortableColumn('request_ip', 'IP de Solicitação') ?></th>
+		<th><?php echo $paginator->sortableColumn('reset_date', 'Data do Reset') ?></th>
+		<th><?php echo $paginator->sortableColumn('reset_ip', 'IP de Redefinição') ?></th>
 	</tr>
 	<?php foreach ($resets as $reset): ?>
-	<tr>
-		<td align="right">
+	<tr  align="center">
+		<td>
 			<?php if ($auth->actionAllowed('account', 'view')): ?>
 				<?php echo $this->linkToAccount($reset->account_id, $reset->account_id) ?>
 			<?php else: ?>
@@ -78,7 +78,7 @@
 			<?php if ($reset->userid): ?>
 				<?php echo htmlspecialchars($reset->userid) ?>
 			<?php else: ?>
-				<span class="not-applicable">Unknown</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 		<?php if (Flux::config('CpResetLogShowPassword') && $auth->allowedToSeeCpResetPass): ?>
@@ -97,7 +97,7 @@
 			<?php if ($reset->reset_date): ?>
 				<?php echo $this->formatDateTime($reset->reset_date) ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 		<td>
@@ -108,7 +108,7 @@
 					<?php echo htmlspecialchars($reset->reset_ip) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
@@ -116,5 +116,5 @@
 </table>
 <?php echo $paginator->getHTML() ?>
 <?php else: ?>
-<p>No password resets found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhuma redefinição de senha encontrada. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

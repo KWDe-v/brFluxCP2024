@@ -2,32 +2,32 @@
 if (!defined('FLUX_ROOT')) exit;
 $this->loginRequired();
 ?>
-<h2>Category Control</h2>
+<h2>Controle de Categoria</h2>
 <h3><?php echo Flux::message('SDH3CurrentCat') ?></h3>
 <?php if($catlist): ?>
 	<table class="horizontal-table" width="100%"> 
 		<tbody>
-		<tr>
+		<tr >
 			<th>ID</th>
-			<th>Category Name</th>
-			<th>Display?</th>
-			<th>Options</th>
+			<th>Nome da Categoria</th>
+			<th>Mostrar?</th>
+			<th>Opções</th>
 		</tr>
 		<?php foreach($catlist as $trow):?>
-			<tr >
+			<tr align="center">
 				<td><?php echo $trow->cat_id?></td>
 				<td><?php echo $trow->name?></td>
 				<td>
 					<?php if($trow->display=='1'): ?>
-					Yes
+					Sim
 					<?php else: ?>
-					<i>Hidden</i>
+					<i>Não</i>
 					<?php endif ?></td>
 				<td>
 					<?php if($trow->display=='1'): ?>
-						<a href="<?php echo $this->url('servicedesk', 'catcontrol', array('option' => 'hide', 'catid' => $trow->cat_id))?>" >Hide</a>
+						<a href="<?php echo $this->url('servicedesk', 'catcontrol', array('option' => 'hide', 'catid' => $trow->cat_id))?>" >Esconder</a>
 					<?php else: ?>
-						<a href="<?php echo $this->url('servicedesk', 'catcontrol', array('option' => 'show', 'catid' => $trow->cat_id))?>" >Show</a>
+						<a href="<?php echo $this->url('servicedesk', 'catcontrol', array('option' => 'show', 'catid' => $trow->cat_id))?>" >Mostrar</a>
 					<?php endif ?>
 				</td>
 			</tr>
@@ -44,16 +44,16 @@ $this->loginRequired();
 <form action="<?php echo $this->urlWithQs ?>" method="post">
 	<table class="horizontal-table" width="100%">
 		<tr>
-			<th>Category Name</th>
-			<th>Display?</th>
+			<th>Nome da Categoria</th>
+			<th>Mostrar?</th>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td><input type="text" name="name" /></td>
-			<td><select name="display"><option value="1">Yes</option><option value="0">No</option></select></td>
+			<td><select name="display"><option value="1">Sim</option><option value="0">Não</option></select></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td colspan="2">
-			<input type="submit" value="Add Category" /></td>
+			<input type="submit" value="Adicionar Categoria" /></td>
 		</tr>
     </table>
 </form>

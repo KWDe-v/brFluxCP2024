@@ -16,29 +16,27 @@ if (!defined('FLUX_ROOT')) exit;
 
 		<tr>
 			<th><label for="whoto"><?php echo htmlspecialchars(Flux::message('MailerToLabel')) ?></label></th>
-			<td><input type="radio" name="whoto" id="whoto" value="1" checked="checked"> No one<br />
-				<input type="radio" name="whoto" id="whoto" value="2"> Admins Only<br />
-				<input type="radio" name="whoto" id="whoto" value="3"> Staff Only<br />
+			<td><input type="radio" name="whoto" id="whoto" value="1" checked="checked"> Ninguém<br />
+				<input type="radio" name="whoto" id="whoto" value="2"> Somente administradores<br />
+				<input type="radio" name="whoto" id="whoto" value="3"> Somente equipe<br />
 				<input type="radio" name="whoto" id="whoto" value="5"> VIPs<br />
-				<input type="radio" name="whoto" id="whoto" value="4"> Everyone<br />
+				<input type="radio" name="whoto" id="whoto" value="4"> Todos<br />
 			</td>
 		</tr>
 		<tr>
 			<th><label for="template"><?php echo htmlspecialchars(Flux::message('MailerSelectTemplateLabel')) ?></label></th>
 			<td>
-				<select name="template">
-				<?php for($index=0; $index < $indexCount; $index++): ?>
-					<?php if (substr("$dirArray[$index]", 0, 1) != "." && substr("$dirArray[$index]", 0, 5) != "index" && substr("$dirArray[$index]", 0, 10) != "changemail" && substr("$dirArray[$index]", 0, 7) != "confirm" && substr("$dirArray[$index]", 0, 11) != "contactform" && substr("$dirArray[$index]", 0, 7) != "newpass" && substr("$dirArray[$index]", 0, 9) != "newticket" && substr("$dirArray[$index]", 0, 9) != "resetpass" && substr("$dirArray[$index]", 0, 11) != "ticketreply"): ?>	
-						<?php $tempexp=explode('.',$dirArray[$index]); ?>
-						<option value="<?php echo $tempexp[0] ?>"><?php echo $tempexp[0] ?></option>	        
-					<?php endif ?>
-				<?php endfor ?>
-				</select>
+			<select name="template">
+			    <?php for ($index = 0; $index < $indexCount; $index++): ?>
+			        <?php $tempexp = explode('.', $dirArray[$index]); ?>
+			        <option value="<?php echo $tempexp[0]; ?>"><?php echo $tempexp[0]; ?></option>
+			    <?php endfor; ?>
+			</select>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<input type="submit" value="Send E-mail" />
+				<input type="submit" value="Enviar E-maill" />
 			</td>
 		</tr>
 	</table>

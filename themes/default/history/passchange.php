@@ -8,7 +8,7 @@
 		<th><?php echo $paginator->sortableColumn('change_ip', Flux::message('HistoryPassChangeChangeIp')) ?></th>
 	</tr>
 	<?php foreach ($changes as $change): ?>
-	<tr>
+	<tr align="center">
 		<td><?php echo htmlspecialchars($change->change_date) ?></td>
 		<td>
 		<?php if ($auth->actionAllowed('account', 'index')): ?>

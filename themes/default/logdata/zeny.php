@@ -12,8 +12,8 @@
 		<th><?php echo $paginator->sortableColumn('map', Flux::message('ZenyLogMapLabel')) ?></th>
 	</tr>
 	<?php foreach ($logs as $log): ?>
-	<tr>
-		<td align="right"><?php echo $this->formatDateTime($log->time) ?></td>
+	<tr align="center">
+		<td><?php echo $this->formatDateTime($log->time) ?></td>
 		<td>
 			<?php if ($log->char_name): ?>
 				<?php if ($auth->actionAllowed('character', 'view') && $auth->allowedToViewCharacter): ?>

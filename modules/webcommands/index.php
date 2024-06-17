@@ -15,14 +15,14 @@ if(isset($_POST['command'])){
 	$sth->execute(array($_POST['command'], $session->account->userid, $session->account->account_id));
 	if(Flux::config('DiscordUseWebhook')) {
 		if(Flux::config('DiscordSendOnWebCommand')) {
-			sendtodiscord(Flux::config('DiscordWebhookURL'), 'Web Command Submitted: '. $_POST['command']);
+			sendtodiscord(Flux::config('DiscordWebhookURL'), 'Comando da Web enviado: '. $_POST['command']);
 		}
 	}
 
 }
 
 
-// Last ran commands
+// Últimos comandos executados
 
 $sql1 = "SELECT * FROM {$server->charMapDatabase}.$tbl WHERE `done` = '1' ORDER BY `timestamp` DESC LIMIT 5";
 $sth1 = $server->connection->getStatement($sql1);

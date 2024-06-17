@@ -1,17 +1,17 @@
-Using a Custom Theme
+Usando um tema personalizado
 ======
 
-How does it work?
+Como funciona?
 ---------
-The Theme System in FluxCP is based on an "inheritance structure". In simple terms, this means you only need to add files to your new theme folder that you want to change.
+O Sistema de Temas no FluxCP é baseado em uma "estrutura de herança". Em termos simples, isso significa que você só precisa adicionar os arquivos que deseja alterar à nova pasta do tema.
 
-It all works similar to the config import system in rAthena. The default theme is read first, then if there are any files matching the required view in the custom theme, then it gets loaded instead. This means that that **you don't need to copy/paste the default theme every time you create a new custom theme**.
+Tudo funciona de forma semelhante ao sistema de importação de configuração no rAthena. O tema padrão é lido primeiro e, em seguida, se houver algum arquivo que corresponda à visualização necessária no tema personalizado, ele será carregado. Isso significa que **você não precisa copiar/colar o tema padrão toda vez que criar um novo tema personalizado**.
 
-The manifest.php file controls inheritance with `'inherit'     => 'default',`.
+O arquivo manifest.php controla a herança com `'inherit' => 'default',`.
 
-How should my theme look?
+Como deve ser o meu tema?
 ---------
-This is an example directory structure for a custom theme in a fresh install of FluxCP:
+Este é um exemplo de estrutura de diretório para um tema personalizado em uma nova instalação do FluxCP:
 ```
 .
 ├── addons
@@ -49,22 +49,22 @@ This is an example directory structure for a custom theme in a fresh install of 
 └── index.php
 ```
 
-As you can see, there are only a few files in the **cust_theme1** folder.
+Como você pode ver, existem apenas alguns arquivos na pasta **cust_theme1**.
 
 
-How do I make it display on my website?
+Como faço para exibi-lo em meu site?
 ---------
-To enable your theme, simply add it to the theme array in /config/application.php:
-```'ThemeName'					=> array('default', 'bootstrap', 'cust_theme1'),```
+Para habilitar seu tema, basta adicioná-lo ao array de temas em /config/application.php:
+```'ThemeName' => array('default', 'bootstrap', 'cust_theme1'),```
 
-If you want your new theme to always display and remove the theme selection box in the footer, remove the other themes from this array so it looks like:
-```'ThemeName'					=> array('cust_theme1'),```
+Se você quiser que seu novo tema sempre seja exibido e remova a caixa de seleção de tema no rodapé, remova os outros temas desta matriz para que fique assim:
+```'NomeDoTema' => array('cust_theme1'),```
 
 
-How do I know if a theme I downloaded will work?
+Como posso saber se um tema que baixei funcionará?
 ---------
-As a general rule of thumb, if your new theme has a `manifest.php` file in the theme folder, it will work with current versions of FluxCP just fine.
+Como regra geral, se o seu novo tema tiver um arquivo `manifest.php` na pasta do tema, ele funcionará perfeitamente com as versões atuais do FluxCP.
 
-If it doesn't have `manifest.php`, you will need to create one. This will make the new theme able to load, but you will still have problems.
+Se não tiver `manifest.php`, você precisará criar um. Isso fará com que o novo tema seja carregado, mas você ainda terá problemas.
 
-In the past, even after this theme system was introduced, theme designers have still opted to create themes reliant on old versions of FluxCP. They are lazy. Use at your own risk.
+No passado, mesmo após a introdução deste sistema de temas, os designers de temas ainda optaram por criar temas dependentes de versões antigas do FluxCP. Eles são preguiçosos. Use por sua conta e risco.

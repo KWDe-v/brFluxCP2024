@@ -1,16 +1,16 @@
 <?php
-return array(
-	'ammo'			=> 'Ammo',
-	'armor'			=> 'Armor',
-	'card'			=> 'Card',
-	'cash'			=> 'Cash Shop Reward',
-	'delayconsume'	=> 'Delay Consume',
-	'etc'			=> 'Etc',
-	'healing'		=> 'Healing',
-	'petarmor'		=> 'Pet Armor',
-	'petegg'		=> 'Pet Egg',
-	'shadowgear'	=> 'Shadow Equipment',
-	'usable'		=> 'Usable',
-	'weapon'		=> 'Weapon'
-)
+return [
+	'ammo'			=> 'Munição',
+	'armor'			=> 'Armadura',
+	'card'			=> 'Carta',
+	'cash'			=> 'Recompensa da Loja de Cash',
+	'delayconsume'	=> 'Consumível',
+	'etc'			=> 'Outros',
+	'healing'		=> 'Cura',
+	'petarmor'		=> 'Armadura de Pet',
+	'petegg'		=> 'Ovo de Pet',
+	'shadowgear'	=> 'Equipamento Sombrio',
+	'usable'		=> 'Utilizável',
+	'weapon'		=> 'Arma'
+];
 ?>

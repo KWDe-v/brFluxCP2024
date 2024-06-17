@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'List IP Ban History';
+$title = 'Listar histórico de banimentos de IP';
 
 $ipBanTable = Flux::config('FluxTables.IpBanTable');
 $sqlpartial = "WHERE 1=1 ";

@@ -6,7 +6,7 @@ if (!defined('FLUX_ROOT'))
 require_once 'Flux/TemporaryTable.php';
 
 
-// Get the current Vendor values.
+// Obtenha os valores atuais do fornecedor.
 $sql = "SELECT `char`.name as char_name, `vendings`.id, `vendings`.account_id, `vendings`.sex, `vendings`.map, `vendings`.x, `vendings`.y, `vendings`.title, autotrade ";
 $sql .= "FROM vendings ";
 $sql .= "LEFT JOIN `char` on vendings.char_id = `char`.char_id where id=?";
@@ -22,7 +22,7 @@ if ($vending) {
         $isMine = true;
     }
 
-// Create the itemdb temp table to retrieve names.
+// Cria a tabela temporária itemdb para recuperar nomes.
     if ($server->isRenewal) {
         $fromTables = array("{$server->charMapDatabase}.item_db_re", "{$server->charMapDatabase}.item_db2_re");
     } else {
@@ -31,8 +31,8 @@ if ($vending) {
     $itemDB = "{$server->charMapDatabase}.items";
     $tempTable = new Flux_TemporaryTable($server->connection, $itemDB, $fromTables);
 
-// Get the vendor's items.
-// Get the current Vendor values.
+// Obtenha os itens do fornecedor.
+// Obtenha os valores atuais do fornecedor.
     $sql = "SELECT `vending_items`.cartinventory_id, `vending_items`.amount, `vending_items`.price, ";
     $sql .= "`cart_inventory`.nameid, `cart_inventory`.refine, `cart_inventory`.card0, `cart_inventory`.card1, `cart_inventory`.card2, c.name as char_name, ";
     $sql .= "`cart_inventory`.option_id0, `cart_inventory`.option_val0, ";
@@ -59,7 +59,7 @@ if ($vending) {
     $items=$vending_items;
     
 
-    //Set the cards
+    //Definir as cartas
     $cards = array();
     if ($items) {
 		$cardIDs = array();
@@ -119,7 +119,7 @@ if ($vending) {
 
     
 } else {
-    $title = "No Vendor Found.";
+    $title = "Nenhum Vendedor Encontrado.";
 }
 
 

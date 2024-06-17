@@ -1,9 +1,9 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>View Cart</h2>
-<p class="cart-info-text">You have <span class="cart-item-count"><?php echo number_format(count($items)) ?></span> item(s) in your cart.</p>
-<p class="cart-total-text">Your current subtotal is <span class="cart-sub-total"><?php echo number_format($total=$server->cart->getTotal()) ?></span> credit(s).</p>
+<h2>Carrinho</h2>
+<p class="cart-info-text">Você tem <span class="cart-item-count"><?php echo number_format(count($items)) ?></span> iten(s) No seu carrinho.</p>
+<p class="cart-total-text">Seu subtotal atual é <span class="cart-sub-total"><?php echo number_format($total=$server->cart->getTotal()) ?></span> crédito(s).</p>
 <br />
-<p class="checkout-text"><a href="<?php echo $this->url('purchase', 'checkout') ?>">Proceed to Checkout Area</a></p>
+<p class="checkout-text"><a href="<?php echo $this->url('purchase', 'checkout') ?>">Prossiga para a área de checkout</a></p>
 <form action="<?php echo $this->url('purchase', 'remove') ?>" method="post">
 	<table class="vertical-table cart">
 		<?php foreach ($items as $num => $item): ?>
@@ -21,15 +21,15 @@
 					</label>
 				</h4>
 				<?php if ($item->shop_item_qty > 1): ?>
-				<p class="shop-item-qty">Quantity: <span class="qty"><?php echo number_format($item->shop_item_qty) ?></span></p>
+				<p class="shop-item-qty">Quantidade: <span class="qty"><?php echo number_format($item->shop_item_qty) ?></span></p>
 				<?php endif ?>
-				<p class="shop-item-cost"><span class="cost"><?php echo number_format($item->shop_item_cost) ?></span> credits</p>
+				<p class="shop-item-cost"><span class="cost"><?php echo number_format($item->shop_item_cost) ?></span> créditos</p>
 				<p class="shop-item-action">
 					<?php if ($auth->actionAllowed('item', 'view')): ?>
-						<?php echo $this->linkToItem($item->shop_item_nameid, 'View Item') ?> /
+						<?php echo $this->linkToItem($item->shop_item_nameid, 'Ver Item') ?> /
 					<?php endif ?>
-					<a href="<?php echo $this->url('purchase', 'remove', array('num' => $num)) ?>">Remove from Cart</a> /
-					<a href="<?php echo $this->url('purchase', 'add', array('id' => $item->shop_item_id, 'cart' => true)) ?>">Add Another to Cart</a>
+					<a href="<?php echo $this->url('purchase', 'remove', array('num' => $num)) ?>">Remover do Carrionho</a> /
+					<a href="<?php echo $this->url('purchase', 'add', array('id' => $item->shop_item_id, 'cart' => true)) ?>">Adicionar outro ao carrinho</a>
 				</p>
 				<p><?php echo nl2br(htmlspecialchars($item->shop_item_info)) ?></p>
 			</td>
@@ -37,11 +37,17 @@
 		<?php endforeach ?>
 	</table>
 	<p class="remove-from-cart">
-		<input type="submit" value="Remove Selected Items from Cart" />
+		<input type="submit" value="Remover itens selecionados do carrinho" />
 	</p>
 </form>
 <form action="<?php echo $this->url('purchase', 'clear') ?>" method="post">
 	<p class="remove-from-cart">
-		<input type="submit" value="Empty Out Your Cart" />
+		<input type="submit" value="Esvazie seu carrinho" />
 	</p>
 </form>
+<form action="<?php echo $this->url('purchase', 'checkout') ?>" method="post">
+	<p class="remove-from-cart">
+		<input type="submit" value="Ir Para o Checkout" />
+	</p>
+</form>
+

@@ -1,16 +1,16 @@
 <?php
-return array(
+return [
+	// Se a visualização não for encontrada neste modelo,
+	// irá carregar os arquivos do template herdado
+	// Então, basicamente, se você quiser criar um novo tema, você não precisa
+	// preciso colocar todos os arquivos aqui novamente, apenas as views modificadas são suficientes.
 
-	// If view isn't found in this template it
-	// will load the files from the inherited template
-	// So basically, if you want to create a new theme, you don't
-	// need to put all the files here again, just the modified views are enough.
 	'inherit'     => 'default',
 
-	// This data is not displayed anywhere.
+	// Esses dados não são exibidos em lugar nenhum.
 	'author'      => 'Akkarinage',
 	'version'     => '1.0',
-	'description' => 'Bootstrap Theme for FluxCP',
+	'description' => 'Bootstrap Tema Para FluxCP',
 	'website'     => 'http://rathena.org/board/'
-);
+];
 ?>

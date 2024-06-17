@@ -1,8 +1,8 @@
 <?php
-// rA monster sizes.
-return array(
-	 'Small' => 'Small',
-	 'Medium' => 'Medium',
-	 'Large' => 'Large'
-)
+// Tamanhos de monstros em rA.
+return [
+	 'Small' => 'Pequeno',
+	 'Medium' => 'Médio',
+	 'Large' => 'Grande'
+];
 ?>

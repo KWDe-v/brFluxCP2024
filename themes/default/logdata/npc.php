@@ -12,9 +12,9 @@
 		<th><?php echo $paginator->sortableColumn('mes', Flux::message('NPCLogMsgLabel')) ?></th>
 	</tr>
 	<?php foreach ($npcs as $npc): ?>
-	<tr>
-		<td align="center"><?php echo $this->formatDateTime($npc->npc_date) ?></td>
-		<td align="center">
+	<tr align="center">
+		<td><?php echo $this->formatDateTime($npc->npc_date) ?></td>
+		<td>
 			<?php if ($npc->account_id): ?>
 				<?php if ($auth->actionAllowed('account', 'view') && $auth->allowedToViewAccount): ?>
 					<?php echo $this->linkToAccount($npc->account_id, $npc->account_id) ?>
@@ -25,7 +25,7 @@
 					<span class="not-applicable"><?php echo htmlspecialchars(Flux::message('NoneLabel')) ?></span>
 			<?php endif ?>
 		</td>
-		<td align="center">
+		<td>
 			<?php if ($npc->char_id): ?>
 				<?php if ($auth->actionAllowed('character', 'view') && $auth->allowedToViewCharacter): ?>
 					<?php echo $this->linkToCharacter($npc->char_id, $npc->char_id) ?>
@@ -36,15 +36,15 @@
 				<span class="not-applicable"><?php echo htmlspecialchars(Flux::message('NoneLabel')) ?></span>
 			<?php endif ?>
 		</td>
-		<td align="center"><?php echo htmlspecialchars($npc->char_name) ?></td>
-		<td align="center">
+		<td><?php echo htmlspecialchars($npc->char_name) ?></td>
+		<td>
 			<?php if (strlen(basename($npc->map, '.gat')) > 0): ?>
 				<?php echo htmlspecialchars(basename($npc->map, '.gat')) ?>
 			<?php else: ?>
 				<span class="not-applicable"><?php echo htmlspecialchars(Flux::message('NoneLabel')) ?></span>
 			<?php endif ?>
 		</td>
-		<td align="center"><?php echo htmlspecialchars($npc->mes) ?></td>
+		<td><?php echo htmlspecialchars($npc->mes) ?></td>
 		
 	</tr>
 	<?php endforeach ?>

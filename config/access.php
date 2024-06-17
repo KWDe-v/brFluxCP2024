@@ -1,23 +1,23 @@
 <?php
-// This file should control all access to specified modules and actions.
-return array(
-	// Module/action permissions.
-	// These are handled during runtime by Flux.
-	// '*' is a default that is checked for any action that has not been
-	// specified an access level.
-	'modules' => array(
-		'main'      => array(
+// Este arquivo deve controlar todo o acesso a módulos e ações especificadas.
+return [
+  // Permissões de módulo/ação.
+  // Eles são tratados durante o tempo de execução pelo Flux.
+  // '*' é um padrão que é verificado para qualquer ação que não tenha sido
+  // especificou um nível de acesso.
+	'modules' => [
+		'main'      => [
 			'*'        => AccountLevel::ANYONE
-		),
-		'donate'    => array(
+		],
+		'donate'    => [
 			'index'    => AccountLevel::ANYONE,
 			'notify'   => AccountLevel::ANYONE,
 			'update'   => AccountLevel::ANYONE,
 			'complete' => AccountLevel::ANYONE,
 			'history'  => AccountLevel::NORMAL,
 			'trusted'  => AccountLevel::NORMAL
-		),
-		'purchase'  => array(
+		],
+		'purchase'  => [
 			'index'    => AccountLevel::ANYONE,
 			'add'      => AccountLevel::ANYONE,
 			'clear'    => AccountLevel::NORMAL,
@@ -25,20 +25,20 @@ return array(
 			'checkout' => AccountLevel::NORMAL,
 			'remove'   => AccountLevel::NORMAL,
 			'pending'  => AccountLevel::NORMAL
-		),
-		'itemshop'  => array(
+		],
+		'itemshop'  => [
 			'add'      => AccountLevel::ADMIN,
 			'edit'     => AccountLevel::ADMIN,
 			'delete'   => AccountLevel::ADMIN,
 			'imagedel' => AccountLevel::ADMIN
-		),
-		'cashshop'  => array(
+		],
+		'cashshop'  => [
 			'index'    => AccountLevel::ADMIN,
 			'add'      => AccountLevel::ADMIN,
 			'edit'     => AccountLevel::ADMIN,
 			'delete'   => AccountLevel::ADMIN
-		),
-		'account'   => array(
+		],
+		'account'   => [
 			'index'    => AccountLevel::LOWGM,
 			'view'     => AccountLevel::NORMAL,
 			'create'   => AccountLevel::UNAUTH,
@@ -57,8 +57,8 @@ return array(
 			'changemail' => AccountLevel::NORMAL,
 			'confirmemail' => AccountLevel::NORMAL,
 			'prune'        => AccountLevel::ANYONE
-		),
-		'character'	=> array(
+		],
+		'character'	=> [
 			'index'			=> AccountLevel::LOWGM,
 			'view'			=> AccountLevel::NORMAL,
 			'online'		=> AccountLevel::ANYONE,
@@ -68,23 +68,23 @@ return array(
 			'resetpos'		=> AccountLevel::NORMAL,
 			'mapstats'		=> AccountLevel::ANYONE,
 			'divorce'		=> AccountLevel::NORMAL
-		),
-		'guild'		=> array(
+		],
+		'guild'		=> [
 			'emblem'		=> AccountLevel::ANYONE,
 			'index'			=> AccountLevel::LOWGM,
 			'export'		=> AccountLevel::ADMIN,
 			'view'			=> AccountLevel::NORMAL
-		),
-		'castle'	=> array(
+		],
+		'castle'	=> [
 			'index'			=> AccountLevel::ANYONE
-		),
-		'economy'	=> array(
+		],
+		'economy'	=> [
 			'index'			=> AccountLevel::NORMAL
-		),
-		'auction'	=> array(
+		],
+		'auction'	=> [
 			'index'			=> AccountLevel::LOWGM
-		),
-		'ranking'	=> array(
+		],
+		'ranking'	=> [
 			'character'		=> AccountLevel::ANYONE,
 			'guild'			=> AccountLevel::ANYONE,
 			'zeny'			=> AccountLevel::ANYONE,
@@ -94,22 +94,22 @@ return array(
 			'bowman'		=> AccountLevel::ANYONE,
 			'spearman'		=> AccountLevel::ANYONE,
 			'mvp'       	=> AccountLevel::ANYONE,
-		),
-		'item'		=> array(
+		],
+		'item'		=> [
 			'index'			=> AccountLevel::ANYONE,
 			'view'			=> AccountLevel::ANYONE,
             'iteminfo'		=> AccountLevel::ADMIN
-		),
-		'monster'	=> array(
+		],
+		'monster'	=> [
 			'index'			=> AccountLevel::ANYONE,
 			'view'			=> AccountLevel::ANYONE
-		),
-		'server'	=> array(
+		],
+		'server'	=> [
 			'status'		=> AccountLevel::ANYONE,
 			'status-xml'	=> AccountLevel::ANYONE,
 			'info'			=> AccountLevel::ANYONE
-		),
-		'logdata'	=> array(
+		],
+		'logdata'	=> [
 			'index'			=> AccountLevel::ADMIN,
 			'char'			=> AccountLevel::ADMIN,
 			'cashpoints'	=> AccountLevel::ADMIN,
@@ -123,8 +123,8 @@ return array(
 			'npc'			=> AccountLevel::ADMIN,
 			'pick'			=> AccountLevel::ADMIN,
 			'zeny'			=> AccountLevel::ADMIN
-		),
-		'cplog'		=> array(
+		],
+		'cplog'		=> [
 			'index'			=> AccountLevel::ADMIN,
 			'create'		=> AccountLevel::ADMIN,
 			'paypal'		=> AccountLevel::ADMIN,
@@ -135,57 +135,57 @@ return array(
 			'ban'			=> AccountLevel::ADMIN,
 			'ipban'			=> AccountLevel::ADMIN,
 			'txnview'		=> AccountLevel::ADMIN			
-		),
-		'ipban'		=> array(
+		],
+		'ipban'		=> [
 			'index'			=> AccountLevel::ADMIN,
 			'add'			=> AccountLevel::ADMIN,
 			'unban'			=> AccountLevel::ADMIN,
 			'edit'			=> AccountLevel::ADMIN,
 			'remove'		=> AccountLevel::ADMIN
-		),
-		'service'	=> array(
+		],
+		'service'	=> [
 			'tos'			=> AccountLevel::ANYONE
-		),
-		'captcha'	=> array(
+		],
+		'captcha'	=> [
 			'index'			=> AccountLevel::ANYONE
-		),
-		'install'	=> array(
+		],
+		'install'	=> [
 			'index'			=> AccountLevel::ANYONE,
 			'reinstall'		=> AccountLevel::ADMIN
-		),
-		'test'		=> array(
+		],
+		'test'		=> [
 			'*'				=> AccountLevel::ANYONE
-		),
-		'woe'		=> array(
+		],
+		'woe'		=> [
 			'index'			=> AccountLevel::ANYONE
-		),
-		'mail'		=> array(
+		],
+		'mail'		=> [
 			'index'			=> AccountLevel::ADMIN
-		),
-		'history'	=> array(
+		],
+		'history'	=> [
 			'index'			=> AccountLevel::NORMAL,
 			'cplogin'		=> AccountLevel::NORMAL,
 			'gamelogin'		=> AccountLevel::NORMAL,
 			'emailchange'	=> AccountLevel::NORMAL,
 			'passchange'	=> AccountLevel::NORMAL,
 			'passreset'		=> AccountLevel::NORMAL
-		),
-		'pages'		=> array(
+		],
+		'pages'		=> [
 			'index' 		=> AccountLevel::ADMIN,
 			'add' 			=> AccountLevel::ADMIN,
 			'delete' 		=> AccountLevel::ADMIN,
 			'edit' 			=> AccountLevel::ADMIN,
 			'content' 		=> AccountLevel::ANYONE,
-		),
-		'news'		=> array(
+		],
+		'news'		=> [
 			'index' 		=>  AccountLevel::ANYONE,
 			'view' 			=>  AccountLevel::ANYONE,
 			'manage'		=>  AccountLevel::ADMIN,
 			'add' 			=>  AccountLevel::ADMIN,
 			'edit' 			=>  AccountLevel::ADMIN,
 			'delete' 		=> AccountLevel::ADMIN,
-		),
-		'servicedesk'=> array(
+		],
+		'servicedesk'=> [
 			'index'			=> AccountLevel::NORMAL,
 			'create'		=> AccountLevel::NORMAL,
 			'view'			=> AccountLevel::NORMAL,
@@ -194,17 +194,17 @@ return array(
 			'staffviewclosed'=> AccountLevel::LOWGM,
 			'staffsettings'	=> AccountLevel::LOWGM,
 			'catcontrol'	=> AccountLevel::HIGHGM
-		),
-		'vending'		=> array(
+		],
+		'vending'		=> [
 			'index'			=> AccountLevel::ANYONE,
 			'viewshop'		=> AccountLevel::ANYONE,
-		),	
-		'webcommands'	=> array(
+		],	
+		'webcommands'	=> [
 			'index'			=> AccountLevel::ADMIN,
-		),
-	),
+		],
+	],
 	// General feature permissions, handled by the modules themselves.
-	'features' => array(
+	'features' => [
 		'ViewAccount'		=> AccountLevel::HIGHGM, // View another person's account details.
 		'ViewAccountBanLog'	=> AccountLevel::HIGHGM, // View another person's account ban log.
 		'DeleteAccount'		=> AccountLevel::ADMIN,  // (not yet implemented)
@@ -253,6 +253,6 @@ return array(
 		
 		'EditHigherPower'    => AccountLevel::NOONE,
 		'BanHigherPower'     => AccountLevel::NOONE
-	)
-);
+	]
+];
 ?>

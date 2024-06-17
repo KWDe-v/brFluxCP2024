@@ -1,13 +1,13 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Castles</h2>
-<p>This page shows what castles are activated and which guilds own them.</p>
+<h2>Castelos</h2>
+<p>Esta página mostra quais castelos estão ativados e quais guildas os possuem.</p>
 <?php if ($castles): ?>
 <table class="vertical-table">
 	<tr>
-		<th>Castle ID</th>
-		<th>Castle</th>
-		<th colspan="2">Guild</th>
-		<th>Economy</th>
+		<th>ID do Castelo</th>
+		<th>Castelo</th>
+		<th colspan="2">Guilda</th>
+		<th>Economia</th>
 	</tr>
 	<?php foreach ($castles as $castle): ?>
 		<tr>
@@ -36,5 +36,5 @@
 	<?php endforeach ?>
 </table>
 <?php else: ?>
-<p>No castles found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhum castelo encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

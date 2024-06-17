@@ -1,17 +1,17 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Homunculus Ranking</h2>
+<h2> Ranking Homunculus</h2>
 <h3>
-	Top <?php echo number_format($limit=(int)Flux::config('HomunRankingLimit')) ?> Homunculi
+	Top <?php echo number_format($limit=(int)Flux::config('HomunRankingLimit')) ?> homúnculos
 	<?php if (!is_null($homunClass)): ?>
 	(<?php echo htmlspecialchars($className=$this->homunClassText($homunClass)) ?>)
 	<?php endif ?>
-	on <?php echo htmlspecialchars($server->serverName) ?>
+	em <?php echo htmlspecialchars($server->serverName) ?>
 </h3>
 <?php if ($homuns): ?>
 <form action="" method="get" class="search-form2">
 	<?php echo $this->moduleActionFormInputs('ranking', 'homunculus') ?>
 	<p>
-		<label for="homunclass">Filter by class:</label>
+		<label for="homunclass">Filtrar por classe:</label>
 		<select name="homunclass" id="homunclass">
 			<option value=""<?php if (is_null($homunClass)) echo 'selected="selected"' ?>>All</option>
 		<?php foreach ($classes as $homunClassIndex => $homunClassName): ?>
@@ -30,10 +30,10 @@
 	<tr>
 		<th>Rank</th>
 		<th>Homunculus</th>
-		<th>Owner Name</th>
-		<th>Intimacy</th>
-		<th>Level</th>
-		<th>Experience</th>
+		<th>Nome do Dono</th>
+		<th>Intimiadde</th>
+		<th>Nivel</th>
+		<th>Experiência</th>
 	</tr>
 	<?php $topRankType = !is_null($homunClass) ? $className : 'homunculus' ?>
 	<?php for ($i = 0; $i < $limit; ++$i): ?>
@@ -58,5 +58,5 @@
 	<?php endfor ?>
 </table>
 <?php else: ?>
-<p>There are no homunculi. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Não existem homúnculos. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

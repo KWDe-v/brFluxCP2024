@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = "Who's Online";
+$title = "Quem está on-line?";
 
 $charPrefsTable = Flux::config('FluxTables.CharacterPrefsTable');
 
@@ -94,7 +94,7 @@ $sth  = $server->connection->getStatement($sql);
 
 $sth->execute();
 
-// Number of hidden players (not including the ones hidden by the 'HideFromWhosOnline' app config).
+// Número de jogadores ocultos (não incluindo aqueles ocultos pela configuração do aplicativo 'HideFromWhosOnline').
 $hiddenCount = (int)$sth->fetch()->total;
 
 $col  = "ch.char_id, ch.name AS char_name, ch.class AS char_class, ch.base_level, ch.job_level, ";

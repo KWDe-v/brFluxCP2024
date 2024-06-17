@@ -8,7 +8,7 @@
 		<meta http-equiv="refresh" content="<?php echo $metaRefresh['seconds'] ?>; URL=<?php echo $metaRefresh['location'] ?>" />
 		<?php endif ?>
 		<title><?php echo Flux::config('SiteTitle'); if (isset($title)) echo ": $title" ?></title>
-        <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="./favicon.png" />
 		<link rel="stylesheet" href="<?php echo $this->themePath('css/flux.css') ?>" type="text/css" media="screen" title="" charset="utf-8" />
 		<link href="<?php echo $this->themePath('css/flux/unitip.css') ?>" rel="stylesheet" type="text/css" media="screen" title="" charset="utf-8" />
 		<?php if (Flux::config('EnableReCaptcha')): ?>
@@ -130,13 +130,13 @@
 		<table cellspacing="0" cellpadding="0" width="100%">
 			<tr>
 				<!-- Header -->
-				<td bgcolor="#8ebceb" width="20"></td>
-				<td bgcolor="#8ebceb" colspan="3">
+				<td bgcolor="#016c03" width="20"></td>
+				<td bgcolor="#016c03" colspan="3">
 					<a href="<?php echo $this->basePath ?>">
-						<img src="<?php echo $this->themePath($session->account->group_level >= Flux::config('AdminMenuGroupLevel') ? 'img/logo_admin.gif' : 'img/logo.gif') ?>" id="logo" />
+						<img src="<?php echo $this->themePath($session->account->group_level >= Flux::config('AdminMenuGroupLevel') ? 'img/logo_admin.gif' : 'img/logo.gif') ?>" id="logo" style="max-width: 216px;"/>
 					</a>
 				</td>
-				<td bgcolor="#8ebceb" width="20"></td>
+				<td bgcolor="#016c03" width="20"></td>
 			</tr>
 			<tr>
 				<!-- Spacing between header and content -->
@@ -158,13 +158,13 @@
 					<table cellspacing="0" cellpadding="0" width="100%" id="content">
 						<tr>
 							<td width="18"><img src="<?php echo $this->themePath('img/content_tl.gif') ?>" style="display: block"  /></td>
-							<td bgcolor="#f5f5f5"></td>
+							<td bgcolor="#8888f9"></td>
 							<td width="18"><img src="<?php echo $this->themePath('img/content_tr.gif') ?>" style="display: block" /></td>
 						</tr>
 						
 						<tr>
-							<td bgcolor="#f5f5f5"></td>
-							<td bgcolor="#f5f5f5">
+							<td bgcolor="#8888f9"></td>
+							<td bgcolor="#8888f9">
 								<?php if (Flux::config('DebugMode') && @gethostbyname(Flux::config('ServerAddress')) == '127.0.0.1'): ?>
 									<p class="notice">Please change your <strong>ServerAddress</strong> directive in your application config to your server's real address (e.g., myserver.com).</p>
 								<?php endif ?>

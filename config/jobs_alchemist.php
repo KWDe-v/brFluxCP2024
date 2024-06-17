@@ -1,11 +1,11 @@
 <?php
-return array(
-	18   => 'Alchemist',
-	4019 => 'Creator',
-	4041 => 'Baby Alchemist',
-	4071 => 'Genetic',
-	4078 => 'Genetic+',
-	4107 => 'Baby Genetic',
+return [
+	18   => 'Alquimista',
+	4019 => 'Criador',
+	4041 => 'Alquimista Bebê',
+	4071 => 'Bioquímico',
+	4078 => 'Bioquímico T.',
+	4107 => 'Bioquímico Bebê',
 	4259 => 'Biolo'
-)
+]
 ?>

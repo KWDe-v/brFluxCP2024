@@ -3,5 +3,5 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'Log Data';
+$title = 'Dados de registro';
 ?>

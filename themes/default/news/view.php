@@ -7,7 +7,7 @@ if (!defined('FLUX_ROOT')) exit;
 	<?php foreach($news as $nrow):?>
 		<h4><?php echo $nrow->title ?></h4>
 		<div class="newsCont">
-			<span class="newsDate"><small>by <?php echo $nrow->author ?> on <?php echo date(Flux::config('DateFormat'),strtotime($nrow->created))?></small></span>
+			<span class="newsDate"><small>Por <?php echo $nrow->author ?> Em <?php echo date(Flux::config('DateFormat'),strtotime($nrow->created))?></small></span>
 			<p><?php echo $nrow->body ?></p>
 			<?php if($nrow->created != $nrow->modified && Flux::config('CMSDisplayModifiedBy')):?>
 				<small><?php echo htmlspecialchars(Flux::message('CMSModifiedLabel')) ?> : <?php echo date(Flux::config('DateFormat'),strtotime($nrow->modified))?></small>

@@ -43,7 +43,7 @@ $this->loginRequired();
 			<td align="left"><?php echo htmlspecialchars(Flux::message('CMSRequiredLabel')) ?></td>
         </tr>
         <tr>
-            <td colspan="3"><input type="submit" value="Add" /></td>
+            <td colspan="3"><input type="submit" value="Adicionar" /></td>
         </tr>
     </table>
 </form>

@@ -210,7 +210,7 @@ class Flux_Dispatcher {
 	{
 		$session = Flux::$sessionData;
 		if (!$message) {
-			$message = 'Please login to continue.';
+			$message = 'Por favor faça o login para continuar.';
 		}
 		
 		if (!$session->isLoggedIn()) {

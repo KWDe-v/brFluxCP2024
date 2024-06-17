@@ -1,13 +1,13 @@
 <?php
-// Configuration information for critical error handling.
-// Critical errors are exposed due to an exception in the program.
+// Informações de configuração para o tratamento de erros críticos.
+// Erros críticos são expostos devido a uma exceção no programa.
 
-// Setting $showExceptions to true will cause not only exceptions to be displayed
-// but also the backtrace, which can result in security issues such as exposing
-// your MySQL user and password when unable to connect. Please keep it at false
-// in a production environment.
+// Definir $showExceptions como true fará com que não apenas as exceções sejam exibidas
+// mas também o rastreamento de pilha, o que pode resultar em problemas de segurança, como expor
+// seu nome de usuário e senha do MySQL quando não for possível conectar. Por favor, mantenha-o como false
+// em um ambiente de produção.
 
-$adminEmail      = 'admin@localhost'; // Administrator e-mail address.
-$errorFile       = 'error.php';       // Error file to render.
-$showExceptions  = true;              // Whether or not to show exceptions (only applies to error.php)
+$adminEmail      = 'admin@localhost'; // Endereço de e-mail do administrador.
+$errorFile       = 'error.php';       // Arquivo de erro para renderizar.
+$showExceptions  = true;              // Se mostrar ou não exceções (aplica-se apenas a error.php)
 ?>

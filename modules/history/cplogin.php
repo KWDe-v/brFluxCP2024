@@ -6,20 +6,20 @@ $this->loginRequired();
 $title = Flux::message('HistoryCpLoginTitle');
 $loginLogTable = Flux::config('FluxTables.LoginLogTable');
 
-// Partial SQL query.
+// Consulta SQL parcial.
 $sqlpartial = "WHERE account_id = ?";
 $bind       = array($session->account->account_id);
 
-// Fetch record count.
+//Busca contagem de registros.
 $sql = "SELECT COUNT(id) AS total FROM {$server->loginDatabase}.$loginLogTable $sqlpartial";
 $sth = $server->connection->getStatement($sql);
 $sth->execute($bind);
 
-// Paginator.
+// Paginador.
 $paginator = $this->getPaginator($sth->fetch()->total);
 $paginator->setSortableColumns(array('login_date' => 'desc', 'ip', 'error_code'));
 
-// Fetch actual record data.
+// Busca os dados reais do registro.
 $sql = "SELECT ip, login_date, error_code FROM {$server->loginDatabase}.$loginLogTable $sqlpartial";
 $sql = $paginator->getSQL($sql);
 $sth = $server->connection->getStatement($sql);

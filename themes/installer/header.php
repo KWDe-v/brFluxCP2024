@@ -5,21 +5,45 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-		<title>FluxCP: Install &amp; Update</title>
+		<title>FluxCP: Instalação &amp; Atualização</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<style type="text/css">
-			body { background-color: #ebeef2; }
+			body { background-color: yellow; }
 			.contentcontainer {
-				background-color: #FFFFFF;
+				background-color: #8888f9;
 				border:1px black solid;
 				border-radius:5px;
 				padding:30px;
+				color: white;
 			}
-			.header { padding-bottom: 10%; background-color: #3c6994; margin-bottom: -8%; }
+			.header { padding-bottom: 10%; background-color: #016c03; margin-bottom: -8%; }
+			td{
+				color: white;
+			}
+			.text-success{
+				color: #00ff00!important;
+			}
+			.text-danger{
+				color: red!important;
+			}
+
+			a{
+				color: green!important;
+				transition: all 0.3s ease;
+			}
+			a:hover{
+				color: green!important;
+				text-shadow: 0px 0px 2px white;
+				transition: all 0.3s ease;
+				
+			}
+			h3, h4, th{
+				color: black;
+			}
 		</style>
 	</head>
 
@@ -33,7 +57,7 @@
 			</div>
 			<div class="row">
 				<div class="contentcontainer">
-							<h1>Install &amp; Update</h1>
+							<h1>Instalar &amp; Atualizar</h1>
 					<?php if ($message=$session->getMessage()): ?>
 						<p class="message"><?php echo htmlspecialchars($message) ?></p>
 					<?php endif ?>

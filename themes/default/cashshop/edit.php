@@ -1,6 +1,6 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <h2>CashShop</h2>
-<h3>Modify Item in the CashShop</h3>
+<h3>Modificar item no CashShop</h3>
 <?php if ($item): ?>
 <?php if (!empty($errorMessage)): ?>
 <p class="red"><?php echo htmlspecialchars($errorMessage) ?></p>
@@ -8,15 +8,16 @@
 <form action="<?php echo $this->urlWithQs ?>" method="post" enctype="multipart/form-data">
 <table class="vertical-table">
 	<tr>
-		<th>Item ID</th>
+		<th>ID</th>
 		<td><?php echo $this->linkToItem($item->shop_item_id, $item->shop_item_id) ?></td>
 	</tr>
 	<tr>
-		<th>Name</th>
+		<th>Nome</th>
 		<td><?php echo htmlspecialchars($item->shop_item_name) ?></td>
+		<td width="24"><img src="<?php echo htmlspecialchars($this->iconImage($item->shop_item_id)) ?>?nocache=<?php echo rand() ?>" /></td>
 	</tr>
 	<tr>
-		<th><label for="tab">Tab</label></th>
+		<th><label for="tab">Aba</label></th>
 		<td>
 			<select name="tab" id="tab">
 				<?php foreach ($tabs as $categoryID => $cat): ?>
@@ -26,12 +27,12 @@
 		</td>
 	</tr>
 	<tr>
-		<th><label for="price">Price</label></th>
+		<th><label for="price">Preço</label></th>
 		<td><input type="text" class="short" name="price" id="price" value="<?php echo htmlspecialchars($price) ?>" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			<input type="submit" value="Modify" />
+			<input type="submit" value="Modificar" />
 		</td>
 	</tr>
 </table>

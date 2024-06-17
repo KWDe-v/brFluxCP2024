@@ -68,7 +68,7 @@ if (!$sth->execute(array($newPassword, $account))) {
 
 require_once 'Flux/Mailer.php';
 $mail = new Flux_Mailer();
-$sent = $mail->send($acc->email, 'Password Has Been Reset', 'newpass', array('AccountUsername' => $acc->userid, 'NewPassword' => $unhashedNewPassword));
+$sent = $mail->send($acc->email, 'A senha foi redefinida', 'newpass', array('AccountUsername' => $acc->userid, 'NewPassword' => $unhashedNewPassword));
 
 if ($sent) {
 	$message = Flux::message('ResetPwDone');

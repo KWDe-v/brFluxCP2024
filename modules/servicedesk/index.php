@@ -14,16 +14,28 @@ $catsql = $server->connection->getStatement("SELECT * FROM {$server->loginDataba
 $catsql->execute(array($trow->category));
 $catlist = $catsql->fetch();
 
-$rowoutput.='<tr >
+if($trow->status == 'Pending'){
+	$status = 'Pendente';
+}else{
+	if($trow->status == 'Resolved'){
+	$status = 'Resolvido';
+	}else{
+		
+	}
+}
+
+
+
+$rowoutput.='<tr align="center">
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->ticket_id .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $trow->ticket_id)) .'" >'. $trow->subject .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $trow->ticket_id)) .'" >
 					'. $catlist->name .'</a></td>
 				<td>
-					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $trow->status .'</strong></font>
+					<font color="'. Flux::config('Font'. $trow->status .'Colour') .'"><strong>'. $status .'</strong></font>
 				</td>
 				<td width="50">';
-					if($trow->lastreply=='0'){$rowoutput.='<i>None</i>';} else {$rowoutput.= $trow->lastreply;}
+					if($trow->lastreply=='0'){$rowoutput.='<i>N/A</i>';} else {$rowoutput.= $trow->lastreply;}
 $rowoutput.='</td>
 				<td>
 					'. Flux::message('SDGroup'. $trow->team) .'
@@ -40,17 +52,19 @@ foreach($oldticketlist as $oldtrow){
 $catsql = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}.$tblcat WHERE cat_id = ?");
 $catsql->execute(array($oldtrow->category));
 $catlist = $catsql->fetch();
-
-$oldrowoutput.='<tr >
+if($oldtrow->status == 'Closed'){
+	$oldStatus = 'Fechado';
+}
+$oldrowoutput.='<tr align="center">
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $oldtrow->ticket_id)) .'" >'. $oldtrow->ticket_id .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $oldtrow->ticket_id)) .'" >'. $oldtrow->subject .'</a></td>
 				<td><a href="'. $this->url('servicedesk', 'view', array('ticketid' => $oldtrow->ticket_id)) .'" >
 					'. $catlist->name .'</a></td>
 				<td>
-					<font color="'. Flux::config('Font'. $oldtrow->status .'Colour') .'"><strong>'. $oldtrow->status .'</strong></font>
+					<font color="'. Flux::config('Font'. $oldtrow->status .'Colour') .'"><strong>'. $oldStatus .'</strong></font>
 				</td>
 				<td width="50">';
-					if($oldtrow->lastreply=='0'){$oldrowoutput.='<i>None</i>';} else {$oldrowoutput.= $oldtrow->lastreply;}
+					if($oldtrow->lastreply=='0'){$oldrowoutput.='<i>N/A</i>';} else {$oldrowoutput.= $oldtrow->lastreply;}
 $oldrowoutput.='</td>
 				<td>
 					'. Flux::message('SDGroup'. $oldtrow->team) .'

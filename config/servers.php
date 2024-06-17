@@ -1,141 +1,142 @@
 <?php
-return array(
-	// Example server configuration. You may have more arrays like this one to
-	// specify multiple server groups (however they should share the same login
-	// server whilst they are allowed to have multiple char/map pairs).
-	array(
-		'ServerName'     => 'FluxRO',
-		// Global database configuration (excludes logs database configuration).
-		'DbConfig'       => array(
-			//'Socket'     => '/tmp/mysql.sock',
-			//'Port'       => 3306,
-			//'Encoding'   => 'utf8', // Connection encoding -- use whatever here your MySQL tables collation is.
-			'Convert'    => 'utf8',
-				// -- 'Convert' option only works when 'Encoding' option is specified and iconv (http://php.net/iconv) is available.
-				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)
-			'Hostname'   => '127.0.0.1',
-			'Username'   => 'ragnarok',
-			'Password'   => 'ragnarok',
-			'Database'   => 'ragnarok',
-			'Persistent' => true,
-			'Timezone'   => null // Example: '+0:00' is UTC.
-			// The possible values of 'Timezone' is as documented from the MySQL website:
-			// "The value can be given as a string indicating an offset from UTC, such as '+10:00' or '-6:00'."
-			// "The value can be given as a named time zone, such as 'Europe/Helsinki', 'US/Eastern', or 'MET'." (see below continuation!)
-			// **"Named time zones can be used only if the time zone information tables in the mysql database have been created and populated."
-		),
-		// This is kept separate because many people choose to have their logs
-		// database accessible under different credentials, and often on a
-		// different server entirely to ensure the reliability of the log data.
-		'LogsDbConfig'   => array(
-			//'Socket'     => '/tmp/mysql.sock',
-			//'Port'       => 3306,
-			//'Encoding'   => null, // Connection encoding -- use whatever here your MySQL tables collation is.
-			'Convert'    => 'utf8',
-				// -- 'Convert' option only works when 'Encoding' option is specified and iconv (http://php.net/iconv) is available.
-				// -- It specifies the encoding to convert your MySQL data to on the website (most likely needs to be utf8)
-			'Hostname'   => '127.0.0.1',
-			'Username'   => 'ragnarok',
-			'Password'   => 'ragnarok',
-			'Database'   => 'ragnarok',
-			'Persistent' => true,
-			'Timezone'   => null // Possible values is as described in the comment in DbConfig.
-		),
-		// Web server configuration.
-		'WebDbConfig'    => array(
-			'Hostname'   => '127.0.0.1',
-			'Username'   => 'ragnarok',
-			'Password'   => 'ragnarok',
-			'Database'   => 'ragnarok',
-			'Persistent' => true
-		),
-		// Login server configuration.
-		'LoginServer'    => array(
-			'Address'  => '127.0.0.1',
-			'Port'     => 6900,
-			'UseMD5'   => false,
-			'NoCase'   => true, // rA account case-sensitivity; Default: Case-INsensitive (true).
-			'GroupID'  => 0,    // Default account group ID during registration.
-			//'Database' => 'ragnarok'
-		),
-		'CharMapServers' => array(
-			array(
-				'ServerName'      => 'FluxRO',
-				'Renewal'         => true,
-				'MaxCharSlots'    => 9,
-				'DateTimezone'    => null, // Specifies game server's timezone for this char/map pair. (See: http://php.net/timezones)
-				//'ResetDenyMaps'   => 'sec_pri', // Defaults to 'sec_pri'. This value can be an array of map names.
-				//'Database'        => 'ragnarok', // Defaults to DbConfig.Database
-				'ExpRates' => array(
-					'Base'        => 100, // Rate at which (base) exp is given
-					'Job'         => 100, // Rate at which job exp is given
-					'Mvp'         => 100  // MVP bonus exp rate
-				),
-				'DropRates' => array(
-					// If drop rate was below this amount and bonus is applied to it, the bonus can't make it exceed this amount.
-					'DropRateCap' => 9000,
-					// The rate the common items (in the ETC tab, besides card) are dropped
-					'Common'      => 100,
-					'CommonBoss'  => 100,
-					'CommonMVP'   => 100,
-					'CommonMin'   => 1,
-					'CommonMax'   => 10000,
-					// The rate healing items (that restore HP or SP) are dropped
-					'Heal'        => 100,
-					'HealBoss'    => 100,
-					'HealMVP'     => 100,
-					'HealMin'     => 1,
-					'HealMax'     => 10000,
-					// The rate usable items (in the item tab other then healing items) are dropped
-					'Useable'     => 100,
-					'UseableBoss' => 100,
-					'UseableMVP'  => 100,
-					'UseableMin'  => 1,
-					'UseableMax'  => 10000,
-					// The rate at which equipment is dropped
-					'Equip'       => 100,
-					'EquipBoss'   => 100,
-					'EquipMVP'    => 100,
-					'EquipMin'    => 1,
-					'EquipMax'    => 10000,
-					// The rate at which cards are dropped
-					'Card'        => 100,
-					'CardBoss'    => 100,
-					'CardMVP'     => 100,
-					'CardMin'     => 1,
-					'CardMax'     => 10000,
-					// The rate adjustment for the MVP items that the MVP gets directly in their inventory
-					'MvpItem'     => 100,
-					'MvpItemMin'  => 1,
-					'MvpItemMax'  => 10000,
-					// 0 - official order (Show message "Note: Only one MVP drop will be rewarded.") , 2 - all items
-					'MvpItemMode' => 0,
-				),
-				'CharServer'      => array(
-					'Address'     => '127.0.0.1',
-					'Port'        => 6121
-				),
-				'MapServer'       => array(
-					'Address'     => '127.0.0.1',
-					'Port'        => 5121
-				),
-				// -- WoE days and times --
-				// First parameter: Starding day 0=Sunday / 1=Monday / 2=Tuesday / 3=Wednesday / 4=Thursday / 5=Friday / 6=Saturday
-				// Second parameter: Starting hour in 24-hr format.
-				// Third paramter: Ending day (possible value is same as starting day).
-				// Fourth (final) parameter: Ending hour in 24-hr format.
-				// ** (Note, invalid times are ignored silently.)
-				'WoeDayTimes'   => array(
-					//array(0, '12:00', 0, '14:00'), // Example: Starts Sunday 12:00 PM and ends Sunday 2:00 PM
-					//array(3, '14:00', 3, '15:00')  // Example: Starts Wednesday 2:00 PM and ends Wednesday 3:00 PM
-				),
-				// Modules and/or actions to disallow access to during WoE.
-				'WoeDisallow'   => array(
-					array('module' => 'character', 'action' => 'online'),  // Disallow access to "Who's Online" page during WoE.
-					array('module' => 'character', 'action' => 'mapstats') // Disallow access to "Map Statistics" page during WoE.
-				)
-			)
-		)
-	)
-);
+return [
+    // Configuração de exemplo do servidor. Você pode ter mais arrays como este
+    // para especificar múltiplos grupos de servidores (no entanto, eles devem
+    // compartilhar o mesmo servidor de login, embora possam ter múltiplos pares
+    // de char/map).
+    [
+        'ServerName'     => 'brFluxRO',
+        // Configuração global do banco de dados (exclui a configuração do banco de dados de logs).
+        'DbConfig'       => [
+            //'Socket'     => '/tmp/mysql.sock',
+            //'Port'       => 3306,
+            //'Encoding'   => 'utf8', // Codificação da conexão -- use aqui a mesma que a collation das suas tabelas MySQL.
+            'Convert'    => 'utf8',
+            // -- A opção 'Convert' só funciona quando a opção 'Encoding' está especificada e iconv (http://php.net/iconv) está disponível.
+            // -- Ela especifica a codificação para converter seus dados MySQL no site (provavelmente precisa ser utf8).
+            'Hostname'   => '127.0.0.1',
+            'Username'   => 'ragnarok',
+            'Password'   => 'ragnarok',
+            'Database'   => 'ragnarok',
+            'Persistent' => true,
+            'Timezone'   => null // Exemplo: '+0:00' é UTC.
+            // Os valores possíveis para 'Timezone' são conforme documentado no site do MySQL:
+            // "O valor pode ser dado como uma string indicando um deslocamento de UTC, como '+10:00' ou '-6:00'."
+            // "O valor pode ser dado como um fuso horário nomeado, como 'Europe/Helsinki', 'US/Eastern', ou 'MET'." (veja abaixo a continuação!)
+            // **"Fusos horários nomeados só podem ser usados se as tabelas de informações de fuso horário no banco de dados mysql tiverem sido criadas e populadas."
+        ],
+        // Isso é mantido separado porque muitas pessoas optam por ter o banco de dados de logs
+        // acessível sob credenciais diferentes e, muitas vezes, em um servidor
+        // diferente para garantir a confiabilidade dos dados de log.
+        'LogsDbConfig'   => [
+            //'Socket'     => '/tmp/mysql.sock',
+            //'Port'       => 3306,
+            //'Encoding'   => null, // Codificação da conexão -- use aqui a mesma que a collation das suas tabelas MySQL.
+            'Convert'    => 'utf8',
+            // -- A opção 'Convert' só funciona quando a opção 'Encoding' está especificada e iconv (http://php.net/iconv) está disponível.
+            // -- Ela especifica a codificação para converter seus dados MySQL no site (provavelmente precisa ser utf8).
+            'Hostname'   => '127.0.0.1',
+            'Username'   => 'ragnarok',
+            'Password'   => 'ragnarok',
+            'Database'   => 'ragnarok',
+            'Persistent' => true,
+            'Timezone'   => null // Valores possíveis são conforme descritos no comentário em DbConfig.
+        ],
+        // Configuração do servidor web.
+        'WebDbConfig'    => [
+            'Hostname'   => '127.0.0.1',
+            'Username'   => 'ragnarok',
+            'Password'   => 'ragnarok',
+            'Database'   => 'ragnarok',
+            'Persistent' => true
+        ],
+        // Configuração do servidor de login.
+        'LoginServer'    => [
+            'Address'  => '127.0.0.1',
+            'Port'     => 6900,
+            'UseMD5'   => false,
+            'NoCase'   => true, // Sensibilidade a maiúsculas e minúsculas em contas rA; Padrão: Insensível a maiúsculas/minúsculas (true).
+            'GroupID'  => 0,    // ID do grupo de conta padrão durante o registro.
+            //'Database' => 'ragnarok'
+        ],
+        'CharMapServers' => [
+            [
+                'ServerName'      => 'brFluxRO',
+                'Renewal'         => false,
+                'MaxCharSlots'    => 9,
+                'DateTimezone'    => null, // Especifica o fuso horário do servidor de jogo para este par char/map. (Veja: http://php.net/timezones)
+                //'ResetDenyMaps'   => 'sec_pri', // Padrão é 'sec_pri'. Este valor pode ser um array de nomes de mapas.
+                //'Database'        => 'ragnarok', // Padrão é DbConfig.Database
+                'ExpRates' => [
+                    'Base'        => 100, // Taxa na qual (base) exp é dada
+                    'Job'         => 100, // Taxa na qual a exp de trabalho é dada
+                    'Mvp'         => 100  // Taxa de bônus de exp de MVP
+                ],
+                'DropRates' => [
+                    // Se a taxa de drop estiver abaixo deste valor e o bônus for aplicado, o bônus não pode exceder este valor.
+                    'DropRateCap' => 9000,
+                    // A taxa na qual itens comuns (na aba ETC, exceto carta) são dropados
+                    'Common'      => 100,
+                    'CommonBoss'  => 100,
+                    'CommonMVP'   => 100,
+                    'CommonMin'   => 1,
+                    'CommonMax'   => 10000,
+                    // A taxa na qual itens de cura (que restauram HP ou SP) são dropados
+                    'Heal'        => 100,
+                    'HealBoss'    => 100,
+                    'HealMVP'     => 100,
+                    'HealMin'     => 1,
+                    'HealMax'     => 10000,
+                    // A taxa na qual itens utilizáveis (na aba de itens, exceto itens de cura) são dropados
+                    'Useable'     => 100,
+                    'UseableBoss' => 100,
+                    'UseableMVP'  => 100,
+                    'UseableMin'  => 1,
+                    'UseableMax'  => 10000,
+                    // A taxa na qual equipamentos são dropados
+                    'Equip'       => 100,
+                    'EquipBoss'   => 100,
+                    'EquipMVP'    => 100,
+                    'EquipMin'    => 1,
+                    'EquipMax'    => 10000,
+                    // A taxa na qual cartas são dropadas
+                    'Card'        => 100,
+                    'CardBoss'    => 100,
+                    'CardMVP'     => 100,
+                    'CardMin'     => 1,
+                    'CardMax'     => 10000,
+                    // A taxa de ajuste para os itens MVP que o MVP recebe diretamente no seu inventário
+                    'MvpItem'     => 100,
+                    'MvpItemMin'  => 1,
+                    'MvpItemMax'  => 10000,
+                    // 0 - ordem oficial (Mostrar mensagem "Nota: Apenas um drop de MVP será recompensado."), 2 - todos os itens
+                    'MvpItemMode' => 0,
+                ],
+                'CharServer'      => [
+                    'Address'     => '127.0.0.1',
+                    'Port'        => 6121
+                ],
+                'MapServer'       => [
+                    'Address'     => '127.0.0.1',
+                    'Port'        => 5121
+                ],
+                // -- Dias e horários do WoE --
+                // Primeiro parâmetro: Dia de início 0=Domingo / 1=Segunda / 2=Terça / 3=Quarta / 4=Quinta / 5=Sexta / 6=Sábado
+                // Segundo parâmetro: Hora de início no formato 24 horas.
+                // Terceiro parâmetro: Dia de término (valor possível é o mesmo do dia de início).
+                // Quarto (final) parâmetro: Hora de término no formato 24 horas.
+                // ** (Nota, horários inválidos são ignorados silenciosamente.)
+                'WoeDayTimes'   => [
+                    // array(0, '12:00', 0, '14:00'), // Exemplo: Começa domingo 12:00 e termina domingo 14:00
+                    // array(3, '14:00', 3, '15:00')  // Exemplo: Começa quarta-feira 14:00 PM e termina quarta-feira 15:00 PM
+                ],
+                // Módulos e/ou ações para desabilitar o acesso durante o WoE.
+                'WoeDisallow'   => [
+                    ['module' => 'character', 'action' => 'online'],  // Desabilitar acesso à página "Quem está Online" durante o WoE.
+                    ['module' => 'character', 'action' => 'mapstats'] // Desabilitar acesso à página "Estatísticas do Mapa" durante o WoE.
+                ]
+            ]
+        ]
+    ]
+];
 ?>

@@ -16,7 +16,7 @@ $sql .= "WHERE login.sex != 'S' AND login.group_id >= 0 AND login.account_id = ?
 $sth  = $server->connection->getStatement($sql);
 $sth->execute(array($accountID));
 
-// Account object.
+// Objeto conta.
 $account = $sth->fetch();
 $isMine  = false;
 

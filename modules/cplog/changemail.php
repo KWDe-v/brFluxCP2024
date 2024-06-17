@@ -1,14 +1,14 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Email Changes';
+$title = 'Alterações de e-mail';
 
 $changeTable = Flux::config('FluxTables.ChangeEmailTable');
 $sqlpartial  = "LEFT JOIN {$server->loginDatabase}.login ON login.account_id = log.account_id ";
 $sqlpartial .= 'WHERE 1=1 ';
 $bind        = array();
 
-// Email change searching.
+// Pesquisa de alteração de e-mail.
 $requestAfter  = $params->get('request_after_date');
 $requestBefore = $params->get('request_before_date');
 $changeAfter   = $params->get('change_after_date');

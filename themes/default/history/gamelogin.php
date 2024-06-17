@@ -10,7 +10,7 @@
 		<th><?php echo $paginator->sortableColumn('log', Flux::message('HistoryLogMessageLabel')) ?></th>
 	</tr>
 	<?php foreach ($logins as $login): ?>
-	<tr>
+	<tr align="center">
 		<td><?php echo $this->formatDateTime($login->time) ?></td>
 		<td>
 		<?php if ($auth->actionAllowed('account', 'index')): ?>

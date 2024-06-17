@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'Modify Item in the Shop';
+$title = 'Modificar item na loja';
 
 require_once 'Flux/TemporaryTable.php';
 require_once 'Flux/ItemShop.php';
@@ -46,35 +46,35 @@ if ($item) {
 		$useExisting = (int)$params->get('use_existing');
 
 		if (!$cost) {
-			$errorMessage = 'You must input a credit cost greater than zero.';
+			$errorMessage = 'Você deve inserir um custo de crédito maior que zero.';
 		}
 		elseif ($cost > $maxCost) {
-			$errorMessage = "The credit cost must not exceed $maxCost.";
+			$errorMessage = "O custo de crédito não deve exceder $maxCost.";
 		}
 		elseif (!$quantity) {
-			$errorMessage = 'You must input a quantity greater than zero.';
+			$errorMessage = 'Você deve inserir uma quantidade maior que zero.';
 		}
 		elseif ($quantity > 1 && !$stackable) {
-			$errorMessage = 'This item is not stackable. Quantity must be 1.';
+			$errorMessage = 'Este item não é empilhável. A quantidade deve ser 1.';
 		}
 		elseif ($quantity > $maxQty) {
-			$errorMessage = "The item quantity must not exceed $maxQty.";
+			$errorMessage = "A quantidade do item não deve exceder $maxQty.";
 		}
 		elseif (!$info) {
-			$errorMessage = 'You must input at least some info text.';
+			$errorMessage = 'Você deve inserir pelo menos algum texto informativo.';
 		}
 		else {
 			if ($shop->edit($shopItemID, $category, $cost, $quantity, $info, $useExisting)) {
 				if ($image && $image->get('size') && !$shop->uploadShopItemImage($shopItemID, $image)) {
-					$errorMessage = 'Failed to upload image.';
+					$errorMessage = 'Falha ao carregar a imagem.';
 				}
 				else {
-					$session->setMessageData('Item has been successfully modified.');
+					$session->setMessageData('O item foi modificado com sucesso.');
 					$this->redirect($this->url('purchase'));
 				}
 			}
 			else {
-				$errorMessage = 'Failed to modify the item.';
+				$errorMessage = 'Falha ao modificar o item.';
 			}
 		}
 	}

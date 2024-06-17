@@ -2,23 +2,23 @@
 <h2><?php echo htmlspecialchars(Flux::message('AccountCreateHeading')) ?></h2>
 <p><?php printf(htmlspecialchars(Flux::message('AccountCreateInfo')), '<a href="'.$this->url('service', 'tos').'">'.Flux::message('AccountCreateTerms').'</a>') ?></p>
 <?php if (Flux::config('RequireEmailConfirm')): ?>
-<p><strong>Note:</strong> You will need to provide a working e-mail address to confirm your account before you can log-in.</p>
+<p><strong>Nota:</strong> Você precisará fornecer um endereço de e-mail válido para confirmar sua conta antes de fazer login.</p>
 <?php endif ?>
-<p><strong>Note:</strong> <?php echo sprintf("Your password must be between %d and %d characters.", Flux::config('MinPasswordLength'), Flux::config('MaxPasswordLength')) ?></p>
+<p><strong>Nota:</strong> <?php echo sprintf(Flux::message('MinCharacters'), Flux::config('MinPasswordLength'), Flux::config('MaxPasswordLength')) ?></p>
 <?php if (Flux::config('PasswordMinUpper') > 0): ?>
-<p><strong>Note:</strong> <?php echo sprintf(Flux::message('PasswordNeedUpper'), Flux::config('PasswordMinUpper')) ?></p>
+<p><strong>Nota:</strong> <?php echo sprintf(Flux::message('PasswordNeedUpper'), Flux::config('PasswordMinUpper')) ?></p>
 <?php endif ?>
 <?php if (Flux::config('PasswordMinLower') > 0): ?>
-<p><strong>Note:</strong> <?php echo sprintf(Flux::message('PasswordNeedLower'), Flux::config('PasswordMinLower')) ?></p>
+<p><strong>Nota:</strong> <?php echo sprintf(Flux::message('PasswordNeedLower'), Flux::config('PasswordMinLower')) ?></p>
 <?php endif ?>
 <?php if (Flux::config('PasswordMinNumber') > 0): ?>
-<p><strong>Note:</strong> <?php echo sprintf(Flux::message('PasswordNeedNumber'), Flux::config('PasswordMinNumber')) ?></p>
+<p><strong>Nota:</strong> <?php echo sprintf(Flux::message('PasswordNeedNumber'), Flux::config('PasswordMinNumber')) ?></p>
 <?php endif ?>
 <?php if (Flux::config('PasswordMinSymbol') > 0): ?>
-<p><strong>Note:</strong> <?php echo sprintf(Flux::message('PasswordNeedSymbol'), Flux::config('PasswordMinSymbol')) ?></p>
+<p><strong>Nota:</strong> <?php echo sprintf(Flux::message('PasswordNeedSymbol'), Flux::config('PasswordMinSymbol')) ?></p>
 <?php endif ?>
 <?php if (!Flux::config('AllowUserInPassword')): ?>
-<p><strong>Note:</strong> <?php echo Flux::message('PasswordContainsUser') ?></p>
+<p><strong>Nota:</strong> <?php echo Flux::message('PasswordContainsUser') ?></p>
 <?php endif ?>
 <?php if (isset($errorMessage)): ?>
 <p class="red" style="font-weight: bold"><?php echo htmlspecialchars($errorMessage) ?></p>

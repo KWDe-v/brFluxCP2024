@@ -11,7 +11,7 @@ $info  = array(
 		'classes'    => array()
 );
 
-// Accounts.
+// Contas.
 $sql = "SELECT COUNT(account_id) AS total FROM {$server->loginDatabase}.login WHERE sex != 'S' ";
 if (Flux::config('HideTempBannedStats')) {
 	$sql .= "AND unban_time <= UNIX_TIMESTAMP() ";
@@ -27,7 +27,7 @@ $sth = $server->connection->getStatement($sql);
 $sth->execute();
 $info['accounts'] += $sth->fetch()->total;
 
-// Characters.
+// Personagens.
 $sql = "SELECT COUNT(`char`.char_id) AS total FROM {$server->charMapDatabase}.`char` ";
 if (Flux::config('HideTempBannedStats')) {
 	$sql .= "LEFT JOIN {$server->loginDatabase}.login ON login.account_id = `char`.account_id ";
@@ -45,13 +45,13 @@ $sth = $server->connection->getStatement($sql);
 $sth->execute();
 $info['characters'] += $sth->fetch()->total;
 
-// Guilds.
+// Guildas.
 $sql = "SELECT COUNT(guild_id) AS total FROM {$server->charMapDatabase}.guild";
 $sth = $server->connection->getStatement($sql);
 $sth->execute();
 $info['guilds'] += $sth->fetch()->total;
 
-// Parties.
+// Grupos.
 $sql = "SELECT COUNT(party_id) AS total FROM {$server->charMapDatabase}.party";
 $sth = $server->connection->getStatement($sql);
 $sth->execute();
@@ -91,7 +91,7 @@ $sth = $server->connection->getStatement($sql);
 $sth->execute($hideGroupLevel ? $bind : array());
 $info['zeny'] += $sth->fetch()->total;
 
-// Job classes.
+// Classes.
 $sql = "SELECT `char`.class, COUNT(`char`.class) AS total FROM {$server->charMapDatabase}.`char` ";
 if (Flux::config('HideTempBannedStats')) {
 	$sql .= "LEFT JOIN {$server->loginDatabase}.login ON login.account_id = `char`.account_id ";

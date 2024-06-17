@@ -21,9 +21,9 @@
 			<?php endif ?>
 		</tr>
 		<?php foreach ($banlist as $list): ?>
-		<tr>
+		<tr align="center">
 			<?php if ($auth->allowedToRemoveIpBan && $auth->actionAllowed('ipban', 'unban')): ?>
-			<td align="center">
+			<td>
 				<input type="checkbox" class="unban-cb" name="unban_list[]" value="<?php echo htmlspecialchars($list->list) ?>" />
 			</td>
 			<?php endif ?>

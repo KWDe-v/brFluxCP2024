@@ -14,5 +14,5 @@ if($newstype == '1'){
 		$i = 0;
 		$xml = new SimpleXmlElement($content);
 	}
-} else {exit('Check CMSNewsType configuration option..');}
+} else {exit('Verifique a opção de configuração CMSNewsType.');}
 ?>

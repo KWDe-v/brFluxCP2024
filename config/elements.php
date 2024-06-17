@@ -1,15 +1,16 @@
 <?php
-// rA elements.
-return array(
-	'Neutral' => 'Neutral',
-	'Water' => 'Water',
-	'Earth' => 'Earth',
-	'Fire' => 'Fire',
-	'Wind' => 'Wind',
-	'Poison' => 'Poison',
-	'Holy' => 'Holy',
-	'Dark' => 'Dark',
-	'Ghost' => 'Ghost',
-	'Undead' => 'Undead'
-);
+
+// Elementos do rA.
+return [
+	'Neutral' => 'Neutro',
+	'Water' => 'Água',
+	'Earth' => 'Terra',
+	'Fire' => 'Fogo',
+	'Wind' => 'Vento',
+	'Poison' => 'Veneno',
+	'Holy' => 'Sagrado',
+	'Dark' => 'Sombrio',
+	'Ghost' => 'Fantasma',
+	'Undead' => 'Morto-Vivo'
+];
 ?>

@@ -10,7 +10,7 @@
 		<th><?php echo $paginator->sortableColumn('reset_ip', Flux::message('HistoryPassResetResetIp')) ?></th>
 	</tr>
 	<?php foreach ($resets as $reset): ?>
-	<tr>
+	<tr align="center">
 		<td><?php echo $this->formatDateTime($reset->request_date) ?></td>
 		<td>
 		<?php if ($auth->actionAllowed('account', 'index')): ?>

@@ -10,21 +10,22 @@ $sth = $server->connection->getStatement("SELECT * FROM {$server->loginDatabase}
 $sth->execute(array($session->account->account_id));
 $staff = $sth->fetchAll();
 if(!$staff){
-	$session->setMessageData('!!!Error!!! Account not in Staff Settings table! Please submit your prefered name before using the Service Desk.'); $this->redirect($this->url('servicedesk','staffsettings'));
+	$session->setMessageData('!!!Erro!!! A conta não está na tabela Configurações da equipe! Por favor, envie seu NickName antes de usar o Service Desk.'); $this->redirect($this->url('servicedesk','staffsettings'));
 } else {
 	foreach($staff as $staffsess){}
 }
 
 if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
-//	Respond and Return to Ticket: <input type="radio" name="secact" value="1"/>
-//	Respond and Return to List: <input type="radio" name="secact" value="2"/>
-//	Respond and Resolve Ticket: <input type="radio" name="secact" value="3"/>
-//	Escalate: <input type="radio" name="secact" value="4"/>
-//	Close Ticket: <input type="radio" name="secact" value="5"/>
-//	Respond and Re-Open Ticket: <input type="radio" name="secact" value="6"/>
-//	Resolve Ticket and Credit Account: <input type="radio" name="secact" value="7"/>
+	$email = $_POST['curemail'];
+// Responder e retornar ao ticket: <input type="radio" name="secact" value="1"/>
+// Responder e retornar à lista: <input type="radio" name="secact" value="2"/>
+// Responder e resolver ticket: <input type="radio" name="secact" value="3"/>
+// Escalar: <input type="radio" name="secact" value="4"/>
+// Fechar ticket: <input type="radio" name="secact" value="5"/>
+// Responder e reabrir ticket: <input type="radio" name="secact" value="6"/>
+// Resolver ticket e conceder crédito: <input type="radio" name="secact" value="7"/>
 	if($_POST['secact']=='1'){
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
@@ -38,8 +39,10 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				require_once 'Flux/Mailer.php';
 				$name = $session->loginAthenaGroup->serverName;
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($_POST['curemail'], 'Ticket Reply', 'ticketreply', array(
+				$link = $this->url('servicedesk', 'view', array('_host' => true, 'ticketid' => $ticket_id));
+				$sent = $mail->send($email, 'Resposta de Ticket', 'ticketreply', array(
 					'TicketID'		=> $ticket_id,
+					'ViewID'		=> htmlspecialchars($link),
 					'Staff'			=> $staffsess->prefered_name
 				));
 				if ($sent) {
@@ -50,7 +53,7 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				}
 
 	}elseif($_POST['secact']=='2'){
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
@@ -62,8 +65,10 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				require_once 'Flux/Mailer.php';
 				$name = $session->loginAthenaGroup->serverName;
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($email, 'Ticket Reply', 'ticketreply', array(
+				$link = $this->url('servicedesk', 'view', array('_host' => true, 'ticketid' => $ticket_id));
+				$sent = $mail->send($email, 'Resposta de Ticket', 'ticketreply', array(
 					'TicketID'		=> $ticket_id,
+					'ViewID'		=> htmlspecialchars($link),
 					'Staff'			=> $staffsess->prefered_name
 				));
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET lastreply = 'Staff' WHERE ticket_id = ?");
@@ -74,12 +79,12 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET status = 'Resolved' WHERE ticket_id = ?");
 		$sth->execute(array($ticket_id));
 
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
 		}
-		$action='Ticket Resolved';
+		$action='Ticket Resolvido';
 
 		$sql = "INSERT INTO {$server->loginDatabase}.$tbla (ticket_id, author, text, action, ip, isstaff)";
 		$sql .= "VALUES (?, ?, ?, ?, ?, 1)";
@@ -88,8 +93,10 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				require_once 'Flux/Mailer.php';
 				$name = $session->loginAthenaGroup->serverName;
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($email, 'Ticket Reply', 'ticketreply', array(
+				$link = $this->url('servicedesk', 'view', array('_host' => true, 'ticketid' => $ticket_id));
+				$sent = $mail->send($email, 'Ticket Resolvido', 'ticketresolvido', array(
 					'TicketID'		=> $ticket_id,
+					'ViewID'		=> htmlspecialchars($link),
 					'Staff'			=> $staffsess->prefered_name
 				));
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET lastreply = 'Staff' WHERE ticket_id = ?");
@@ -106,12 +113,12 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET team = ? WHERE ticket_id = ?");
 		$sth->execute(array($escalateto, $ticket_id));
 
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
 		}
-		$action='Escalated to a member of the '. Flux::message('SDGroup'. $escalateto) .' team.';
+		$action='Escalado para um membro do time '. Flux::message('SDGroup'. $escalateto) .'.';
 		$sql = "INSERT INTO {$server->loginDatabase}.$tbla (ticket_id, author, text, action, ip, isstaff)";
 		$sql .= "VALUES (?, ?, ?, ?, ?, 1)";
 		$sth = $server->connection->getStatement($sql);
@@ -123,12 +130,12 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 	}elseif($_POST['secact']=='5'){
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET status = 'Closed' WHERE ticket_id = ?");
 		$sth->execute(array($ticket_id));
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
 		}
-		$action='Ticket Closed by a member of the '. Flux::message('SDGroup'. $staffsess->team) .' group.';
+		$action='Ticket fechado por um membro do grupo '. Flux::message('SDGroup'. $staffsess->team) .' grupo.';
 		$sql = "INSERT INTO {$server->loginDatabase}.$tbla (ticket_id, author, text, action, ip, isstaff)";
 		$sql .= "VALUES (?, ?, ?, ?, ?, 1)";
 		$sth = $server->connection->getStatement($sql);
@@ -141,12 +148,12 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET status = 'Pending' WHERE ticket_id = ?");
 		$sth->execute(array($ticket_id));
 
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
 		}
-		$action='Ticket Re-Opened by a member of the '. Flux::message('SDGroup'. $staffsess->team) .' group.';
+		$action='Ticket reaberto por um membro do grupo '. Flux::message('SDGroup'. $staffsess->team) .'.';
 
 		$sql = "INSERT INTO {$server->loginDatabase}.$tbla (ticket_id, author, text, action, ip, isstaff)";
 		$sql .= "VALUES (?, ?, ?, ?, ?, 1)";
@@ -155,8 +162,10 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				require_once 'Flux/Mailer.php';
 				$name = $session->loginAthenaGroup->serverName;
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($email, 'Ticket Reply', 'ticketreply', array(
+				$link = $this->url('servicedesk', 'view', array('_host' => true, 'ticketid' => $ticket_id));
+				$sent = $mail->send($email, 'Resposta de Ticket', 'ticketreply', array(
 					'TicketID'		=> $ticket_id,
+					'ViewID'		=> htmlspecialchars($link),
 					'Staff'			=> $staffsess->prefered_name
 				));
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET lastreply = 'Staff' WHERE ticket_id = ?");
@@ -168,12 +177,12 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 		$sth->execute(array($ticket_id));
 		$give_credits = intval($_POST['award_credits']);
 
-		if($_POST['response']=='Leave as-is to skip text response.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
+		if($_POST['response']=='Deixe como está para pular a resposta de texto.' || $_POST['response'] == '' || $_POST['response'] == NULL || !isset($_POST['response'])){
 			$text = '0';
 		} else {
 			$text = htmlentities($_POST['response']);
 		}
-		$action = sprintf('Ticket Resolved, %d Credits Awarded.', $give_credits);
+		$action = sprintf('Ticket resolvido, %d créditos concedidos.', $give_credits);
 
 		$sql = "INSERT INTO {$server->loginDatabase}.$tbla (ticket_id, author, text, action, ip, isstaff)";
 		$sql .= "VALUES (?, ?, ?, ?, ?, 1)";
@@ -183,8 +192,10 @@ if(isset($_POST['postreply']) && $_POST['postreply'] == 'gogolol'){
 				require_once 'Flux/Mailer.php';
 				$name = $session->loginAthenaGroup->serverName;
 				$mail = new Flux_Mailer();
-				$sent = $mail->send($email, 'Ticket Reply', 'ticketreply', array(
+				$link = $this->url('servicedesk', 'view', array('_host' => true, 'ticketid' => $ticket_id));
+				$sent = $mail->send($email, 'Ticket Resolvido', 'ticketresolvido', array(
 					'TicketID'		=> $ticket_id,
+					'ViewID'		=> htmlspecialchars($link),
 					'Staff'			=> $staffsess->prefered_name
 				));
 		$sth = $server->connection->getStatement("UPDATE {$server->loginDatabase}.$tbl SET lastreply = 'Staff' WHERE ticket_id = ?");

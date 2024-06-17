@@ -1,38 +1,37 @@
 <?php
-return array(
-	0	=>	// Default job list
-	array(
-		'job_all' => 'All jobs',
-		'job_novice' => 'Novice',
-		'job_supernovice' => 'Super novice',
-		'job_swordman' => 'Swordman',
-		'job_mage' => 'Mage',
-		'job_archer' => 'Archer',
-		'job_merchant' => 'Merchant',
-		'job_thief' => 'Thief',
-		'job_knight' => 'Knight',
-		'job_priest' => 'Priest',
-		'job_wizard' => 'Wizard',
-		'job_blacksmith' => 'Blacksmith',
-		'job_hunter' => 'Hunter',
-		'job_assassin' => 'Assassin',
-		'job_crusader' => 'Crusader',
-		'job_monk' => 'Monk',
-		'job_sage' => 'Sage',
-		'job_rogue' => 'Rogue',
-		'job_alchemist' => 'Alchemist',
-		'job_barddancer' => 'Bard / Dancer',
+return [
+	0 => [ // Lista de Classes Padrão
+		'job_all' => 'Todas as Classes',
+		'job_novice' => 'Aprendiz',
+		'job_supernovice' => 'Super Aprendiz',
+		'job_swordman' => 'Espadachim',
+		'job_mage' => 'Mago',
+		'job_acolyte' => 'Noviço',
+		'job_archer' => 'Arqueiro',
+		'job_merchant' => 'Mercador',
+		'job_thief' => 'Gatuno',
+		'job_knight' => 'Cavaleiro',
+		'job_priest' => 'Sacerdote',
+		'job_wizard' => 'Bruxo',
+		'job_blacksmith' => 'Ferreiro',
+		'job_hunter' => 'Caçador',
+		'job_assassin' => 'Algoz',
+		'job_crusader' => 'Templário',
+		'job_monk' => 'Monge',
+		'job_sage' => 'Sábio',
+		'job_rogue' => 'Arruaceiro',
+		'job_alchemist' => 'Alquimista',
+		'job_barddancer' => 'Bardo / Odalisca',
 		'job_taekwon' => 'Taekwon',
-		'job_stargladiator' => 'Star Gladiator',
-		'job_soullinker' => 'Soul Linker',
-		'job_gunslinger' => 'Gunslinger',
+		'job_stargladiator' => 'Mestre Taekwon',
+		'job_soullinker' => 'Espiritualista',
+		'job_gunslinger' => 'Justiceiro',
 		'job_ninja' => 'Ninja',
-	),
-	1	=>	// Renewal job list
-	array(
+	],
+	1 => [ // Lista de Classes Renovação
 		'job_kagerouoboro' => 'Kagerou / Oboro',
 		'job_rebellion' => 'Rebellion',
 		'job_summoner' => 'Summoner'
-	)
-)
+	]
+];
 ?>

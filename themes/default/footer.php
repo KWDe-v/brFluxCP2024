@@ -1,11 +1,11 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 							</td>
-							<td bgcolor="#f5f5f5"></td>
+							<td bgcolor="#8888f9"></td>
 						</tr>
 
 						<tr>
 							<td><img src="<?php echo $this->themePath('img/content_bl.gif') ?>" style="display: block" /></td>
-							<td bgcolor="#f5f5f5"></td>
+							<td bgcolor="#8888f9"></td>
 							<td><img src="<?php echo $this->themePath('img/content_br.gif') ?>" style="display: block" /></td>
 						</tr>
 					</table>
@@ -18,7 +18,9 @@
 				<td colspan="3"></td>
 				<td id="copyright">
 					<p>
-						<strong>Powered by <a href="https://github.com/rathena/FluxCP" target="_blank">FluxCP</a></strong>
+						<strong>Desenvolvido Por <a href="https://github.com/rathena/FluxCP" target="_blank"  style="color: #555!important;">FluxCP</a></strong>
+						<br>
+						<strong>Traduzido & Otimizado Por <a href="https://discord.gg/RbGj9sUYzw" target="_blank" style="color: #555!important;">KWDev</a></strong>
 					</p>
 				</td>
 				<td></td>
@@ -29,10 +31,11 @@
 				<td colspan="3"></td>
 				<td id="info">
 					<p>
-						Page generated in <strong><?php echo round(microtime(true) - __START__, 5) ?></strong> second(s).
-						Number of queries executed: <strong><?php echo (int)Flux::$numberOfQueries ?></strong>.
-						<?php if (Flux::config('GzipCompressOutput')): ?>Gzip Compression: <strong>Enabled</strong>.<?php endif ?>
+					    Página gerada em <strong><?php echo round(microtime(true) - __START__, 5) ?></strong> segundo(s).
+					    Número de consultas executadas: <strong><?php echo (int)Flux::$numberOfQueries ?></strong>.
+					    <?php if (Flux::config('GzipCompressOutput')): ?>Compactação Gzip: <strong>Ativada</strong>.<?php endif ?>
 					</p>
+
 				</td>
 				<td></td>
 			</tr>
@@ -41,10 +44,14 @@
 			<tr>
 				<td colspan="3"></td>
 				<td align="right">
-				<span>Theme:
+				<span>Tema:
 					<select name="preferred_theme" onchange="updatePreferredTheme(this)">
 						<?php foreach (Flux::$appConfig->get('ThemeName', false) as $themeName): ?>
-						<option value="<?php echo htmlspecialchars($themeName) ?>"<?php if ($session->theme == $themeName) echo ' selected="selected"' ?>><?php echo htmlspecialchars($themeName) ?></option>
+    						<?php if($themeName == 'default'){?> 
+						        <option value="<?php echo htmlspecialchars($themeName) ?>"<?php if ($session->theme == $themeName) echo ' selected="selected"' ?>><?php echo 'Padrão' ?></option>
+						    <?php }else{ ?>
+						        <option value="<?php echo htmlspecialchars($themeName) ?>"<?php if ($session->theme == $themeName) echo ' selected="selected"' ?>><?php echo htmlspecialchars($themeName) ?></option>
+						    <?php } ?>
 						<?php endforeach ?>
 					</select>
 					</span>
@@ -60,7 +67,7 @@
             <tr>
                 <td colspan="3"></td>
                 <td align="right">
-                            <span>Language:
+                            <span>Idioma:
                                 <select name="preferred_language" onchange="updatePreferredLanguage(this)">
                                     <?php foreach (Flux::getAvailableLanguages() as $lang_key => $lang): ?>
                                         <option value="<?php echo htmlspecialchars($lang_key) ?>"<?php if (!empty($_COOKIE['language']) && $_COOKIE['language'] == $lang_key) echo ' selected="selected"' ?>><?php echo htmlspecialchars($lang) ?></option>

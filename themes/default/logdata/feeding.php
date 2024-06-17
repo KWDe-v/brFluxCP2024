@@ -1,50 +1,49 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <h2><?php echo htmlspecialchars($title) ?></h2>
 
-<p class="toggler"><a href="javascript:toggleSearchForm()">Search...</a></p>
+<p class="toggler"><a href="javascript:toggleSearchForm()">Procurar...</a></p>
 <form class="search-form" method="get">
 	<?php echo $this->moduleActionFormInputs($params->get('module')) ?>
 	<p>
-		<label for="char_id">Char ID:</label>
+		<label for="char_id">ID do Personagem:</label>
 		<input type="text" name="char_id" id="char_id" value="<?php echo htmlspecialchars($params->get('char_id') ?: '') ?>" />
 		...
-		<label for="map">Map:</label>
+		<label for="map">Mapa:</label>
 		<input type="text" name="map" id="map" value="<?php echo htmlspecialchars($params->get('map') ?: '') ?>" />
 		...
-		<label for="target">Target ID:</label>
+		<label for="target">ID do Alvo:</label>
 		<input type="text" name="target" id="target" value="<?php echo htmlspecialchars($params->get('target') ?: '') ?>" />
 		...
-		<label for="item_id">Item ID:</label>
+		<label for="item_id">ID do Item:</label>
 		<input type="text" name="item_id" id="item_id" value="<?php echo htmlspecialchars($params->get('item_id') ?: '') ?>" />
 		...
-		<label>Feeding Type:</label><!-- shared same values -->
+		<label>Tipo de Alimentação:</label><!-- compartilhado com os mesmos valores -->
 		<?php foreach (Flux::config('FeedingTypes')->toArray() as $feedtype => $typename): ?>
-			<label title="<?php echo $typename ?>"><input type="checkbox" name="type[<?php echo $feedtype ?>]" value="1" <?php if (in_array($feedtype,$type)) echo " checked=\"yes\" " ?> /> <?php echo $typename ?> ..</label>
+			<label title="<?php echo $typename ?>"><input type="checkbox" name="type[<?php echo $feedtype ?>]" value="1" <?php if (in_array($feedtype, $type)) echo " checked=\"yes\" " ?> /> <?php echo $typename ?> ..</label>
 		<?php endforeach ?>
 		<br />
 		<br />
-		<label for="from_date">Date from:</label>
+		<label for="from_date">Data de:</label>
 		<input type="date" name="from_date" id="from_date" value="<?php echo htmlspecialchars($params->get('from_date') ?: '') ?>" />
 		...
-		<label for="to_date">Date to:</label>
+		<label for="to_date">Data até:</label>
 		<input type="date" name="to_date" id="to_date" value="<?php echo htmlspecialchars($params->get('to_date') ?: '') ?>" />
 		...
-		<input type="submit" value="Search" />
-		<input type="button" value="Reset" onclick="reload()" />
+		<input type="submit" value="Procurar" />
+		<input type="button" value="Resetar" onclick="reload()" />
 	</p>
 </form>
-
 <?php if ($feeds): ?>
 <?php echo $paginator->infoText() ?>
 <table class="horizontal-table">
 	<tr>
-		<th><?php echo $paginator->sortableColumn('time', 'Time') ?></th>
-		<th><?php echo $paginator->sortableColumn('char_id', 'Char ID') ?></th>
-		<th><?php echo $paginator->sortableColumn('type', 'Type') ?></th>
-		<th><?php echo $paginator->sortableColumn('target_class', 'Target Class') ?></th>
-		<th><?php echo $paginator->sortableColumn('intimacy', 'Intimacy') ?></th>
-		<th><?php echo $paginator->sortableColumn('item_id', 'Item ID') ?></th>
-		<th><?php echo $paginator->sortableColumn('map', 'Map') ?></th>
+		<th><?php echo $paginator->sortableColumn('time', 'Hora') ?></th>
+		<th><?php echo $paginator->sortableColumn('char_id', 'ID do Personagem') ?></th>
+		<th><?php echo $paginator->sortableColumn('type', 'Tipo') ?></th>
+		<th><?php echo $paginator->sortableColumn('target_class', 'Classe alvo') ?></th>
+		<th><?php echo $paginator->sortableColumn('intimacy', 'Intimidade') ?></th>
+		<th><?php echo $paginator->sortableColumn('item_id', 'ID do Item') ?></th>
+		<th><?php echo $paginator->sortableColumn('map', 'Mapa') ?></th>
 	</tr>
 	<?php foreach ($feeds as $log): ?>
 	<tr>

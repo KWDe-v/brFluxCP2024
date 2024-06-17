@@ -1390,6 +1390,13 @@ class Flux_Template {
 		$button = ob_get_clean();
 		return $button;
 	}
+		public function donateButtonMp($amount)
+	{
+		ob_start();
+		include FLUX_DATA_DIR.'/mp/button.php';
+		$button = ob_get_clean();
+		return $button;
+	}
 	
 	/**
 	 *
@@ -1434,54 +1441,99 @@ class Flux_Template {
 	 */
 	public function iconImage($itemID)
 	{
-		$path = sprintf(FLUX_DATA_DIR."/items/icons/".Flux::config('ItemIconNameFormat'), $itemID);
-		$link = preg_replace('&/{2,}&', '/', "{$this->basePath}/$path");
-		
-		if(Flux::config('DivinePrideIntegration') && !file_exists($path)) {
-			$download_link = "https://static.divine-pride.net/images/items/item/$itemID.png";
-			$data = get_headers($download_link, true);
-			$size = isset($data['Content-Length']) ? (int)$data['Content-Length'] : 0;
-			if($size != 0)
-				file_put_contents(sprintf(FLUX_DATA_DIR."/items/icons/".Flux::config('ItemIconNameFormat'), $itemID), file_get_contents($download_link));
-		}
-        return file_exists($path) ? $link : false;
+	    $localPngPath = sprintf(FLUX_DATA_DIR."/items/icons/%d.png", $itemID);
+	    $localBmpPath = sprintf(FLUX_DATA_DIR."/items/icons/%d.bmp", $itemID);
+	    
+
+	    if (file_exists($localPngPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localPngPath");
+	    } elseif (file_exists($localPngPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localPngPath");
+	    } else {
+	        $path = sprintf(FLUX_DATA_DIR."/items/icons/".Flux::config('ItemIconNameFormat'), $itemID);
+	        $link = preg_replace('&/{2,}&', '/', "{$this->basePath}/$path");
+
+	        if (file_exists($path)) {
+	            return $link;
+	        } elseif (Flux::config('DivinePrideIntegration')) {
+	            $remote_link = "https://static.divine-pride.net/images/items/item/$itemID.png";
+	            return $remote_link;
+	        } else {
+	            return false;
+	        }
+	    }
 	}
-	
-	/**
-	 *
-	 */
+			
+			/**
+			 *
+			 */
 	public function itemImage($itemID)
 	{
-		$path = sprintf(FLUX_DATA_DIR."/items/images/".Flux::config('ItemImageNameFormat'), $itemID);
-		$link = preg_replace('&/{2,}&', '/', "{$this->basePath}/$path");
-		
-		if(Flux::config('DivinePrideIntegration') && !file_exists($path)) {
-			$download_link = "https://static.divine-pride.net/images/items/collection/$itemID.png";
-			$data = get_headers($download_link, true);
-			$size = isset($data['Content-Length']) ? (int)$data['Content-Length'] : 0;
-			if($size != 0)
-				file_put_contents(sprintf(FLUX_DATA_DIR."/items/images/".Flux::config('ItemImageNameFormat'), $itemID), file_get_contents($download_link));
-		}
-        return file_exists($path) ? $link : false;
+	    $localPngPath = sprintf(FLUX_DATA_DIR."/items/images/%d.png", $itemID);
+	    $localBmpPath = sprintf(FLUX_DATA_DIR."/items/images/%d.bmp", $itemID);
+
+	    if (file_exists($localPngPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localPngPath");
+	    } elseif (file_exists($localBmpPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localBmpPath");
+	    } else {
+	        $path = sprintf(FLUX_DATA_DIR."/items/images/".Flux::config('ItemImageNameFormat'), $itemID);
+	        $link = preg_replace('&/{2,}&', '/', "{$this->basePath}/$path");
+
+	        if (file_exists($path)) {
+	            return $link;
+	        } elseif (Flux::config('DivinePrideIntegration')) {
+	            $remote_link = "https://static.divine-pride.net/images/items/collection/$itemID.png";
+	            return $remote_link;
+	        } else {
+	            return false;
+	        }
+	    }
 	}
 
- 	/**
- 	 *
- 	 */
+
+
 	public function monsterImage($monsterID)
 	{
-		$path = sprintf(FLUX_DATA_DIR."/monsters/".Flux::config('MonsterImageNameFormat'), $monsterID);
-		$link = preg_replace('&/{2,}&', '/', "{$this->basePath}/$path");
-		
-		if(Flux::config('DivinePrideIntegration') && !file_exists($path)) {
-			$download_link = "https://static.divine-pride.net/images/mobs/png/$monsterID.png";
-			$data = get_headers($download_link, true);
-			$size = isset($data['Content-Length']) ? (int)$data['Content-Length'] : 0;
-			if($size != 0)
-				file_put_contents(sprintf(FLUX_DATA_DIR."/monsters/".Flux::config('MonsterImageNameFormat'), $monsterID), file_get_contents($download_link));
-		}
-        return file_exists($path) ? $link : false;
+	    $localGifPath = sprintf(FLUX_DATA_DIR."/monsters/%d.gif", $monsterID);
+	    $localPngPath = sprintf(FLUX_DATA_DIR."/monsters/%d.png", $monsterID);
+
+	    if (file_exists($localGifPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localGifPath");
+	    } elseif (file_exists($localPngPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localPngPath");
+	    } elseif (Flux::config('DivinePrideIntegration')) {
+	        $remoteGifLink = "https://static.ragnaplace.com/db/npc/gif/$monsterID.gif";
+	        $headers = get_headers($remoteGifLink, 1);
+
+	        if (strpos($headers[0], '404') !== false) {
+	            $remotePngLink = "https://static.divine-pride.net/images/mobs/png/$monsterID.png";
+	            return $remotePngLink;
+	        } else {
+	            return $remoteGifLink;
+	        }
+	    } else {
+	        return false;
+	    }
 	}
+
+	public function monsterImageIndex($monsterID)
+	{
+	    $localGifPath = sprintf(FLUX_DATA_DIR."/monsters/%d.gif", $monsterID);
+	    $localPngPath = sprintf(FLUX_DATA_DIR."/monsters/%d.png", $monsterID);
+
+	    if (file_exists($localGifPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localGifPath");
+	    } elseif (file_exists($localPngPath)) {
+	        return preg_replace('&/{2,}&', '/', "{$this->basePath}/$localPngPath");
+	    } elseif (Flux::config('DivinePrideIntegration')) {
+	        $remotePngLink = "https://static.divine-pride.net/images/mobs/png/$monsterID.png";
+	        return $remotePngLink;
+	    } else {
+	        return false;
+	    }
+	}
+
 	
 	/**
 	 *
@@ -1493,6 +1545,16 @@ class Flux_Template {
 		return file_exists($path) ? $link : false;
 	}
 	
+
+	public function iconJob($jobID)
+	{
+		$remoteLink = "https://static.divine-pride.net/images/jobs/icon_jobs_$jobID.png";
+		
+			return $remoteLink;
+
+	}
+
+
 	/**
 	 *
 	 */

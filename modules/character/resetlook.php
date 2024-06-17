@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'Reset Look';
+$title = 'Resetar Visual';
 
 $charID = $params->get('id');
 if (!$charID) {

@@ -1,61 +1,64 @@
 <?php
-if (!defined('FLUX_ROOT')) exit;
 
-$this->loginRequired();
+$user_id = $session->account->account_id;
+$status = ['approved', 'pending', 'refunded', 'processing'];
 
-$txnTable = Flux::config('FluxTables.TransactionTable');
+// Verificar conexão
+if (!$server->connection) {
+    die("Conexão falhou: " . $server->connection->error);
+}
 
-/** Completed Transactions **/
 
-$sqlpartial  = "WHERE account_id = ? AND hold_until IS NULL AND payment_status = 'Completed' ";
-$sqlpartial .= "ORDER BY payment_date DESC";
+function processResults($stmt) {
+    $resultsArray = array();
+    while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        // Definir o tipo com base no valor da coluna 'tipo'
+        $tipo = $row->tipo == '0' ? 'Link de Pagamento' : ($row->tipo == '1' ? 'PIX' : $row->tipo);
+        $tipoNum = $row->tipo == '0' ? '0' : ($row->tipo == '1' ? '1' : $row->tipo);
+        $resultsArray[] = array(
+            'id' => $row->id,
+            'valor' => $row->valor,
+            'created' => $row->created,
+            'tipo' => $tipo,
+            'tipoNum' => $tipoNum
+        );
+    }
+    return $resultsArray;
+}
 
-$sql = "SELECT COUNT(id) AS total FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
+$aprovadas = array();
+$pendentes = array();
+$reembolsos = array();
 
-$sth->execute(array($session->account->account_id));
-$completedTotal = $sth->fetch()->total;
+$sql = "SELECT id, valor, created, tipo FROM payment WHERE status = ? AND user_id = ?";
+$stmt = $server->connection->getStatement($sql);
+if ($stmt) {
+    $stmt->execute([$status[0], $user_id]);
+    $aprovadas = processResults($stmt);
+} else {
+    die("Falha ao preparar statement: " . $server->connection->errorInfo());
+}
 
-$col = "*";
-$sql = "SELECT $col FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
 
-$sth->execute(array($session->account->account_id));
-$completedTxn = $sth->fetchAll();
+$sql = "SELECT id, valor, created, tipo FROM payment WHERE (status = ? OR status = ?) AND user_id = ?";
+$stmt = $server->connection->getStatement($sql);
+if ($stmt) {
+    $stmt->execute([$status[1], $status[3], $user_id]);
+    $pendentes = processResults($stmt);
+} else {
+    die("Falha ao preparar statement: " . $server->connection->errorInfo());
+}
 
-/** Held Transactions **/
 
-$sqlpartial  = "WHERE account_id = ? AND hold_until IS NOT NULL AND payment_status = 'Completed' ";
-$sqlpartial .= "ORDER BY payment_date DESC";
+$sql = "SELECT id, valor, created, tipo FROM payment WHERE status = ? AND user_id = ?";
+$stmt = $server->connection->getStatement($sql);
+if ($stmt) {
+    $stmt->execute([$status[2], $user_id]);
+    $reembolsos = processResults($stmt);
+} else {
+    die("Falha ao preparar statement: " . $server->connection->errorInfo());
+}
 
-$sql = "SELECT COUNT(id) AS total FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
 
-$sth->execute(array($session->account->account_id));
-$heldTotal = $sth->fetch()->total;
 
-$col = "*";
-$sql = "SELECT $col FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
-
-$sth->execute(array($session->account->account_id));
-$heldTxn = $sth->fetchAll();
-
-/** Failed Transactions **/
-
-$sqlpartial  = "WHERE account_id = ? AND hold_until IS NULL AND payment_status = 'Completed' ";
-$sqlpartial .= "AND credits < 1 ORDER BY payment_date DESC";
-
-$sql = "SELECT COUNT(id) AS total FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
-
-$sth->execute(array($session->account->account_id));
-$failedTotal = $sth->fetch()->total;
-
-$col = "*";
-$sql = "SELECT $col FROM {$server->loginDatabase}.$txnTable $sqlpartial";
-$sth = $server->connection->getStatement($sql);
-
-$sth->execute(array($session->account->account_id));
-$failedTxn = $sth->fetchAll();
 ?>

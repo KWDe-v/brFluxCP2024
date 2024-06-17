@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Re-Install Database Schemas';
+$title = 'Reinstalar banco de dados';
 
 if (count($_POST) && $params->get('reinstall')) {
 	$loginDbFiles   = glob(FLUX_DATA_DIR.'/logs/schemas/logindb/*/*.txt');
@@ -12,8 +12,8 @@ if (count($_POST) && $params->get('reinstall')) {
 			foreach ($dbDir as $file) {
 				unlink($file);
 			}
-			// Attempt to unlink the directory, but let's not display an error if
-			// there are still files in it.
+			//Tentamos desvincular o diretório, mas não vamos exibir erro se
+			// ainda há arquivos nele.
 			@rmdir($dbDir);
 		}
 	}

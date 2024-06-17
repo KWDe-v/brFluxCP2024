@@ -6,7 +6,7 @@ $this->loginRequired();
 if (!$auth->allowedToManageCashShop) {
 	$this->deny();
 }
-$title = 'Add Item to Cash Shop';
+$title = 'Adicionar item à loja a dinheiro';
 
 require_once 'Flux/TemporaryTable.php';
 require_once 'Flux/CashShop.php';
@@ -37,14 +37,14 @@ if ($item && count($_POST)) {
 	$price       = (int)$params->get('price');
 	
 	if (!$price) {
-		$errorMessage = 'You must input a cashpoint cost greater than zero.';
+		$errorMessage = 'Você deve inserir um custo de caixa eletrônico maior que zero.';
 	} else {
 		if ($shop->add($tab, $itemID, $price)) {
-			$message = 'Item has been successfully added to the CashShop';
+			$message = 'O item foi adicionado com sucesso ao CashShop';
 			$session->setMessageData($message);
 			$this->redirect($this->url('cashshop'));
 		} else {
-			$errorMessage = 'Failed to add the item to the CashShop.';
+			$errorMessage = 'Falha ao adicionar o item ao CashShop.';
 		}
 	}
 }

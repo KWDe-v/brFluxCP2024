@@ -4,82 +4,114 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>rA's Flux Control Panel: Critical Error</title>
+		<title>rA's Painel de Controle: Erro Crítico</title>
 		<style type="text/css" media="screen">
 			body {
-				margin: 10px;
-				padding: 0;
-				font-family: "Lucida Grande", "Lucida Sans", sans-serif;
+			    margin: 20px;
+			    padding: 0;
+			    font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+			    background-color: #f4f4f9;
+			    color: #000; /* Mudança da cor para um tom mais suave */
+			    line-height: 1.6;
 			}
-			
+
+			h2.heading {
+			    font-family: "Segoe UI", "Roboto", "Gill Sans", "Lucida Grande", sans-serif;
+			    font-weight: 600;
+			    border-bottom: 2px solid red; 
+			    color: red; 
+			    padding-bottom: 10px;
+			    margin-bottom: 20px;
+			}
+
 			p {
-				font-size: 85%;
+			    font-size: 1rem;
+			    margin-bottom: 15px;
+			    color: #000; 
 			}
-			
+
 			pre {
-				font-family: Monaco, "Lucida Console", monospace;
+			    font-family: "Courier New", Courier, "Lucida Console", monospace;
+			    background-color: #f8f9fa;
+			    padding: 15px; 
+			    border: 1px solid #ddd;
+			    border-radius: 4px;
+			    overflow-x: auto;
+			    color: #000; 
 			}
-			
-			.heading {
-				font-family: "Gill Sans", "Gill Sans MT", "Lucida Grande", "Lucida Sans", sans-serif;
-				font-weight: normal;
-				border-bottom: 1px solid #ddd;
+
+			table.backtrace {
+			    width: 100%;
+			    font-size: 0.875rem;
+			    border-spacing: 0;
+			    border-collapse: collapse;
+			    background-color: #fff;
+			    margin-bottom: 20px;
+			    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			    border-radius: 5px; 
+			    overflow: hidden; 
 			}
-			
-			.backtrace {
-				font-size: 85%;
-				border-spacing: 0;
-				border-collapse: collapse;
-				background-color: #fefefe;
+
+			table.backtrace th, table.backtrace td {
+			    padding: 12px; 
+			    border: 1px solid #ddd;
 			}
-			
-			.backtrace th, .backtrace td {
-				padding: 5px;
-				border: 1px solid #ccc;
+
+			table.backtrace th {
+			    background-color: #f0f0f0; 
+			    font-weight: 700; 
+			    text-align: left;
+			    color: #000
 			}
-			
-			.backtrace th {
-				background-color: #eee;
+
+			table.backtrace td {
+			    background-color: #f5f5f5;
+			    color: #555; 
 			}
+
+			table.backtrace tr:nth-child(even) td {
+			    background-color: #fff;
+			}
+
 		</style>
 	</head>
 	
 	<body>
-		<h2 class="heading">Critical Error</h2>
-		
-		<p>An error was encountered during the lifetime of the application.</p>
-		<p>This could be due to a variety of problems, such as a bug in the application.</p>
-		<p><strong>However, normally it is caused by <em>misconfiguration</em>.</strong></p>
-		
-		<h2 class="heading">Exception Details</h2>
-		<p>Error: <strong><?php echo get_class($e) ?></strong></p>
-		<p>Message: <em><?php echo nl2br(htmlspecialchars($e->getMessage())) ?></em></p>
-		<p>File: <?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></p>
-		
-		<?php if (count($e->getTrace())): ?>
-		<!-- Exception Backtrace -->
-		<table class="backtrace">
-			<tr>
-				<th>File</th>
-				<th>Line</th>
-				<th>Function/Method</th>
-			</tr>
-			<?php foreach ($e->getTrace() as $trace): ?>
-			<tr>
-				<td><?php echo $trace['file'] ?></td>
-				<td><?php echo $trace['line'] ?></td>
-				<td><?php echo isset($trace['class']) ? "$trace[class]::$trace[function]" : $trace['function'] ?>()</td>
-			</tr>
-			<?php endforeach ?>
-		</table>
-		
-		<h2 class="heading">Exception Trace As String</h2>
-		<pre><?php echo htmlspecialchars(preg_replace('/PDO->__construct\\((.+?)\\)/', 'PDO->__construct(*hidden*)', $e->getTraceAsString())) ?></pre>
-		<?php endif ?>
-	</body>
+    <h2 class="heading">Erro Crítico</h2>
+    
+    <p>Ocorreu um erro durante a execução da aplicação.</p>
+    <p>Isso pode ser devido a uma variedade de problemas, como um bug na aplicação.</p>
+    <p><strong>No entanto, normalmente é causado por <em>configuração incorreta</em>.</strong></p>
+    
+    <h2 class="heading">Detalhes da Exceção</h2>
+    <p>Erro: <strong><?php echo get_class($e) ?></strong></p>
+    <p>Mensagem: <em><?php echo nl2br(htmlspecialchars($e->getMessage())) ?></em></p>
+    <p>Arquivo: <?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></p>
+    
+    <?php if (count($e->getTrace())): ?>
+    <!-- Rastreamento da Exceção -->
+    <table class="backtrace">
+        <tr>
+            <th>Arquivo</th>
+            <th>Linha</th>
+            <th>Função/Método</th>
+        </tr>
+        <?php foreach ($e->getTrace() as $trace): ?>
+        <tr>
+            <td><?php echo $trace['file'] ?></td>
+            <td><?php echo $trace['line'] ?></td>
+            <td><?php echo isset($trace['class']) ? "$trace[class]::$trace[function]" : $trace['function'] ?>()</td>
+        </tr>
+        <?php endforeach ?>
+    </table>
+    
+    <h2 class="heading">Rastreamento da Exceção Como String</h2>
+    <pre><?php echo htmlspecialchars(preg_replace('/PDO->__construct\\((.+?)\\)/', 'PDO->__construct(*hidden*)', $e->getTraceAsString())) ?></pre>
+    <?php endif ?>
+</body>
 </html>
 <?php else: ?>
-<h2>Error</h2>
-<p>An error occurred while trying to process your request.</p>
-<p>Please try contacting an administrator: <a href="mailto:<?php echo htmlspecialchars($adminEmail) ?>"><?php echo htmlspecialchars($adminEmail) ?></a></p>
+<h2>Erro</h2>
+<p>Ocorreu um erro ao tentar processar sua solicitação.</p>
+<p>Por favor, tente contatar um administrador: <a href="mailto:<?php echo htmlspecialchars($adminEmail) ?>"><?php echo htmlspecialchars($adminEmail) ?></a></p>
 <?php endif ?>

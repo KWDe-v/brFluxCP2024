@@ -3,7 +3,7 @@ if (!defined('FLUX_ROOT')) exit;
 
 $this->loginRequired();
 
-$title = 'Viewing Character';
+$title = 'Visualizando Personagem';
 
 require_once 'Flux/TemporaryTable.php';
 

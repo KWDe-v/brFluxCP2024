@@ -1,5 +1,5 @@
 <?php
-return array(
+return [
 	// Lif
 	6001 => 'Lif',
 	6009 => 'Lif',
@@ -30,5 +30,5 @@ return array(
 	6050 => 'Sera',
 	6051 => 'Dieter',
 	6052 => 'Elanor'
-);
+];
 ?>

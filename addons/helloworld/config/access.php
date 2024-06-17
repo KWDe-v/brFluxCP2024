@@ -1,12 +1,12 @@
 <?php
-return array(
-	'modules' => array(
-		'helloworld' => array(
+return [
+	'modules' => [
+		'helloworld' => [
 			'index' => AccountLevel::ADMIN
-		)
-	),
-	'features' => array(
+		]
+	],
+	'features' => [
 		// None.
-	)
-)
+	]
+]
 ?>

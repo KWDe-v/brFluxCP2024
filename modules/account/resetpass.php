@@ -58,7 +58,7 @@ if (count($_POST)) {
 					$name = $loginAthenaGroup->serverName;
 					$link = $this->url('account', 'resetpw', array('_host' => true, 'code' => $code, 'account' => $row->account_id, 'login' => $name));
 					$mail = new Flux_Mailer();
-					$sent = $mail->send($email, 'Reset Password', 'resetpass', array('AccountUsername' => $userid, 'ResetLink' => htmlspecialchars($link)));
+					$sent = $mail->send($email, 'Redefinição de Senha', 'resetpass', array('AccountUsername' => $userid, 'ResetLink' => htmlspecialchars($link)));
 				}
 			}
 		}

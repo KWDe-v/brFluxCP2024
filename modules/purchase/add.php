@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$this->loginRequired('Please log-in to add items to your cart.');
+$this->loginRequired('Faça login para adicionar itens ao seu carrinho.');
 
 require_once 'Flux/ItemShop.php';
 
@@ -11,10 +11,10 @@ $item = $shop->getItem($id);
 
 if ($item) {
 	$server->cart->add($item);
-	$session->setMessageData("{$item->shop_item_name} has been added to your cart.");
+	$session->setMessageData("{$item->shop_item_name} Foi adicionado ao seu carrinho.");
 }
 else {
-	$session->setMessageData("Couldn't add item to your cart.");
+	$session->setMessageData("Não foi possível adicionar o item ao seu carrinho.");
 }
 
 $action = $params->get('cart') ? 'cart' : 'index';

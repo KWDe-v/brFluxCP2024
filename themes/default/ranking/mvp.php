@@ -1,10 +1,10 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>MVP Ranking</h2>
-<h3>Search</h3>
+<h2>Ranking MVP</h2>
+<h3>Procurar</h3>
 <form action="" method="get" class="search-form2">
 	<?php echo $this->moduleActionFormInputs('ranking', 'mvp') ?>
 	<p>
-		<label for="mvpdata">Filter by monster:</label>
+		<label for="mvpdata">Filtrar por Monstro:</label>
 		<select name="mvpdata" id="mvpdata">
 		<?php foreach ($moblist as $mob): ?>
 			<option value="<?php echo $mob->id ?>" <?php if ($mvpdata && $mob->id == $mvpdata) echo "selected" ?>>
@@ -13,8 +13,8 @@
 		<?php endforeach ?>
 		</select>
 		
-		<input type="submit" value="Filter" />
-		<input type="button" value="Reset" onclick="reload()" />
+        <input type="submit" value="Filtrar" />
+        <input type="button" value="Resetar" onclick="reload()" />
 	</p>
 </form>
 
@@ -23,7 +23,7 @@
 
 <?php if ($mvpdata): ?>
     <?php if($kills):?>
-    <h3>Latest <?php echo Flux::config('MVPRankingLimit') ?> Kills</h3>
+    <h3>últimas <?php echo Flux::config('MVPRankingLimit') ?> Kills</h3>
     <table class="horizontal-table">
     	<tr>
     		<th><?php echo Flux::message('MVPLogCharacterLabel') ?></th>
@@ -63,14 +63,14 @@
 
 <?php else: ?>
     <?php if($mvps):?>
-    <h3>Latest <?php echo Flux::config('MVPRankingLimit') ?> Kills</h3>
+    <h3>últimas <?php echo Flux::config('MVPRankingLimit') ?> Kills</h3>
     <table class="horizontal-table">
     	<tr>
     		<th><?php echo Flux::message('MVPLogDateLabel') ?></th>
     		<th><?php echo Flux::message('MVPLogCharacterLabel') ?></th>
     		<th><?php echo Flux::message('MVPLogMonsterLabel') ?></th>
     		<th><?php echo Flux::message('MVPLogExpLabel') ?></th>
-    		<th><?php echo Flux::message('MVPLogMapLabel') ?></th
+    		<th><?php echo Flux::message('MVPLogMapLabel') ?></th>
     	</tr>
     	<?php foreach ($mvps as $mvp): ?>
     	<tr>

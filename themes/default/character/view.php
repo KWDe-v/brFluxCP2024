@@ -1,15 +1,15 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Viewing Character</h2>
+<h2>Visualizando Personagem</h2>
 <?php if ($char): ?>
-<h3>Character Information for <?php echo htmlspecialchars($char->char_name) ?></h3>
+<h3>Informações do personagem para <?php echo htmlspecialchars($char->char_name) ?></h3>
 <table class="vertical-table">
-	<tr>
+	<tr align="center">
 		<?php if ($image=$this->jobImage($char->gender, $char->char_class)): ?>
 			<td rowspan="11" style="width: 150px; text-align: center; vertical-alignment: middle">
 				<img src="<?php echo $image ?>" />
 			</td>
 		<?php endif ?>
-		<th>Character ID</th>
+		<th>ID do Personagem</th>
 		<td colspan="2"><?php echo htmlspecialchars($char->char_id) ?></td>
 		<th>Account ID</th>
 		<td>
@@ -19,13 +19,13 @@
 				<span class="not-applicable">Not Applicable</span>
 			<?php endif ?>
 		</td>
-		<th>Character Slot</th>
+		<th>Slot de personagem</th>
 		<td><?php echo number_format($char->char_num+1) ?></td>
 	</tr>
-	<tr>
-		<th>Character</th>
+	<tr align="center">
+		<th>Personagem</th>
 		<td colspan="2"><?php echo htmlspecialchars($char->char_name) ?></td>
-		<th>Account</th>
+		<th>Usuário</th>
 		<td>
 			<?php if ($isMine): ?>
 				<a href="<?php echo $this->url('account', 'view') ?>"><?php echo htmlspecialchars($char->userid) ?></a>
@@ -33,21 +33,22 @@
 				<?php echo $this->linkToAccount($char->char_account_id, $char->userid) ?>
 			<?php endif ?>
 		</td>
-		<th>Job Class</th>
+		<th>Classe</th>
 		<td>
 			<?php if ($job=$this->jobClassText($char->char_class)): ?>
 				<?php echo htmlspecialchars($job) ?>
 			<?php else: ?>
-				<span class="not-applicable">Unknown</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
+		<td><img src="<?php echo $this->iconJob($char->char_class) ?>" /></td>
 	</tr>
-	<tr>
-		<th>Base Level</th>
+	<tr align="center">
+		<th>Nível de Base</th>
 		<td colspan="2"><?php echo number_format((int)$char->char_base_level) ?></td>
-		<th>B. Experience</th>
+		<th>Experiencia B.</th>
 		<td><?php echo number_format($char->char_base_exp) ?></td>
-		<th>Partner</th>
+		<th>Parceiro</th>
 		<td>
 			<?php if ($char->partner_name): ?>
 				<?php if ($auth->allowedToViewCharacter): ?>
@@ -56,16 +57,16 @@
 					<?php echo htmlspecialchars($char->partner_name) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
-		<th>Job Level</th>
+	<tr align="center">
+		<th>Nível de Clase</th>
 		<td colspan="2"><?php echo number_format((int)$char->char_job_level) ?></td>
-		<th>J. Experience</th>
+		<th>Experiencia C.</th>
 		<td><?php echo number_format($char->char_job_exp) ?></td>
-		<th>Child</th>
+		<th>Filho</th>
 		<td>
 			<?php if ($char->child_name): ?>
 				<?php if ($auth->allowedToViewCharacter): ?>
@@ -74,14 +75,14 @@
 					<?php echo htmlspecialchars($char->child_name) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
-		<th>Current HP</th>
+	<tr align="center">
+		<th>HP Atual</th>
 		<td colspan="2"><?php echo number_format((int)$char->char_hp) ?></td>
-		<th>Max HP</th>
+		<th>HP Max</th>
 		<td><?php echo number_format((int)$char->char_max_hp) ?></td>
 		<th>Mother</th>
 		<td>
@@ -92,16 +93,16 @@
 					<?php echo htmlspecialchars($char->mother_name) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
-		<th>Current SP</th>
+	<tr align="center">
+		<th>SP Atual</th>
 		<td colspan="2"><?php echo number_format((int)$char->char_sp) ?></td>
-		<th>Max SP</th>
+		<th>SP Max</th>
 		<td><?php echo number_format((int)$char->char_max_sp) ?></td>
-		<th>Father</th>
+		<th>Pai</th>
 		<td>
 			<?php if ($char->father_name): ?>
 				<?php if ($auth->allowedToViewCharacter): ?>
@@ -110,20 +111,20 @@
 					<?php echo htmlspecialchars($char->father_name) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
+	<tr align="center">
 		<th>Zeny</th>
 		<td colspan="2"><?php echo number_format((int)$char->char_zeny) ?></td>
-		<th>Status Points</th>
+		<th>Pontos de Status</th>
 		<td><?php echo number_format((int)$char->char_status_point) ?></td>
-		<th>Skill Points</th>
+		<th>Pontos de Skill</th>
 		<td><?php echo number_format((int)$char->char_skill_point) ?></td>
 	</tr>
-	<tr>
-		<th>Guild Name</th>
+	<tr align="center">
+		<th>Nome da Guild</th>
 			<?php if ($char->guild_name): ?>
 				<?php if ($char->emblem): ?>
 				<td><img src="<?php echo $this->emblem($char->guild_id) ?>" /></td>
@@ -136,29 +137,29 @@
 					<?php endif ?>
 				</td>
 			<?php else: ?>	
-				<td colspan="2"><span class="not-applicable">None</span></td>
+				<td colspan="2"><span class="not-applicable">N/A</span></td>
 			<?php endif ?>
-		<th>Guild Position</th>
+		<th>Posição da Guilda</th>
 		<td>
 			<?php if ($char->guild_position): ?>
 				<?php echo htmlspecialchars($char->guild_position) ?>
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
-		<th>Tax Level</th>
+		<th>Taxa de Nível</th>
 		<td><?php echo number_format($char->guild_tax) ?>%</td>
 	</tr>
-	<tr>
-		<th>Party Name</th>
+	<tr align="center">
+		<th>Nome do Grupo</th>
 		<td colspan="2">
 			<?php if ($char->party_name): ?>
 				<?php echo htmlspecialchars($char->party_name) ?>
 			<?php else: ?>	
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
-		<th>Party Leader</th>
+		<th>Líder do Grupo</th>
 		<td>
 			<?php if ($char->party_leader_name): ?>
 				<?php if ($auth->allowedToViewCharacter): ?>
@@ -167,7 +168,7 @@
 					<?php echo htmlspecialchars($char->party_leader_name) ?>
 				<?php endif ?>
 			<?php else: ?>	
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 		<th>Pet</th>
@@ -176,14 +177,14 @@
 				<?php echo htmlspecialchars($char->pet_name) ?>
 				(<?php echo htmlspecialchars($char->pet_mob_name) ?>)
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
-		<th>Death Count</th>
+	<tr align="center">
+		<th>Contagem de Mortes</th>
 		<td colspan="2"><?php echo number_format((int)$char->death_count) ?></td>
-		<th>Online Status</th>
+		<th>Status</th>
 		<td>
 			<?php if ($char->char_online): ?>
 				<span class="online">Online</span>
@@ -197,28 +198,28 @@
 				<?php echo htmlspecialchars($char->homun_name) ?>
 				(<?php echo htmlspecialchars($this->homunClassText($char->homun_class)) ?>)
 			<?php else: ?>
-				<span class="not-applicable">None</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
 	</tr>
-	<tr>
-		<th>Character Stats</th>
+	<tr align="center">
+		<th>Atributos do personagem</th>
 		<td colspan="6">
 			<table class="character-stats">
-				<tr>
-					<td><span class="stat-name">STR</span></td>
+				<tr align="center">
+					<td><span class="stat-name">FOR</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_str) ?></span></td>
 					<td><span class="stat-name">AGI</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_agi) ?></span></td>
 					<td><span class="stat-name">VIT</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_vit) ?></span></td>
 				</tr>
-				<tr>
+				<tr align="center">
 					<td><span class="stat-name">INT</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_int) ?></span></td>
-					<td><span class="stat-name">DEX</span></td>
+					<td><span class="stat-name">DES</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_dex) ?></span></td>
-					<td><span class="stat-name">LUK</span></td>
+					<td><span class="stat-name">SOR</span></td>
 					<td><span class="stat-value"><?php echo number_format((int)$char->char_luk) ?></span></td>
 				</tr>
 			</table>
@@ -226,20 +227,20 @@
 	</tr>
 </table>
 <?php if ($char->party_name): ?>
-<h3>Other Party Members of <?php echo htmlspecialchars($char->party_name) ?></h3>
+<h3>Outros membros do partido <?php echo htmlspecialchars($char->party_name) ?></h3>
 	<?php if ($partyMembers): ?>
 		<p><?php echo htmlspecialchars($char->party_name) ?> has <?php echo count($partyMembers) ?> other party member(s) besides <?php echo htmlspecialchars($char->char_name) ?>.</p>
 		<table class="vertical-table">
-			<tr>
-				<th>Character Name</th>
-				<th>Job Class</th>
-				<th>Base Level</th>
-				<th>Job Level</th>
+			<tr align="center">
+				<th>Nome do Personagem</th>
+				<th>Classe</th>
+				<th>Nível de Base</th>
+				<th>Npivel de Clase</th>
 				<th colspan="2">Guild</th>
 				<th>Status</th>
 			</tr>
 			<?php foreach ($partyMembers as $partyMember): ?>
-			<tr>
+			<tr align="center">
 				<td align="right">
 					<?php if ($auth->allowedToViewCharacter): ?>
 						<?php echo $this->linkToCharacter($partyMember->char_id, $partyMember->name) ?>
@@ -251,7 +252,7 @@
 					<?php if ($job=$this->jobClassText($partyMember->class)): ?>
 						<?php echo htmlspecialchars($job) ?>
 					<?php else: ?>
-						<span class="not-applicable">Unknown</span>
+						<span class="not-applicable">N/A</span>
 					<?php endif ?>
 				</td>
 				<td><?php echo number_format((int)$partyMember->base_level) ?></td>
@@ -276,7 +277,7 @@
 						</td>
 					<?php endif ?>
 				<?php else: ?>	
-					<td colspan="2" align="center"><span class="not-applicable">None</span></td>
+					<td colspan="2" align="center"><span class="not-applicable">N/A</span></td>
 				<?php endif ?>
 				<td>
 					<?php if ($partyMember->online): ?>
@@ -289,23 +290,23 @@
 			<?php endforeach ?>
 		</table>
 	<?php else: ?>
-		<p>There are no other members in this party.</p>
+		<p>Não há outros membros neste partido.</p>
 	<?php endif ?>
 <?php endif ?>
-<h3>Friends of <?php echo htmlspecialchars($char->char_name) ?></h3>
+<h3>Amigos de <?php echo htmlspecialchars($char->char_name) ?></h3>
 <?php if ($friends): ?>
 	<p><?php echo htmlspecialchars($char->char_name) ?> has <?php echo count($friends) ?> friend(s).</p>
 	<table class="vertical-table">
-		<tr>
-			<th>Character Name</th>
-			<th>Job Class</th>
-			<th>Base Level</th>
-			<th>Job Level</th>
+		<tr align="center">
+			<th>Nome do Personagem</th>
+			<th>Classe</th>
+			<th>Nível de Base</th>
+			<th>Npivel de Clase</th>
 			<th colspan="2">Guild</th>
 			<th>Status</th>
 		</tr>
 		<?php foreach ($friends as $friend): ?>
-		<tr>
+		<tr align="center">
 			<td align="right">
 				<?php if ($auth->allowedToViewCharacter): ?>
 					<?php echo $this->linkToCharacter($friend->char_id, $friend->name) ?>
@@ -317,7 +318,7 @@
 				<?php if ($job=$this->jobClassText($friend->class)): ?>
 					<?php echo htmlspecialchars($job) ?>
 				<?php else: ?>
-					<span class="not-applicable">Unknown</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td><?php echo number_format((int)$friend->base_level) ?></td>
@@ -334,7 +335,7 @@
 					<?php endif ?>
 				</td>
 			<?php else: ?>	
-				<td colspan="2"><span class="not-applicable">None</span></td>
+				<td colspan="2"><span class="not-applicable">N/A</span></td>
 			<?php endif ?>
 			<td>
 				<?php if ($friend->online): ?>
@@ -347,19 +348,19 @@
 		<?php endforeach ?>
 	</table>
 <?php else: ?>
-	<p><?php echo htmlspecialchars($char->char_name) ?> has no friends.</p>
+	<p><?php echo htmlspecialchars($char->char_name) ?> não tem amigos.</p>
 <?php endif ?>
 
-<h3>Inventory Items of <?php echo htmlspecialchars($char->char_name) ?></h3>
+<h3>Itens no inventário de <?php echo htmlspecialchars($char->char_name) ?></h3>
 <?php if ($items): ?>
 	<p><?php echo htmlspecialchars($char->char_name) ?> has <?php echo count($items) ?> inventory item(s).</p>
 	<table class="vertical-table">
-		<tr>
-			<th>Item ID</th>
-			<th colspan="2">Name</th>
-			<th>Amount</th>
-			<th>Identified</th>
-			<th>Broken</th>
+		<tr align="center">
+			<th>ID</th>
+			<th colspan="2">Nome</th>
+			<th>Quantidade</th>
+			<th>Identificado</th>
+			<th>Quebrado</th>
 			<th>Slot 1</th>
 			<th>Slot 2</th>
 			<th>Slot 3</th>
@@ -371,8 +372,8 @@
 		</tr>
 		<?php foreach ($items AS $item): ?>
 		<?php $icon = $this->iconImage($item->nameid) ?>
-		<tr<?php if ($item->equip) echo ' class="equipped"' ?>>
-			<td align="right"><?php echo $this->linkToItem($item->nameid, $item->nameid) ?></td>
+		<tr align="center" <?php if ($item->equip) echo ' class="equipped"' ?>>
+			<td align="center"><?php echo $this->linkToItem($item->nameid, $item->nameid) ?></td>
 			<?php if ($icon): ?>
 				<td><img src="<?php echo htmlspecialchars($icon) ?>" /></td>
 			<?php endif ?>
@@ -404,7 +405,7 @@
 				<?php if ($item->name_english): ?>
 					<span class="item_name"><?php echo htmlspecialchars($item->name_english) ?></span>
 				<?php else: ?>
-					<span class="not-applicable">Unknown Item</span>
+					<span class="not-applicable">Item Desconhecido</span>
 				<?php endif ?>
 				<?php if ($item->slots): ?>
 					<?php echo htmlspecialchars(' [' . $item->slots . ']') ?>
@@ -413,16 +414,16 @@
 			<td><?php echo number_format($item->amount) ?></td>
 			<td>
 				<?php if ($item->identify): ?>
-					<span class="identified yes">Yes</span>
+					<span class="identified yes">Sim</span>
 				<?php else: ?>
-					<span class="identified no">No</span>
+					<span class="identified no">Não</span>
 				<?php endif ?>
 			</td>
 			<td>
 				<?php if ($item->attribute): ?>
-					<span class="broken yes">Yes</span>
+					<span class="broken yes">Sim</span>
 				<?php else: ?>
-					<span class="broken no">No</span>
+					<span class="broken no">Não</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -433,7 +434,7 @@
 						<?php echo $this->linkToItem($item->card0, $item->card0) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -444,7 +445,7 @@
 						<?php echo $this->linkToItem($item->card1, $item->card1) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -455,7 +456,7 @@
 						<?php echo $this->linkToItem($item->card2, $item->card2) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -466,7 +467,7 @@
 						<?php echo $this->linkToItem($item->card3, $item->card3) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<?php if($server->isRenewal): ?>
@@ -476,7 +477,7 @@
 							<?php foreach($item->rndopt as $rndopt) echo "<li>".$this->itemRandOption($rndopt[0], $rndopt[1])."</li>"; ?>
 						</ul>
 					<?php else: ?>
-						<span class="not-applicable">None</span>
+						<span class="not-applicable">N/A</span>
 					<?php endif ?>
 				</td>
 			<?php endif ?>
@@ -490,26 +491,26 @@
 			<?php elseif($item->bound == 4):?>
 				Character Bound
 			<?php else:?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 			<?php endif ?>
 			</td>
 		</tr>
 		<?php endforeach ?>
 	</table>
 <?php else: ?>
-	<p>There are no inventory items on this character.</p>
+	<p>Não há itens no inventário deste personagem.</p>
 <?php endif ?>
 
-<h3>Cart Inventory Items of <?php echo htmlspecialchars($char->char_name) ?></h3>
+<h3>Itens no carrinho de <?php echo htmlspecialchars($char->char_name) ?></h3>
 <?php if ($cart_items): ?>
 	<p><?php echo htmlspecialchars($char->char_name) ?> has <?php echo count($cart_items) ?> cart inventory item(s).</p>
 	<table class="vertical-table">
-		<tr>
-			<th>Item ID</th>
-			<th colspan="2">Name</th>
-			<th>Amount</th>
-			<th>Identified</th>
-			<th>Broken</th>
+		<tr align="center">
+			<th>ID</th>
+			<th colspan="2">Nome</th>
+			<th>Quantidade</th>
+			<th>Identificado</th>
+			<th>Quebrado</th>
 			<th>Slot 1</th>
 			<th>Slot 2</th>
 			<th>Slot 3</th>
@@ -522,7 +523,7 @@
 		</tr>
 		<?php foreach ($cart_items AS $cart_item): ?>
 		<?php $icon = $this->iconImage($cart_item->nameid) ?>
-		<tr>
+		<tr align="center">
 			<td align="right"><?php echo $this->linkToItem($cart_item->nameid, $cart_item->nameid) ?></td>
 			<?php if ($icon): ?>
 			<td><img src="<?php echo htmlspecialchars($icon) ?>" /></td>
@@ -555,7 +556,7 @@
 				<?php if ($cart_item->name_english): ?>
 					<span class="item_name"><?php echo htmlspecialchars($cart_item->name_english) ?></span>
 				<?php else: ?>
-					<span class="not-applicable">Unknown Item</span>
+					<span class="not-applicable">Item Desconhecido</span>
 				<?php endif ?>
 				<?php if ($cart_item->slots): ?>
 					<?php echo htmlspecialchars(' [' . $cart_item->slots . ']') ?>
@@ -564,16 +565,16 @@
 			<td><?php echo number_format($cart_item->amount) ?></td>
 			<td>
 				<?php if ($cart_item->identify): ?>
-					<span class="identified yes">Yes</span>
+					<span class="identified yes">Sim</span>
 				<?php else: ?>
-					<span class="identified no">No</span>
+					<span class="identifiãod no">No</span>
 				<?php endif ?>
 			</td>
 			<td>
 				<?php if ($cart_item->attribute): ?>
-					<span class="broken yes">Yes</span>
+					<span class="broken yes">Sim</span>
 				<?php else: ?>
-					<span class="broken no">No</span>
+					<span class="broken no">Não</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -584,7 +585,7 @@
 						<?php echo $this->linkToItem($cart_item->card0, $cart_item->card0) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -595,7 +596,7 @@
 						<?php echo $this->linkToItem($cart_item->card1, $cart_item->card1) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -606,7 +607,7 @@
 						<?php echo $this->linkToItem($cart_item->card2, $cart_item->card2) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<td>
@@ -617,7 +618,7 @@
 						<?php echo $this->linkToItem($cart_item->card3, $cart_item->card3) ?>
 					<?php endif ?>
 				<?php else: ?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 				<?php endif ?>
 			</td>
 			<?php if($server->isRenewal): ?>
@@ -627,7 +628,7 @@
 							<?php foreach($cart_item->rndopt as $rndopt) echo "<li>".$this->itemRandOption($rndopt[0], $rndopt[1])."</li>"; ?>
 						</ul>
 					<?php else: ?>
-						<span class="not-applicable">None</span>
+						<span class="not-applicable">N/A</span>
 					<?php endif ?>
 				</td>
 			<?php endif ?>
@@ -641,16 +642,16 @@
 			<?php elseif($cart_item->bound == 4):?>
 				Character Bound
 			<?php else:?>
-					<span class="not-applicable">None</span>
+					<span class="not-applicable">N/A</span>
 			<?php endif ?>
 			</td>
 		</tr>
 		<?php endforeach ?>
 	</table>
 <?php else: ?>
-	<p>There are no cart inventory items on this character.</p>
+	<p>Não há itens no carrinho desse personagem</p>
 <?php endif ?>
 
 <?php else: ?>
-<p>No such character was found. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Nenhum personagem encontrado. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>

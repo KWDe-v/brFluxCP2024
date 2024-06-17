@@ -1,111 +1,122 @@
 <?php
-// This is the application configuration file. All values have been set to
-// the default, and should be changed as needed.
-return array(
-	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)
-	'BaseURI'					=> 'fluxcp',						// The base URI is the base web root on which your application lies.
-	'InstallerPassword'			=> 'secretpassword',		// Installer/updater password.
-	'RequireOwnership'			=> true,					// Require the executing user to be owner of the FLUX_ROOT/data/ directory tree? (Better for security)
-															// WARNING: This will be mostly IGNORED on non-POSIX-compliant OSes (e.g. Windows).
+
+//  Este é o arquivo de configuração da aplicação. 
+//  Todos os valores foram definidos como padrão e devem ser alterados conforme necessário.
+
+return [
+	'ServerAddress'				=> 'brFluxRO',				//  Este valor é o hostname:port onde o Flux está rodando. (ex: example.com ou example.com:80)
+	'BaseURI'					=> '',		//  O URI base é a raiz web base onde sua aplicação está localizada.
+	'InstallerPassword'			=> 'secretpassword',		//  Senha do instalador/atualizador.
+	'RequireOwnership'			=> true,					//  Requer que o usuário executante seja o dono do diretório FLUX_ROOT/data/? (Melhor para segurança)
+															//  AVISO: Isso será quase IGONRADO em sistemas operacionais não compatíveis com POSIX (ex: Windows).
+	'accesstoken'				=> 'SEU_ACESSTOKEN', // COLE SEU ACESSTOKEN DO MERCADO PAGO (OBRIGATÓRIO PARA FUNCIONAR)
+	'url_notification_api'		=> 'https://SUA_URL/?module=mp&action=notification', // Padrão = SUA_URL/?module=mp&action=notification (OBRIGATÓRIO PARA FUNCIONAR)
+	'notification_url_success'	=> 'https://SUA_URL/?module=donate&action=complete', // Padrão = SUA_URL/?module=donate&action=complete (OBRIGATÓRIO PARA FUNCIONAR)
+	'notification_url_pending'	=> 'https://SUA_URL/?module=donate&action=pending',  // Padrão = SUA_URL/?module=donate&action=pending (OBRIGATÓRIO PARA FUNCIONAR)
+	'notification_url_failure'	=> 'https://SUA_URL/?module=donate&action=failure',  // Padrão = SUA_URL/?module=donate&action=failure (OBRIGATÓRIO PARA FUNCIONAR)
+	'MethodPaymentMP'			=> true, 					// Formas de Pagamentos do MercadoPago?, (true = PIX, false = PIX e CARTÃO)
+	'GatePayment'				=> 2, 						// Gateways de Pagamentos, (0 = somente MercadoPago, 1 = Somente Paypal, 2 = Ambos)
 	'DefaultLoginGroup'			=> null,
 	'DefaultCharMapServer'		=> null,
-	'DefaultLanguage'			=> 'en_us',					// Specify the default control panel language (see FLUX_ROOT/lang/ directory for available languages.)
-	'SiteTitle'					=> 'Flux Control Panel',	// This value is only used if the theme decides to use it.
-	'ThemeName'					=> array('default', 'bootstrap'), // Names of the themes you would like list for use in the footer. Themes are in FLUX_ROOT/themes.
-	'ScriptTimeLimit'			=> 0,						// Script execution time limit. Specifies (in seconds) how long a page should run before timing out. (0 means forever)
+	'DefaultLanguage'			=> '#pt_br',				//  Especifique o idioma padrão do painel de controle (veja o diretório FLUX_ROOT/lang/ para idiomas disponíveis.)
+	'SiteTitle'					=> 'Painel de Controle Flux',	//  Este valor é usado apenas se o tema decidir usá-lo.
+    'ThemeName'                 => ['default', 'bootstrap'],// Nomes dos temas que você gostaria de listar para uso no rodapé. Os temas estão em FLUX_ROOT/themes.
+	'ScriptTimeLimit'			=> 0,						//  Limite de tempo de execução do script. Especifica (em segundos) quanto tempo uma página deve rodar antes de expirar. (0 significa para sempre)
+	'LogoName'					=> 'logomail.png',			//  DIGITE O NOME DO ARQUIVO DA LOGO QUE VAI APARECECR NOS EMAILS (Padrão: logomail.png) (DIRETORIO: data/logomail.png)
 	'MissingEmblemBMP'			=> 'empty.bmp',				//
-	'ItemIconNameFormat'		=> '%d.png',				// The filename format for item icons (defaults to {itemid}.png).
-	'ItemImageNameFormat'		=> '%d.png',				// The filename format for item images (defaults to {itemid}.png).
-	'MonsterImageNameFormat'	=> '%d.gif',				// The filename format for monster images (defaults to {monsterid}.gif).
-	'JobImageNameFormat'		=> '%d.gif',				// The filename format for job images (defaults to {jobid}.gif).
-	'DivinePrideIntegration'	=> true,					// Dowload monsters and items images from https://www.divine-pride.net if it's not exist.
-	'ForceEmptyEmblem'			=> false,					// Forcefully display empty guild emblems, helpful when you don't have GD2 installed.
-	'EmblemCacheInterval'		=> 12,						// Hourly interval to re-cache guild emblems (set to 0 to disable emblem cache).
-	'EmblemUseWebservice'		=> true,					// Load emblems from WebService?
-	'SessionCookieExpire'		=> 48,						// Duration in hours.
-	'AdminMenuGroupLevel'		=> AccountLevel::LOWGM,		// The starting group ID for which module actions are moved into the admin menu for display.
-	'DateDefaultTimezone'		=> 'UTC',					// The default timezone, consult the PHP manual for valid timezones: http://php.net/timezones (null for defaut system TZ)
-	'DateFormat'				=> 'Y-m-d',					// Default DATE format to be displayed in pages.
-	'DateTimeFormat'			=> 'Y-m-d H:i:s',			// Default DATETIME format to be displayed in pages.
-	'ShowSinglePage'			=> true,					// Whether or not to show the page numbers even if there's only one page.
-	'ResultsPerPage'			=> 20,						// The number of results to display in a paged set, per page.
-	'PagesToShow'				=> 10,						// The number of page numbers to display at once.
-	'PageJumpMinimumPages'		=> 1,						// Minimum number of required pages before page jump box is shown. (0 to always show!)
-	'ShowPageJump'				=> true,					// Whether or not to show the "Page Jump" box.
-	'SingleMatchRedirect'		=> true,					// Whether or not to redirect to view action from index page if only one match is returned (and action is allowed).
-	'SingleMatchRedirectItem'	=> false,					// Same as above, for item module.
-	'SingleMatchRedirectMobs'	=> false,					// Same as above, for monster module.
-	'UsernameAllowedChars'		=> 'a-zA-Z0-9_',			// PCRE Format Pattern. default: 'a-zA-Z0-9_' (alphanumeric and underscore)
-															// WARNING: This string isn't escaped so be careful which chars you use!
-															// PCRE Pattern Ref: http://php.net/manual/en/pcre.pattern.php
-	'MinUsernameLength'			=> 4,						// Minimum username length.
-	'MaxUsernameLength'			=> 23,						// Maximum username length.
-	'MinPasswordLength'			=> 8,						// Minimum password length.
-	'MaxPasswordLength'			=> 31,						// Maximum password length.
-	'PasswordMinUpper'			=> 1,						// Number of upper-case letters to require in passwords.
-	'PasswordMinLower'			=> 1,						// Number of lower-case letters to require in passwords.
-	'PasswordMinNumber'			=> 1,						// Number of numbers to require in passwords.
-	'PasswordMinSymbol'			=> 0,						// Number of symbols to require in passwords.
-	'GMMinPasswordLength'		=> 8,						// Minimum password length for GM accounts.
-	'GMPasswordMinUpper'		=> 1,						// Number of upper-case letters to require in passwords for GM accounts.
-	'GMPasswordMinLower'		=> 1,						// Number of lower-case letters to require in passwords for GM accounts.
-	'GMPasswordMinNumber'		=> 1,						// Number of numbers to require in passwords for GM accounts.
-	'GMPasswordMinSymbol'		=> 1,						// Number of symbols to require in passwords for GM accounts.
-	'RandomPasswordLength'		=> 16,						// This is the length of the random password generated by the "Reset Password" feature. (NOTE: Hardcoded minimum value of 8)
-	'AllowUserInPassword'		=> false,					// Whether or not to allow the password to contain the username. (NOTE: A case-insensitive search is performed)
-	'AllowDuplicateEmails'		=> false,					// Whether or not to allow duplicate e-mails to be used in registration. (See Mailer config options)
-	'RequireEmailConfirm'		=> false,					// Require e-mail confirmation during registration.
-	'RequireChangeConfirm'		=> false,					// Require confirmation when changing e-mail addresses.
-	'EmailConfirmExpire'		=> 48,						// E-mail confirmations expire hours. Unconfirmed accounts will expire after this period of time.
-	'PincodeEnabled'			=> true,					// Whether or not the pincode system is enabled in your server. (Check your char_athena.conf file. Enabled by default.)
-	'MailerFromAddress'			=> 'noreply@localhost',		// The e-mail address displayed in the From field.
-	'MailerFromName'			=> 'MailerName',			// The name displayed with the From e-mail address.
-	'MailerUseSMTP'				=> false,					// Whether or not to use a separate SMTP server for sending mail.
-	'MailerSMTPUseSSL'			=> false,					// Whether or not mailer should connect using SSL (yes for GMail).
-	'MailerSMTPUseTLS'			=> false,					// Same as above SSL setting, but for TLS.  This setting will override the SSL setting.
-	'MailerSMTPPort'			=> null,					// When MailerUseSMTP is true: SMTP server port (mailer will default to 25).
-	'MailerSMTPHosts'			=> null,					// When MailerUseSMTP is true: A string host or array of hosts (e.g., 'host1' or array('host1', 'backuphost')).
-	'MailerSMTPUsername'		=> null,					// When MailerUseSMTP is true: Authorized username for SMTP server.
-	'MailerSMTPPassword'		=> null,					// When MailerUseSMTP is true: Authorized password for SMTP server (for above user).
-	'ServerStatusCache'			=> 2,						// Store a cached server status and refresh every X minutes.  Default: 2 minutes (value is measured in minutes).
-	'ServerStatusTimeout'		=> 2,						// For each server, spend X amount of seconds to determine whether it's up or not.
-	'SessionKey'				=> 'fluxSessionData',		// Shouldn't be changed, just specifies the session key to be used for session data.
-	'DefaultModule'				=> 'main',					// This is the module to execute when none has been specified.
-	'DefaultAction'				=> 'index',					// This is the default action for any module, probably should leave this alone. (Deprecated)
-	'GzipCompressOutput'		=> false,					// Whether or not to compress output using zlib.
-	'GzipCompressionLevel'		=> 9,						// zlib compression level. (1~9)
-	'OutputCleanHTML'			=> true,					// Use this if you have Tidy installed to clean your HTML output when serving pages.
-	'ShowCopyright'				=> true,					// Whether or not to show the copyright footer.
-	'ShowRenderDetails'			=> true,					// Shows the "page rendered in X seconds" and "number of queries executed: X" in the default theme.
-	'UseCleanUrls'				=> false,					// Set to true if you're running Apache and it supports mod_rewrite and .htaccess files.
-	'DebugMode'					=> false,					// Set to false to minimize technical details from being output by Flux. WARNING: DO NOT USE THIS OPTION ON A PUBLICALLY-ACCESSIBLE CP.
-	'UseCaptcha'				=> false,					// Use CAPTCHA image for account registration to prevent automated account creations. (Requires GD2/FreeType2)
-	'UseLoginCaptcha'			=> false,					// Use CAPTCHA image for account logins. (Requires GD2/FreeType2)
-	'EnableReCaptcha'			=> false,					// Enables the use of reCAPTCHA instead of Flux's native GD2 library (http://www.google.com/recaptcha)
-	'ReCaptchaPublicKey'		=> '...',					// This is your reCAPTCHA public key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
-	'ReCaptchaPrivateKey'		=> '...',					// This is your reCAPTCHA private key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
-	'ReCaptchaTheme'			=> 'light',					// ReCaptcha theme to use (Value: dark or light) (see: https://developers.google.com/recaptcha/docs/display#render_param)
-	'DisplaySinglePages'		=> true,					// Whether or not to display paging for single page results.
-	'ForwardYears'				=> 15,						// (Visual) The number of years to display ahead of the current year in date inputs.
-	'BackwardYears'				=> 60,						// (Visual) The number of years to display behind the current year in date inputs.
-	'ColumnSortAscending'		=> ' ▲',					// (Visual) Text displayed for ascending sorted column names.
-	'ColumnSortDescending'		=> ' ▼',					// (Visual) Text displayed for descending sorted column names.
-	'DisplayCashPoints'			=> false,					// Whether or not to display "Cash Points" instead of the player's "Credits" in the control panel.
-	'CreditExchangeRate'		=> 1.0,						// The rate at which credits are exchanged for dollars.
-	'MinDonationAmount'			=> 2.0,						// Minimum donation amount. (NOTE: Actual donations made that are less than this account won't be exchanged)
-	'DonationCurrency'			=> 'USD',					// Preferred donation currency. Only donations made in this currency will be processed for credit deposits.
-	'MoneyDecimalPlaces'		=> 2,						// (Visual) Number of decimal places to display in amount.
-	'MoneyThousandsSymbol'		=> ',',						// (Visual) Thousandths place separator (a period in European currencies).
-	'MoneyDecimalSymbol'		=> '.',						// (Visual) Decimal separator (a comma in European currencies).
-	'AcceptDonations'			=> true,					// Whether or not to accept donations.
-	'PayPalIpnUrl'				=> 'www.paypal.com',		// The ipnpb.paypal.com and ipnpb.sandbox.paypal.com endpoints only accept HTTPS connections. If you currently use www.paypal.com, you should move to ipnpb.paypal.com when you update your code to use HTTPS.
-	'PayPalBusinessEmail'		=> 'admin@localhost',		// Enter the e-mail under which you have registered your business account.
-	'PayPalReceiverEmails'		=> array(					// These are the receiver e-mail addresses who are allowed to receive payment.
-		//'admin2@localhost',								// -- This array may be empty if you only use one e-mail
-		//'admin3@localhost'								// -- because your Business Email is also checked.
-	),
-	'PaypalHackNotify'          => true,                    // Send email notification if hack attempt detected (Notification will be send for each address in list PayPalBusinessEmail and PayPalReceiverEmails)
-	'PayPalAllowedHosts'        => array(					// PayPal IP list https://www.paypal.com/fm/smarthelp/article/what-are-the-ip-addresses-for-live-paypal-servers-ts1056
+	'ItemIconNameFormat'		=> '%d.png',				//  Formato caso não tenha nenhum arquivo na pasta data/items/icons (FORMATO ACEITO É PNG E BMP)(padrão é .png).
+	'ItemImageNameFormat'		=> '%d.png',				//  Formato caso não tenha nenhum arquivo na pasta data/items/images (FORMATO ACEITO É PNG E BMP)(padrão é .png).
+	'MonsterImageNameFormat'	=> '%d.gif',				//  Formato caso não tenha nenhum arquivo na pasta data/monsters (FORMATO ACEITO É PNG E GIF)(padrão é .gif).
+	'JobImageNameFormat'		=> '%d.gif',				//  O formato do nome do arquivo para imagens de classes (padrão é {jobid}.gif).
+	'DivinePrideIntegration'	=> true,					//  Baixar imagens de monstros e itens de https://www.divine-pride.net se não existirem.
+	'ForceEmptyEmblem'			=> false,					//  Forçar a exibição de emblemas de guilda vazios, útil quando você não tem GD2 instalado.
+	'EmblemCacheInterval'		=> 12,						//  Intervalo em horas para recarregar emblemas de guilda (defina como 0 para desativar o cache de emblemas).
+	'EmblemUseWebservice'		=> true,					//  Carregar emblemas do WebService?
+	'SessionCookieExpire'		=> 48,						//  Duração em horas.
+	'AdminMenuGroupLevel'		=> AccountLevel::LOWGM,		//  O ID de grupo inicial para o qual as ações do módulo são movidas para o menu de administração para exibição.
+	'DateDefaultTimezone'		=> 'UTC',					//  O fuso horário padrão, consulte o manual do PHP para fusos horários válidos: http://php.net/timezones (null para fuso horário do sistema)
+	'DateFormat'				=> 'Y-m-d',					//  Formato de DATA padrão a ser exibido nas páginas.
+	'DateTimeFormat'			=> 'Y-m-d H:i:s',			//  Formato de DATA e HORA padrão a ser exibido nas páginas.
+	'ShowSinglePage'			=> true,					//  Exibir ou não os números da página, mesmo se houver apenas uma página.
+	'ResultsPerPage'			=> 20,						//  O número de resultados a ser exibido em um conjunto paginado, por página.
+	'PagesToShow'				=> 10,						//  O número de números de páginas a serem exibidos de uma vez.
+	'PageJumpMinimumPages'		=> 1,						//  Número mínimo de páginas necessárias antes que a caixa de salto de página seja mostrada. (0 para sempre mostrar!)
+	'ShowPageJump'				=> true,					//  Exibir ou não a caixa de "Salto de Página".
+	'SingleMatchRedirect'		=> true,					//  Redirecionar ou não para a ação de visualização da página índice se apenas uma correspondência for retornada (e a ação for permitida).
+	'SingleMatchRedirectItem'	=> false,					//  O mesmo que acima, para o módulo de itens.
+	'SingleMatchRedirectMobs'	=> false,					//  O mesmo que acima, para o módulo de monstros.
+	'UsernameAllowedChars'		=> 'a-zA-Z0-9_',			//  Padrão de Formato PCRE. padrão: 'a-zA-Z0-9_' (alfanumérico e sublinhado)
+															//  AVISO: Esta string não é escapada, então tome cuidado com os caracteres que você usa!
+															//  Referência de Padrão PCRE: http://php.net/manual/en/pcre.pattern.php
+	'MinUsernameLength'			=> 4,						//  Comprimento mínimo do nome de usuário.
+	'MaxUsernameLength'			=> 23,						//  Comprimento máximo do nome de usuário.
+	'MinPasswordLength'			=> 8,						//  Comprimento mínimo da senha.
+	'MaxPasswordLength'			=> 31,						//  Comprimento máximo da senha.
+	'PasswordMinUpper'			=> 1,						//  Número de letras maiúsculas a serem exigidas nas senhas.
+	'PasswordMinLower'			=> 1,						//  Número de letras minúsculas a serem exigidas nas senhas.
+	'PasswordMinNumber'			=> 1,						//  Número de números a serem exigidos nas senhas.
+	'PasswordMinSymbol'			=> 0,						//  Número de símbolos a serem exigidos nas senhas.
+	'GMMinPasswordLength'		=> 8,						//  Comprimento mínimo da senha para contas GM.
+	'GMPasswordMinUpper'		=> 1,						//  Número de letras maiúsculas a serem exigidas nas senhas para contas GM.
+	'GMPasswordMinLower'		=> 1,						//  Número de letras minúsculas a serem exigidas nas senhas para contas GM.
+	'GMPasswordMinNumber'		=> 1,						//  Número de números a serem exigidos nas senhas para contas GM.
+	'GMPasswordMinSymbol'		=> 1,						//  Número de símbolos a serem exigidos nas senhas para contas GM.
+	'RandomPasswordLength'		=> 16,						//  Este é o comprimento da senha aleatória gerada pelo recurso "Redefinir Senha". (NOTA: Valor mínimo codificado de 8)
+	'AllowUserInPassword'		=> false,					//  Permitir ou não que a senha contenha o nome de usuário. (NOTA: É realizada uma busca insensível a maiúsculas e minúsculas)
+	'AllowDuplicateEmails'		=> false,					//  Permitir ou não que e-mails duplicados sejam usados no registro. (Consulte as opções de configuração do Mailer)
+	'RequireEmailConfirm'		=> false,					//  Exigir confirmação por e-mail durante o registro.
+	'RequireChangeConfirm'		=> false,					//  Exigir confirmação ao alterar endereços de e-mail.
+	'EmailConfirmExpire'		=> 48,						//  As confirmações por e-mail expiram em horas. Contas não confirmadas expirarão após este período de tempo.
+	'PincodeEnabled'			=> true,					//  O sistema de pincode está habilitado no seu servidor? (Verifique seu arquivo char_athena.conf. Habilitado por padrão.)
+	'MailerFromAddress'			=> 'noreply@localhost',		//  O endereço de e-mail exibido no campo De.
+	'MailerFromName'			=> 'MailerName',			//  O nome exibido com o endereço de e-mail do De.
+	'MailerUseSMTP'				=> false,					//  Usar ou não um servidor SMTP separado para enviar e-mails.
+	'MailerSMTPUseSSL'			=> false,					//  O mailer deve conectar usando SSL (sim para GMail).
+	'MailerSMTPUseTLS'			=> false,					//  O mesmo que a configuração SSL acima, mas para TLS. Esta configuração substituirá a configuração SSL.
+	'MailerSMTPPort'			=> null,					//  Quando MailerUseSMTP for true: Porta do servidor SMTP (o mailer usará a porta 25 por padrão).
+	'MailerSMTPHosts'			=> null,					//  Quando MailerUseSMTP for true: Uma string de host ou array de hosts (ex: 'host1' ou ['host1', 'backuphost')).
+	'MailerSMTPUsername'		=> null,					//  Quando MailerUseSMTP for true: Nome de usuário autorizado para o servidor SMTP.
+	'MailerSMTPPassword'		=> null,					//  Quando MailerUseSMTP for true: Senha autorizada para o servidor SMTP (para o usuário acima).
+	'ServerStatusCache'			=> 2,						//  Armazenar um status de servidor em cache e atualizar a cada X minutos. Padrão: 2 minutos (valor é medido em minutos).
+	'ServerStatusTimeout'		=> 2,						//  Para cada servidor, gastar X quantidade de segundos para determinar se está ativo ou não.
+	'SessionKey'				=> 'fluxSessionData',		//  Não deve ser alterado, apenas especifica a chave de sessão a ser usada para dados de sessão.
+	'DefaultModule'				=> 'main',					//  Este é o módulo a ser executado quando nenhum foi especificado.
+	'DefaultAction'				=> 'index',					//  Esta é a ação padrão para qualquer módulo, provavelmente deve ser deixada sozinha. (Descontinuado)
+	'GzipCompressOutput'		=> false,					//  Usar ou não compressão de saída usando zlib.
+	'GzipCompressionLevel'		=> 9,						//  Nível de compressão zlib. (1~9)
+	'OutputCleanHTML'			=> true,					//  Use isso se você tiver Tidy instalado para limpar sua saída HTML ao servir páginas.
+	'ShowCopyright'				=> true,					//  Exibir ou não o rodapé de direitos autorais.
+	'ShowRenderDetails'			=> true,					//  Mostra "página renderizada em X segundos" e "número de consultas executadas: X" no tema padrão.
+	'UseCleanUrls'				=> false,					//  Defina como true se você estiver executando Apache e ele suportar mod_rewrite e arquivos .htaccess.
+	'DebugMode'					=> false,					//  Defina como false para minimizar os detalhes técnicos exibidos pelo Flux. AVISO: NÃO USE ESTA OPÇÃO EM UM CP ACESSÍVEL PUBLICAMENTE.
+	'UseCaptcha'				=> false,					//  Usar imagem CAPTCHA para registro de contas para evitar criações automatizadas de contas. (Requer GD2/FreeType2)
+	'UseLoginCaptcha'			=> false,					//  Usar imagem CAPTCHA para logins de contas. (Requer GD2/FreeType2)
+	'EnableReCaptcha'			=> false,					//  Habilitar o uso do reCAPTCHA em vez da biblioteca nativa GD2 do Flux (http://www.google.com/recaptcha)
+	'ReCaptchaPublicKey'		=> '...',					//  Esta é a sua chave pública do reCAPTCHA [OBRIGATÓRIA PARA RECAPTCHA] (cadastre-se em http://www.google.com/recaptcha)
+	'ReCaptchaPrivateKey'		=> '...',					//  Esta é a sua chave privada do reCAPTCHA [OBRIGATÓRIA PARA RECAPTCHA] (cadastre-se em http://www.google.com/recaptcha)
+	'ReCaptchaTheme'			=> 'light',					//  Tema do ReCaptcha a ser usado (Valor: dark ou light) (veja: https://developers.google.com/recaptcha/docs/display#render_param)
+	'DisplaySinglePages'		=> true,					//  Exibir ou não a paginação para resultados de uma única página.
+	'ForwardYears'				=> 15,						//  (Visual) O número de anos a serem exibidos à frente do ano atual nas entradas de data.
+	'BackwardYears'				=> 60,						//  (Visual) O número de anos a serem exibidos atrás do ano atual nas entradas de data.
+	'ColumnSortAscending'		=> ' ▲',					//  (Visual) Texto exibido para nomes de colunas classificadas em ordem ascendente.
+	'ColumnSortDescending'		=> ' ▼',					//  (Visual) Texto exibido para nomes de colunas classificadas em ordem descendente.
+	'DisplayCashPoints'			=> true,					//  Exibir ou não "Pontos de Dinheiro" em vez de "Créditos" do jogador no painel de controle.
+	'CreditExchangeRate'		=> 1.0,						//  A taxa na qual os créditos são trocados por reais.
+	'MinDonationAmount'			=> 1.0,						//  Valor mínimo de doação. (NOTA: Doações reais feitas que são menores do que essa quantia não serão trocadas)
+	'MaxDonationAmount'			=> 1000.0,					//  Valor Maxima de doação. 
+	'DonationCurrency'			=> 'R$',					//  Moeda de doação preferida. Apenas doações feitas nesta moeda serão processadas para depósitos de crédito.
+	'MoneyDecimalPlaces'		=> 2,						//  (Visual) Número de casas decimais a serem exibidas no valor.
+	'MoneyThousandsSymbol'		=> ',',						//  (Visual) Separador de milhar (um ponto em moedas europeias).
+	'MoneyDecimalSymbol'		=> '.',						//  (Visual) Separador decimal (uma vírgula em moedas europeias).
+	'AcceptDonations'			=> true,					//  Aceitar ou não doações.
+	'PayPalIpnUrl'				=> 'www.paypal.com',		//  Os endpoints ipnpb.paypal.com e ipnpb.sandbox.paypal.com aceitam apenas conexões HTTPS. Se você usa atualmente www.paypal.com, deverá mudar para ipnpb.paypal.com ao atualizar seu código para usar HTTPS.
+	'PayPalBusinessEmail'		=> 'admin@localhost',		//  Insira o e-mail sob o qual você registrou sua conta comercial.
+	'PayPalReceiverEmails'		=> [					//  Estes são os endereços de e-mail de recebedores que estão autorizados a receber pagamento.
+		//'admin2@localhost',								// 'admin2@localhost',                               // -- Este array pode estar vazio se você usar apenas um e-mail
+		//'admin3@localhost'								// 'admin3@localhost'                                // -- porque seu E-mail Comercial também é verificado.
+	],
+	'PaypalHackNotify'          => true,                    //  Enviar notificação por e-mail se uma tentativa de hack for detectada (A notificação será enviada para cada endereço na lista PayPalBusinessEmail e PayPalReceiverEmails)
+	'PayPalAllowedHosts'        => [					//  Lista de IPs do PayPal https://www.paypal.com/fm/smarthelp/article/what-are-the-ip-addresses-for-live-paypal-servers-ts1056
 		'ipn.sandbox.paypal.com',
 		'notify.paypal.com',
 		'66.211.170.66',
@@ -119,406 +130,409 @@ return array(
 		'6.211.168.0/22',
 		'173.0.80.0/20',
 		'91.243.72.0/23'
-	),
-	'GStorageLeaderOnly'		=> false,					// Only allow guild leader to view guild storage rather than all members?
-	'DivorceKeepChild'			=> false,					// Keep child after divorce?
-	'DivorceKeepRings'			=> false,					// Keep wedding rings after divorce?
-	'IpWhitelistPattern'		=>							// PCRE Format Pattern. It's recommended you add your gameserver, webserver and server owner's IPs here.
-		'(127\.0\.0\.1|0(\.[0\*]){3})',						// WARNING: This string isn't escaped so be careful which chars you use!
-															// By default, whitelists 127.0.0.1 (localhost) and 0.0.0.0 (all interfaces; whitelists all wildcard bans that can achive this too)
-	'AllowIpBanLogin'			=> false,					// Allow logging into account from banned IP.
-	'AllowTempBanLogin'			=> false,					// Allow logging in of temporarily banned accounts.
-	'AllowPermBanLogin'			=> false,					// Allow logging in of permanently banned accounts.
-	'AutoRemoveTempBans'		=> true,					// Automatically remove expired temporary bans on certain pages.
-	'ItemShopMaxCost'			=> 99,						// Max price an item can be sold for.
-	'ItemShopMaxQuantity'		=> 99,						// Max quantity the item may be sold at once for.
-	'ItemShopItemPerPage'		=> 5,						// The number of items to display per page in the "Item Shop" page.
-    'ShowItemDesc'              => false,                   // Displays generated item descs from parsed itemInfo.lua
-	'HideFromWhosOnline'		=> AccountLevel::LOWGM,		// Levels greater than or equal to this will be hidden from the "Who's Online" page.
-	'HideFromMapStats'			=> AccountLevel::LOWGM,		// Levels greater than or equal to this will be hidden from the "Map Stats" page.
-	'EnableGMPassSecurity'		=> AccountLevel::LOWGM,		// Levels greater than or equal to this will be required to use passwords that meet the earlier GM Password settings.
-	'ChargeGenderChange'		=> 0,						// You can specify this as the number of credits to charge for gender change.  Can be 0 for free change.
-	'BanPaymentStatuses'		=> array(					// Payment statuses that will automatically ban the account owner if received.
-		'Cancelled_Reversal',								// -- 'Cancelled_Reversal'
-		'Reversed',											// -- 'Reversed'
-	),
+	],
+	'GStorageLeaderOnly'		=> false,					//  Permitir apenas o líder da guilda visualizar o armazenamento da guilda em vez de todos os membros?
+	'DivorceKeepChild'			=> false,					//  Manter a criança após o divórcio?
+	'DivorceKeepRings'			=> false,					//  Manter os anéis de casamento após o divórcio?
+	'IpWhitelistPattern'		=>							//  Padrão de Formato PCRE. É recomendável adicionar IPs do servidor de jogos, servidor web e do proprietário do servidor aqui.
+		'(127\.0\.0\.1|0(\.[0\*]){3})',						//  AVISO: Esta string não é escapada, então tome cuidado com os caracteres que você usa!
+															//  Por padrão, permite 127.0.0.1 (localhost) e 0.0.0.0 (todas as interfaces; permite todos os bans curinga que podem alcançar isso também)
+	'AllowIpBanLogin'			=> false,					//  Permitir login na conta a partir de IPs banidos.
+	'AllowTempBanLogin'			=> false,					//  Permitir login de contas temporariamente banidas.
+	'AllowPermBanLogin'			=> false,					//  Permitir login de contas permanentemente banidas.
+	'AutoRemoveTempBans'		=> true,					//  Remover automaticamente bans temporários expirados em certas páginas.
+	'ItemShopMaxCost'			=> 99,						//  Preço máximo que um item pode ser vendido.
+	'ItemShopMaxQuantity'		=> 99,						//  Quantidade máxima que o item pode ser vendido de uma vez.
+	'ItemShopItemPerPage'		=> 5,						//  Número de itens a serem exibidos por página na página "Item Shop".
+    'ShowItemDesc'              => false,                   //  Exibir descrições de itens geradas a partir do itemInfo.lua analisado
+	'HideFromWhosOnline'		=> AccountLevel::LOWGM,		//  Níveis maiores ou iguais a este serão ocultados da página "Quem está online".
+	'HideFromMapStats'			=> AccountLevel::LOWGM,		//  Níveis maiores ou iguais a este serão ocultados da página "Estatísticas do Mapa".
+	'EnableGMPassSecurity'		=> AccountLevel::LOWGM,		//  Níveis maiores ou iguais a este serão obrigados a usar senhas que atendam às configurações de Senha GM anteriores.
+	'ChargeGenderChange'		=> 0,						//  Você pode especificar isso como o número de créditos a serem cobrados por mudança de gênero. Pode ser 0 para mudança gratuita.
+	'BanPaymentStatuses'		=> [					//  Status de pagamento que banirão automaticamente o proprietário da conta se recebidos.
+		'Cancelled_Reversal',								//  -- 'Cancelled_Reversal'
+		'Reversed',											//  -- 'Reversed'
+	],
 
-	'HoldUntrustedAccount'		=> 0,						// This is the time in hours to hold a donation crediting process for, if the account
-															// isn't a trusted account. Specify 0 or false to disable this feature.
+	'HoldUntrustedAccount'		=> 0,						//  Este é o tempo em horas para segurar um processo de crédito de doação, se a conta
+															//  não for uma conta confiável. Especifique 0 ou false para desativar este recurso.
 
-	'AutoUnholdAccount'			=> false,					// Enable this to auto-unhold an account and credit it if the transaction is still
-															// valid.  This only applies if you are using the HoldUnstrustedAccount feature.
-															// If you want to run a cron job instead, you can make a request to the '/donate/update'
-															// module/action with the InstallerPassword as the password to run the update task.
-															// With clean URLs: http://<server>/<baseURI>/donate/update?password=<InstallerPassword>
-															// Without clean URLs: http://<server>/<baseURI>?module=donate&action=update&password=<InstallerPassword>
-															// NOTE: This option is HIGHLY inefficient, it's recommended to run a cron job instead.
+	'AutoUnholdAccount'			=> false,					//  Ative isso para liberar automaticamente uma conta e creditar se a transação ainda
+															//  for válida. Isso só se aplica se você estiver usando o recurso HoldUntrustedAccount.
+															//  Se você deseja executar uma tarefa cron em vez disso, você pode fazer uma solicitação ao módulo/ação '/donate/update'
+															//  com a InstallerPassword como a senha para executar a tarefa de atualização.
+															//  Com URLs limpas: http://<server>/<baseURI>/donate/update?password=<InstallerPassword>
+															//  Sem URLs limpas: http://<server>/<baseURI>?module=donate&action=update&password=<InstallerPassword>
+															//  NOTA: Esta opção é ALTAMENTE ineficiente, é recomendável executar uma tarefa cron em vez disso.
 
-	'AutoPruneAccounts'			=> false,					// Enable this to automatically prune expired accounts. Enabling this is a performance
-															// performance killer. See 'AutoUnholdAccount' for running this task as a cron job,
-															// the module is 'account' and the action is 'prune'.
-															// With clean URLs: http://<server>/<baseURI>/account/prune?password=<InstallerPassword>
-															// Without clean URLs: http://<server>/<baseURI>?module=account&action=prune&password=<InstallerPassword>
+	'AutoPruneAccounts'			=> false,					//  Ative isso para podar automaticamente contas expiradas. Ativar isso é um desempenho
+															//  matador de performance. Veja 'AutoUnholdAccount' para executar esta tarefa como uma tarefa cron,
+															//  o módulo é 'account' e a ação é 'prune'.
+															//  Com URLs limpas: http://<server>/<baseURI>/conta/prune?password=<InstallerPassword>
+															//  Sem URLs limpas: http://<server>/<baseURI>?module=conta&action=prune&password=<InstallerPassword>
 
-	'ShopImageExtensions'		=> array(					// These are the image extensions allowed for uploading in the item shop.
+	'ShopImageExtensions'		=> [					//  Estas são as extensões de imagem permitidas para upload na loja de itens.
 		'png', 'jpg', 'gif', 'bmp', 'jpeg'
-	),
-	'NoResetPassGroupLevel'		=> AccountLevel::LOWGM,		// Minimum group level of account to prevent password reset using control panel.
-
-	'CharRankingLimit'			=> 20,						//
-	'GuildRankingLimit'			=> 20,						//
-	'ZenyRankingLimit'			=> 20,						//
-	'DeathRankingLimit'			=> 20,						//
-	'AlchemistRankingLimit'		=> 20,						//
-	'BlacksmithRankingLimit'	=> 20,						//
-	'HomunRankingLimit'			=> 20,						//
-	'MVPRankingLimit'			=> 20,						//
-
-	'RankingHideGroupLevel'		=> AccountLevel::LOWGM,		//
-	'InfoHideZenyGroupLevel'	=> AccountLevel::LOWGM,		// Minimum group level of account to hide zeny from in server information page.
-
-	'CharRankingThreshold'		=> 0,						// Number of days the character must have logged in within to be listed in character ranking. (0 = disabled)
-	'ZenyRankingThreshold'		=> 0,						// Number of days the character must have logged in within to be listed in zeny ranking. (0 = disabled)
-	'DeathRankingThreshold'		=> 0,						// Number of days the character must have logged in within to be listed in death ranking. (0 = disabled)
-	'AlchemistRankingThreshold'	=> 0,						// Number of days the character must have logged in within to be listed in death ranking. (0 = disabled)
-	'HomunRankingThreshold'		=> 0,						// Number of days the character must have logged in within to be listed in homunculus ranking. (0 = disabled)
-
-	'HideTempBannedCharRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedCharRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'HideTempBannedZenyRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedZenyRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'HideTempBannedDeathRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedDeathRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'HideTempBannedAlcheRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedAlcheRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'HideTempBannedSmithRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedSmithRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'HideTempBannedStats'		=> false,					// Hide temporarily banned accounts from statistics.
-	'HidePermBannedStats'		=> true,					// Hide permanently banned accounts from statistics.
-
-	'HideTempBannedHomunRank'	=> false,					// Hide temporarily banned characters from ranking.
-	'HidePermBannedHomunRank'	=> true,					// Hide permanently banned characters from ranking.
-
-	'SortJobsByAmount'			=> false,					// Sort job class information on statistics page by descending quantity (false = Sort by Job ID).
-
-	'CpLoginLogShowPassword'	=> false,					// Show password in CP login log (also see access.php's SeeCpLoginLogPass).
-
-	'CpResetLogShowPassword'	=> false,					// Show password in CP "password resets" log (also see access.php's SeeCpResetPass).
-
-	'CpChangeLogShowPassword'	=> false,					// Show password in CP "password changes" log (also see access.php's SeeCpChangePass).
-
-	'AdminMenuNewStyle'			=> true,					// Use new-style admin menu;  Applies to 'default' theme.
-	'EnablePeakDisplay'			=> true,					// Display Peak User count on Server Status page.
+	],
 
 
-// News Options
-	'CMSNewsOnHomepage'			=> true,					// Display News on Home Page instead of "You've Just Installed FluxCP" message?
-	'CMSNewsType'				=> 1,						// Type = source of news feed:
+	'NoResetPassGroupLevel'		=> AccountLevel::LOWGM,		//  Nível mínimo do grupo da conta para impedir a redefinição de senha usando o painel de controle.
+
+	'CharRankingLimit'			=> 20,						//  Limite de classificação de personagens.
+	'GuildRankingLimit'			=> 20,						//  Limite de classificação de guildas.
+	'ZenyRankingLimit'			=> 20,						//  Limite de classificação de zeny.
+	'DeathRankingLimit'			=> 20,						//  Limite de classificação de mortes.
+	'AlchemistRankingLimit'		=> 20,						//  Limite de classificação de alquimistas.
+	'BlacksmithRankingLimit'	=> 20,						//  Limite de classificação de ferreiros.
+	'HomunRankingLimit'			=> 20,						//  Limite de classificação de homúnculos.
+	'MVPRankingLimit'			=> 20,						//  Limite de classificação de MVP.
+
+	'RankingHideGroupLevel'		=> AccountLevel::LOWGM,		//  Nível mínimo do grupo para ocultar da classificação.
+	'InfoHideZenyGroupLevel'	=> AccountLevel::LOWGM,		//  Nível mínimo do grupo da conta para ocultar zeny na página de informações do servidor.
+
+	'CharRankingThreshold'		=> 0,						//  Número de dias em que o personagem deve ter logado para ser listado na classificação de personagens. (0 = desativado)
+	'ZenyRankingThreshold'		=> 0,						//  Número de dias em que o personagem deve ter logado para ser listado na classificação de zeny. (0 = desativado)
+	'DeathRankingThreshold'		=> 0,						//  Número de dias em que o personagem deve ter logado para ser listado na classificação de mortes. (0 = desativado)
+	'AlchemistRankingThreshold'	=> 0,						//  Número de dias em que o personagem deve ter logado para ser listado na classificação de alquimistas. (0 = desativado)
+	'HomunRankingThreshold'		=> 0,						//  Número de dias em que o personagem deve ter logado para ser listado na classificação de homúnculos. (0 = desativado)
+
+	'HideTempBannedCharRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação.
+	'HidePermBannedCharRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação.
+
+	'HideTempBannedZenyRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação de zeny.
+	'HidePermBannedZenyRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação de zeny.
+
+	'HideTempBannedDeathRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação de mortes.
+	'HidePermBannedDeathRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação de mortes.
+
+	'HideTempBannedAlcheRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação de alquimistas.
+	'HidePermBannedAlcheRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação de alquimistas.
+
+	'HideTempBannedSmithRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação de ferreiros.
+	'HidePermBannedSmithRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação de ferreiros.
+
+	'HideTempBannedStats'		=> false,					//  Ocultar contas temporariamente banidas das estatísticas.
+	'HidePermBannedStats'		=> true,					//  Ocultar contas permanentemente banidas das estatísticas.
+
+	'HideTempBannedHomunRank'	=> false,					//  Ocultar personagens temporariamente banidos da classificação de homúnculos.
+	'HidePermBannedHomunRank'	=> true,					//  Ocultar personagens permanentemente banidos da classificação de homúnculos.
+
+	'SortJobsByAmount'			=> false,					//  Classificar informações de classes na página de estatísticas por quantidade decrescente (false = Classificar por ID de Classe).
+
+	'CpLoginLogShowPassword'	=> false,					//  Mostrar senha no log de login do CP (consulte também SeeCpLoginLogPass em access.php).
+
+	'CpResetLogShowPassword'	=> false,					//  Mostrar senha no log de "redefinições de senha" do CP (consulte também SeeCpResetPass em access.php).
+
+	'CpChangeLogShowPassword'	=> false,					//  Mostrar senha no log de "mudanças de senha" do CP (consulte também SeeCpChangePass em access.php).
+
+	'AdminMenuNewStyle'			=> true,					//  Usar novo estilo de menu de administração; Aplica-se ao tema 'default'.
+	'EnablePeakDisplay'			=> true,					//  Exibir contagem de usuários máximos na página de Status do Servidor.
+
+
+//  Opções de Notícias
+	'CMSNewsOnHomepage'			=> true,					//  Exibir Notícias na Página Inicial em vez da mensagem "Você acabou de instalar o FluxCP"?
+	'CMSNewsType'				=> 1,						//  Tipo = origem do feed de notícias:
 															//	1 = Built-in news page
 															//	2 = RSS Import
 
-	'CMSNewsRSS'				=> 'https://rathena.org/board/rss/1-latest-community-announcements.xml/',		// Use if CMSNewsType = 2
-	'CMSNewsLimit'				=> 4,						// Number of news items to display
-	'CMSDisplayModifiedBy'		=> false,					// If a news item has been modified, display modified date under news item?
+	'CMSNewsRSS'				=> 'https://rathena.org/board/rss/1-latest-community-announcements.xml/',		//  Usar se CMSNewsType = 2
+	'CMSNewsLimit'				=> 4,						//  Número de itens de notícias para exibir
+	'CMSDisplayModifiedBy'		=> false,					//  Se um item de notícia foi modificado, exibir a data modificada abaixo do item de notícia?
 
-// Service Desk
-	'StaffReplyColour'			=> 'brown',
+//  Mesa de Serviço
+	'StaffReplyColour'			=> 'white',
 	'FontResolvedColour'		=> 'green',
 	'FontPendingColour'			=> 'orange',
 	'FontClosedColour'			=> 'darkgrey',
-	'SDEnableCreditRewards'		=> true,					// Show option in Service Desk to reward player X credits for reporting bugs/abuse/etc.
-	'SDCreditReward'			=> 10,						// Number of credits to award account.
+	'SDEnableCreditRewards'		=> true,					//  Mostrar opção na Mesa de Serviço para recompensar o jogador X créditos por relatar bugs/abuso/etc.
+	'SDCreditReward'			=> 10,						//  Número de créditos para conceder à conta.
 
-// Discord Webhooks
+//  Webhooks do Discord
 	'DiscordUseWebhook'			=> false,
 	'DiscordWebhookURL'			=> 'enter_webhook_url_from_discord_here',
-    'DiscordSendOnRegister'     => true, // Sends a channel message when someone registers
-    'DiscordSendOnNewTicket'    => true, // Sends a channel message when someone submits a new ticket to the Service Desk
-    'DiscordSendOnWebCommand'   => true, // Sends a channel message when someone uses the Web Command feature in FluxCP
-    'DiscordSendOnMarketing'    => true, // Sends a channel message when someone uses the Send Email feature in FluxCP
-	'DiscordSendOnErrorException' => true, // Sends a channel message when an exception is thrown
+    'DiscordSendOnRegister'     => true, //  Envia uma mensagem no canal quando alguém se registra
+    'DiscordSendOnNewTicket'    => true, //  Envia uma mensagem no canal quando alguém envia um novo ticket para a Mesa de Serviço
+    'DiscordSendOnWebCommand'   => true, //  Envia uma mensagem no canal quando alguém usa o recurso de Comando Web no FluxCP
+    'DiscordSendOnMarketing'    => true, //  Envia uma mensagem no canal quando alguém usa o recurso de Enviar Email no FluxCP
+	'DiscordSendOnErrorException' => true, //  Envia uma mensagem no canal quando uma exceção é lançada
 
-	'TinyMCEKey'				=> 'no-key',				// Register for a key at https://www.tiny.cloud/my-account/dashboard/
+	'TinyMCEKey'				=> 'no-key',				//  Registre uma chave em https://www.tiny.cloud/my-account/dashboard/
 
-	// These are the main menu items that should be displayed by themes.
-	// They route to modules and actions.  Whether they are displayed or
-	// not at any given time depends on the user's account group level and/or
-	// their login status.
-	'MenuItems'		=> array(
-		'MainMenuLabel'		=> array(
-			'HomeLabel'			=> array('module' => 'main'),
-			//'ForumLabel'		=> array('exturl' => 'http://www.fluxro.com/community'),	// External forum link
-			//'ForumLabel'		=> array('module' => 'forums'), 						// Built-in forum link
-			'NewsLabel'			=> array('module' => 'news'),
-			// Sample items for pages function.
-			'DownloadsLabel'		=> array('module' => 'pages','action'=>'content','param'=>array('path'=>'downloads')),
-			'RulesLabel'			=> array('module' => 'pages','action'=>'content','param'=>array('path'=>'rules')),
-			// End sample items for pages function.
-		),
-		'AccountLabel'		=> array(
-			'AccountCreateHeading'		=> array('module' => 'account', 'action' => 'create'),
-			'LoginTitle'			=> array('module' => 'account', 'action' => 'login'),
-			'MyAccountLabel'	=> array('module' => 'account', 'action' => 'view'),
-			'HistoryLabel'		=> array('module' => 'history'),
-			'ServiceDeskLabel'	=> array('module' => 'servicedesk'),
-			'LogoutTitle'		=> array('module' => 'account', 'action' => 'logout'),
-		),
-		'DonationsLabel'		=> array(
-			'PurchaseLabel'		=> array('module' => 'purchase'),
-			'DonateLabel'		=> array('module' => 'donate'),
-		),
-		'InformationLabel'	=> array(
-			'ServerInfoLabel'	=> array('module' => 'server', 'action' => 'info'),
-			'ServerStatusLabel'	=> array('module' => 'server', 'action' => 'status'),
-			'WoeHoursLabel'		=> array('module' => 'woe'),
-			'CastlesLabel'		=> array('module' => 'castle'),
-			'WhosOnlineLabel'	=> array('module' => 'character', 'action' => 'online'),
-			'MapStaticsLabel'=> array('module' => 'character', 'action' => 'mapstats'),
-			'RankingInfoLabel'	=> array('module' => 'ranking', 'action' => 'character'),
-			'VendingInfoLabel'	=> array('module' => 'vending'),
-			'BuyingstoreInfoLabel'	=> array('module' => 'buyingstore'),
-		),
-		'DatabaseLabel'		=> array(
-			'ItemDatabaseLabel'	=> array('module' => 'item'),
-			'MobDatabaseLabel'	=> array('module' => 'monster'),
-		),
-		'SocialLabel'		=> array(
-			'JoinUsInFacebookLabel'	=> array('exturl' => 'https://www.facebook.com/<change_me>'),
-			'RateUsOnRMSLabel'		=> array('exturl' => '<link_to_RMS>'),
-		),
-		'Service Desk'	=> array(
-			'ServiceDeskLabel'	=> array('module' => 'servicedesk', 'action' => 'staffindex'),
-		),
-		'Misc. Stuff'	=> array(
-			'AccountLabel'		=> array('module' => 'account'),
-			'CharacterLabel'	=> array('module' => 'character'),
-			'CPLogsLabel'		=> array('module' => 'cplog'),
-			'PagesLabel'		=> array('module' => 'pages'),
-			'NewsLabel'			=> array('module' => 'news', 'action' => 'manage'),
-			'GuildsLabel'		=> array('module' => 'guild'),
-			'IPBanListLabel'	=> array('module' => 'ipban'),
-			'rALogsLabel'		=> array('module' => 'logdata'),
-			'ReInstallLabel'	=> array('module' => 'install', 'action' => 'reinstall'),
-			'SendMailLabel'		=> array('module' => 'mail'),
-			'WCTitleLabel'		=> array('module' => 'webcommands'),
-			'Cash Shop'			=> array('module' => 'cashshop'),
-			//'Auction'		=> array('module' => 'auction'),
-			//'Economy'		=> array('module' => 'economy')
-		)
-	),
+	//  Estes são os itens de menu principal que devem ser exibidos pelos temas.
+	//  Eles roteiam para módulos e ações. Se eles são exibidos ou não em um determinado momento
+	//  depende do nível do grupo da conta do usuário e/ou
+	//  seu status de login.
+	'MenuItems'		=> [
+		'MainMenuLabel'		=> [
+			'HomeLabel'			=> ['module' => 'main'],
+			//'ForumLabel'		=> ['exturl' => 'http://www.fluxro.com/community'],	//  Link externo para o fórum
+			//'ForumLabel'		=> ['module' => 'forums'], 						//  Link para fórum incorporado
+			'NewsLabel'			=> ['module' => 'news'],
+			//  Itens de exemplo para a função de páginas.
+			'DownloadsLabel'		=> ['module' => 'downloads'],
+			'RulesLabel'			=> ['module' => 'rules'],
+			//  Fim dos itens de exemplo para a função de páginas.
+		],
+		'AccountLabel'		=> [
+			'AccountCreateHeading'		=> ['module' => 'account', 'action' => 'create'],
+			'LoginTitle'			=> ['module' => 'account', 'action' => 'login'],
+			'MyAccountLabel'	=> ['module' => 'account', 'action' => 'view'],
+			'HistoryLabel'		=> ['module' => 'history'],
+			'ServiceDeskLabel'	=> ['module' => 'servicedesk'],
+			'LogoutTitle'		=> ['module' => 'account', 'action' => 'logout'],
+		],
+		'DonationsLabel'		=> [
+			'PurchaseLabel'		=> ['module' => 'purchase'],
+			'DonateLabel'		=> ['module' => 'donate'],
+		],
+		'InformationLabel'	=> [
+			'ServerInfoLabel'	=> ['module' => 'server', 'action' => 'info'],
+			'ServerStatusLabel'	=> ['module' => 'server', 'action' => 'status'],
+			'WoeHoursLabel'		=> ['module' => 'woe'],
+			'CastlesLabel'		=> ['module' => 'castle'],
+			'WhosOnlineLabel'	=> ['module' => 'character', 'action' => 'online'],
+			'MapStaticsLabel'=> ['module' => 'character', 'action' => 'mapstats'],
+			'RankingInfoLabel'	=> ['module' => 'ranking', 'action' => 'character'],
+			'VendingInfoLabel'	=> ['module' => 'vending'],
+			'BuyingstoreInfoLabel'	=> ['module' => 'buyingstore'],
+		],
+		'DatabaseLabel'		=> [
+			'ItemDatabaseLabel'	=> ['module' => 'item'],
+			'MobDatabaseLabel'	=> ['module' => 'monster'],
+		],
+		'SocialLabel'		=> [
+			'JoinUsInFacebookLabel'	=> ['exturl' => 'https://www.facebook.com/<change_me>'],
+			'RateUsOnRMSLabel'		=> ['exturl' => '<link_to_RMS>'],
+		],
+		'Service Desk'	=> [
+			'ServiceDeskLabel'	=> ['module' => 'servicedesk', 'action' => 'staffindex'],
+		],
+		'Misc. Stuff'	=> [
+			'AccountLabel'		=> ['module' => 'account'],
+			'CharacterLabel'	=> ['module' => 'character'],
+			'CPLogsLabel'		=> ['module' => 'cplog'],
+			'PagesLabel'		=> ['module' => 'pages'],
+			'NewsLabel'			=> ['module' => 'news', 'action' => 'manage'],
+			'GuildsLabel'		=> ['module' => 'guild'],
+			'IPBanListLabel'	=> ['module' => 'ipban'],
+			'rALogsLabel'		=> ['module' => 'logdata'],
+			'ReInstallLabel'	=> ['module' => 'install', 'action' => 'reinstall'],
+			'SendMailLabel'		=> ['module' => 'mail'],
+			'WCTitleLabel'		=> ['module' => 'webcommands'],
+			'Cash Shop'			=> ['module' => 'cashshop'],
+			//'Auction'		=> ['module' => 'auction'],
+			//'Economy'		=> ['module' => 'economy']
+		]
+	],
 
-	// Sub-menu items that are displayed for any action belonging to a
-	// particular module. The format it simple.
-	'SubMenuItems'	=> array(
-		'history'		=> array(
-			'gamelogin'		=> 'Game Logins',
-			'cplogin'		=> 'CP Logins',
-			'emailchange'	=> 'E-Mail Changes',
-			'passchange'	=> 'Password Changes',
-			'passreset'		=> 'Password Resets'
-		),
-		'account'		=> array(
-			'index'			=> 'List Accounts',
-			'view'			=> 'View Account',
-			'changepass'	=> 'Change Password',
-			'changemail'	=> 'Change E-mail',
-			'changesex'		=> 'Change Gender',
-			'transfer'		=> 'Transfer Credits',
-			'xferlog'		=> 'Credit Transfer History',
-			'cart'			=> 'Go to Shopping Cart',
-			'login'			=> 'Login',
-			'create'		=> 'Register',
-			'resetpass'		=> 'Reset Password',
-			'resend'		=> 'Resend E-mail Confirmation'
-		),
-		'guild'			=> array(
-			'index'			=> 'List Guilds',
-			'export'		=> 'Export Guild Emblems'
-		),
-		'server'		=> array(
-			'status'		=> 'View Status',
-			'status-xml'	=> 'View Status as XML'
-		),
-		'logdata'		=> array(
-			'branch'		=> 'Branches',
-			'char'			=> 'Characters',
-			'cashpoints'	=> 'CashPoints',
-			'chat'			=> 'Chat Messages',
-			'command'		=> 'Commands',
-			'feeding'		=> 'Feeding',
-			'inter'			=> 'Interactions',
-			'pick'			=> 'Item Picks',
-			'login'			=> 'Logins',
-			'mvp'			=> 'MVP',
-			'npc'			=> 'NPC',
-			'zeny'			=> 'Zeny'
-		),
-		'cplog'			=> array(
-			'paypal'		=> 'PayPal Transactions',
-			'create'		=> 'Account Registrations',
-			'login'			=> 'Logins',
-			'resetpass'		=> 'Password Resets',
-			'changepass'	=> 'Password Changes',
-			'changemail'	=> 'E-mail Changes',
-			'ban'			=> 'Account Bans',
-			'ipban'			=> 'IP Bans'
-		),
-		'purchase'		=> array(
-			'index'			=> 'Shop',
-			'cart'			=> 'Go to Cart',
-			'checkout'		=> 'Checkout',
-			'clear'			=> 'Empty Cart',
-			'pending'		=> 'Pending Redemption'
-		),
-		'donate'		=> array(
-			'index'			=> 'Make a Donation',
-			'history'		=> 'Donation History',
-			'trusted'		=> 'Trusted PayPal E-mails'
-		),
-		'ipban'			=> array(
-			'index'			=> 'IP Ban List',
-			'add'			=> 'Add IP Ban'
-		),
-		'ranking'		=> array(
-			'character'		=> 'Characters',
-			'death'			=> 'Deaths',
-			'alchemist'		=> 'Alchemists',
-			'blacksmith'	=> 'Blacksmiths',
-			'homunculus'	=> 'Homunculus',
-			'mvp'			=> 'MVPs',
-			'guild'			=> 'Guilds',
-			'zeny'			=> 'Zeny'
-		),
-		'item'			=> array(
-			'index'			=> 'List Items',
-			'iteminfo'		=> 'Add Item Info',
-		),
-		'pages'			=> array(
-			'index'			=> 'Manage Pages',
-			'add'			=> 'Add New Page',
-		),
-		'news'			=> array(
-			'index'			=> 'Latest News',
-			'manage'			=> 'Manage',
-			'add'			=> 'Add News',
-		),
-		'servicedesk'	=> array(
-			'staffindex'	=> 'View Active',
-			'staffviewclosed'=> 'View Closed',
-			'staffsettings'	=> 'Staff Settings',
-			'catcontrol'	=> 'Category Control',
-		),
-		'vending'			=> array(
-			'index'			=> 'Vendors',
-		),
-		'buyingstore'		=> array(
-			'index'			=> 'Buyers',
-		),
-	),
+	//  Itens de sub-menu que são exibidos para qualquer ação pertencente a um
+	//  módulo específico. O formato é simples.
+	'SubMenuItems' => [
+    'history' => [
+        'gamelogin'     => 'Logins no Jogo',
+        'cplogin'       => 'Logins no CP',
+        'emailchange'   => 'Mudanças de E-mail',
+        'passchange'    => 'Mudanças de Senha',
+        'passreset'     => 'Redefinições de Senha'
+    ],
+    'account' => [
+        'index'         => 'Listar Contas',
+        'view'          => 'Visualizar Conta',
+        'changepass'    => 'Mudar Senha',
+        'changemail'    => 'Mudar E-mail',
+        'changesex'     => 'Mudar Gênero',
+        'transfer'      => 'Transferir Créditos',
+        'xferlog'       => 'Histórico de Transferências de Créditos',
+        'cart'          => 'Ir ao Carrinho de Compras',
+        'login'         => 'Entrar',
+        'create'        => 'Registrar',
+        'resetpass'     => 'Redefinir Senha',
+        'resend'        => 'Reenviar Confirmação de E-mail'
+    ],
+    'guild' => [
+        'index'         => 'Listar Guildas',
+        'export'        => 'Exportar Emblemas de Guildas'
+    ],
+    'server' => [
+        'status'        => 'Ver Status',
+        'status-xml'    => 'Ver Status como XML'
+    ],
+    'logdata' => [
+        'branch'        => 'Branches',
+        'char'          => 'Personagens',
+        'cashpoints'    => 'Pontos de Dinheiro',
+        'chat'          => 'Mensagens de Chat',
+        'command'       => 'Comandos',
+        'feeding'       => 'Alimentação',
+        'inter'         => 'Interações',
+        'pick'          => 'Drop de Itens',
+        'login'         => 'Logins',
+        'mvp'           => 'MVP',
+        'npc'           => 'NPC',
+        'zeny'          => 'Zeny'
+    ],
+    'cplog' => [
+        'paypal'        => 'Transações PayPal',
+        'create'        => 'Registros de Contas',
+        'login'         => 'Logins',
+        'resetpass'     => 'Redefinições de Senha',
+        'changepass'    => 'Mudanças de Senha',
+        'changemail'    => 'Mudanças de E-mail',
+        'ban'           => 'Banimentos de Conta',
+        'ipban'         => 'Banimentos de IP'
+    ],
+    'purchase' => [
+        'index'         => 'Loja',
+        'cart'          => 'Ir ao Carrinho',
+        'checkout'      => 'Finalizar Compra',
+        'clear'         => 'Esvaziar Carrinho',
+        'pending'       => 'Resgates Pendentes'
+    ],
+    'donate' => [
+        'index'         => 'Fazer uma Doação',
+        'history'       => 'Histórico de Doações',
+        'trusted'       => 'E-mails do PayPal Confiáveis'
+    ],
+    'ipban' => [
+        'index'         => 'Lista de Banimentos de IP',
+        'add'           => 'Adicionar Banimento de IP'
+    ],
+    'ranking' => [
+        'character'     => 'Personagens',
+        'death'         => 'Mortes',
+        'alchemist'     => 'Alquimistas',
+        'blacksmith'    => 'Ferreiros',
+        'homunculus'    => 'Homunculus',
+        'mvp'           => 'MVPs',
+        'guild'         => 'Guildas',
+        'zeny'          => 'Zeny'
+    ],
+    'item' => [
+        'index'         => 'Listar Itens',
+        'iteminfo'      => 'Adicionar Informações de Item',
+    ],
+    'pages' => [
+        'index'         => 'Gerenciar Páginas',
+        'add'           => 'Adicionar Nova Página',
+    ],
+    'news' => [
+        'index'         => 'Últimas Notícias',
+        'manage'        => 'Gerenciar',
+        'add'           => 'Adicionar Notícia',
+    ],
+    'servicedesk' => [
+        'staffindex'    => 'Ver Ativos',
+        'staffviewclosed'=> 'Ver Fechados',
+        'staffsettings' => 'Configurações da Equipe',
+        'catcontrol'    => 'Controle de Categorias',
+    ],
+    'vending' => [
+        'index'         => 'Vendedores',
+    ],
+    'buyingstore' => [
+        'index'         => 'Compradores',
+    ],
+],
+
 
 	'AllowMD5PasswordSearch'		=> false,
-	'ReallyAllowMD5PasswordSearch'	=> false, // Are you POSITIVELY sure?
+	'ReallyAllowMD5PasswordSearch'	=> false, //  Você está POSITIVAMENTE certo?
 
-	// Specifies which modules and actions should be ignored by Tidy
-	// (enabled/disabled by the OutputCleanHTML option).
-	'TidyIgnore'	=> array(
-		array('module' => 'captcha'),
-		array('module' => 'guild', 'action' => 'emblem')
-	),
+	//  Especifica quais módulos e ações devem ser ignorados pelo Tidy
+	//  (ativado/desativado pela opção OutputCleanHTML).
+	'TidyIgnore'	=> [
+		['module' => 'captcha'],
+		['module' => 'guild', 'action' => 'emblem']
+	],
 
-	// Job classes, loaded from another file to avoid cluttering this one.
-	// There isn't normally a need to modify this file, unless it's been
-	// modified in an update. (In English: DON'T TOUCH THIS.)
+	//  Classes, carregadas de outro arquivo para evitar bagunçar este.
+	//  Normalmente não há necessidade de modificar este arquivo, a menos que tenha sido
+	//  modificado em uma atualização. (Em inglês: NÃO TOQUE NISSO.)
 	'JobClasses'					=> include('jobs.php'),
 
-	// Alchemist job classes, mostly used for alchemist rankings.
-	// Should be left alone unless new alchemist-related job classes are introduced.
+	//  Classes de trabalho de Alquimista, usadas principalmente para rankings de alquimistas.
+	//  Deve ser deixado sozinho, a menos que novas classes de trabalho relacionadas a alquimistas sejam introduzidas.
 	'AlchemistJobClasses'			=> include('jobs_alchemist.php'),
 
-	// Blacksmith job classes, mostly used for blacksmith rankings.
-	// Should be left alone unless new blacksmith-related job classes are introduced.
+	//  Classes de trabalho de Ferreiro, usadas principalmente para rankings de ferreiros.
+	//  Deve ser deixado sozinho, a menos que novas classes de trabalho relacionadas a ferreiros sejam introduzidas.
 	'BlacksmithJobClasses'			=> include('jobs_blacksmith.php'),
 
-	// Gender-linked Job class IDs and their corresponding names.
-	// Should be left alone unless new gender-specific job classes are introduced.
+	//  IDs de classe de trabalho vinculados ao gênero e seus nomes correspondentes.
+	//  Deve ser deixado sozinho, a menos que novas classes de trabalho específicas de gênero sejam introduzidas.
 	'GenderLinkedJobClasses'		=> include('jobs_gender_linked.php'),
 
-	// Homunculus class IDs and their corresponding names.
-	// Best not to mess with this either.
+	//  IDs de classe de Homúnculo e seus nomes correspondentes.
+	//  Melhor não mexer nisso também.
 	'HomunClasses'					=> include('homunculus.php'),
 
-	// Item Types with their corresponding names.
-	// Shouldn't touch this either.
+	//  Tipos de item com seus nomes correspondentes.
+	//  Também não deve mexer nisso.
 	'ItemTypes'						=> include('itemtypes.php'),
 
-	// Item SubTypes with their corresponding names.
-	// Shouldn't touch this either.
+	//  Subtipos de item com seus nomes correspondentes.
+	//  Também não deve mexer nisso.
 	'ItemSubTypes'					=> include('itemsubtypes.php'),
 
-	// Common Equip Location Combinations with their corresponding names.
-	// Shouldn't touch this unless you've added custom combinations.
+	//  Combinações comuns de localização de equipamento com seus nomes correspondentes.
+	//  Não deve mexer nisso a menos que tenha adicionado combinações personalizadas.
 	'EquipLocationCombinations'		=> include('equip_location_combinations.php'),
 
-	// Error Code -> Error Type mapping.
-	// Shouldn't need touching, however modifying loginerrors.php should be relatively safe.
+	//  Mapeamento de código de erro -> tipo de erro.
+	//  Não deve precisar mexer nisso, no entanto, modificar loginerrors.php deve ser relativamente seguro.
 	'LoginErrors'					=> include('loginerrors.php'),
 
-	// rA equip jobs mapping.
+	//  Mapeamento de classes de equipamento rA.
 	'EquipJobs'						=> include('equip_jobs.php'),
 
-	// rA equip locations mapping.
+	//  Mapeamento de locais de equipamento rA.
 	'EquipLocations'				=> include('equip_locations.php'),
 
-	// rA equip upper mapping.
+	//  Mapeamento de equipamento superior rA.
 	'EquipUpper'					=> include('equip_upper.php'),
 
-	// rA monster sizes mapping.
+	//  Mapeamento de tamanhos de monstros rA.
 	'MonsterSizes'					=> include('sizes.php'),
 
-	// rA monster races mapping.
+	//  Mapeamento de raças de monstros rA.
 	'MonsterRaces'					=> include('races.php'),
 
-	// rA elements mapping.
+	//  Mapeamento de elementos rA.
 	'Elements'						=> include('elements.php'),
 
-	// rA attributes mapping.
+	//  Mapeamento de atributos rA.
 	'Attributes'					=> include('attributes.php'),
 
-	// rA monster modes mapping.
+	//  Mapeamento de modos de monstros rA.
 	'MonsterModes'					=> include('monstermode.php'),
 	'MonsterAI'						=> include('monster_ai.php'),
 
-	// Item shop categories.
+	//  Categorias de loja de itens.
 	'ShopCategories'				=> include('shopcategories.php'),
 
-	// Cash shop categories.
+	//  Categorias de loja de Cash.
 	'CashShopCategories'			=> include('cashshopcategories.php'),
 
-	// Item pick and zeny log types.
+	//  Tipos de log de coleta de itens e zeny.
 	'PickTypes'						=> include('picktypes.php'),
 
-	// Type of feeding
+	//  Tipos de alimentação
 	'FeedingTypes'					=> include('feedingtypes.php'),
 
-	// Castle names.
+	//  Nomes de castelos.
 	'CastleNames'					=> include('castlenames.php'),
 
-	// Trade restrictions.
+	//  Restrições de comércio.
 	'TradeRestriction'				=> include('trade_restrictions.php'),
 
-	// Item flags.
+	//  Flags de item.
 	'ItemFlags'						=> include('itemsflags.php'),
 
-	// Item random options.
+	//  Opções aleatórias de item.
 	'RandomOptions'					=> include('item_randoptions.php'),
 
-	// DON'T TOUCH. THIS IS FOR DEVELOPERS.
-	'FluxTables'		=> array(
+	//  NÃO TOQUE. ISSO É PARA DESENVOLVEDORES.
+	'FluxTables'		=> [
 		'CreditsTable'			=> 'cp_credits',
 		'CreditTransferTable'	=> 'cp_xferlog',
 		'ItemShopTable'			=> 'cp_itemshop',
@@ -544,6 +558,6 @@ return array(
 		'ServiceDeskSettingsTable'	=> 'cp_servicedesksettings',
 		'WebCommandsTable'		=> 'cp_commands',
         'ItemDescTable'     	=> 'cp_itemdesc',
-	)
-);
+	]
+];
 ?>

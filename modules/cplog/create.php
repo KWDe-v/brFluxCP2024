@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Account Registrations';
+$title = 'Registros de conta';
 
 $loginLogTable = Flux::config('FluxTables.AccountCreateTable');
 $sqlpartial    = "WHERE 1=1 ";

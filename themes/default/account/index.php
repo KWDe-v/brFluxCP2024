@@ -1,5 +1,5 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Accounts</h2>
+<h2>Contas</h2>
 <p class="toggler"><a href="javascript:toggleSearchForm()"><?php echo htmlspecialchars(Flux::message('SearchLabel')) ?></a></p>
 <form action="<?php echo $this->url ?>" method="get" class="search-form">
 	<?php echo $this->moduleActionFormInputs($params->get('module')) ?>
@@ -101,8 +101,8 @@
 		<!-- <th><?php echo $paginator->sortableColumn('reg_date', 'Register Date') ?></th> -->
 	</tr>
 	<?php foreach ($accounts as $account): ?>
-	<tr>
-		<td align="right">
+	<tr align="center">
+		<td>
 			<?php if ($auth->actionAllowed('account', 'view') && $auth->allowedToViewAccount): ?>
 				<?php echo $this->linkToAccount($account->account_id, $account->account_id) ?>
 			<?php else: ?>

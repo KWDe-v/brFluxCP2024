@@ -40,7 +40,7 @@ if (count($_POST)) {
 			$name = $loginAthenaGroup->serverName;
 			$link = $this->url('account', 'confirm', array('_host' => true, 'code' => $code, 'user' => $userid, 'login' => $name));
 			$mail = new Flux_Mailer();
-			$sent = $mail->send($email, 'Account Confirmation', 'confirm', array('AccountUsername' => $userid, 'ConfirmationLink' => htmlspecialchars($link)));
+			$sent = $mail->send($email, 'Confirmação de Conta', 'confirm', array('AccountUsername' => $userid, 'ConfirmationLink' => htmlspecialchars($link)));
 		}
 
 		if (empty($sent)) {

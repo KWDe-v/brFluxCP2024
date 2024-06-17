@@ -46,28 +46,28 @@ if ($item && count($_POST)) {
 	$useExisting = (int)$params->get('use_existing');
 	
 	if (!$cost) {
-		$errorMessage = 'You must input a credit cost greater than zero.';
+		$errorMessage = 'Você deve inserir um custo de crédito maior que zero.';
 	}
 	elseif ($cost > $maxCost) {
-		$errorMessage = "The credit cost must not exceed $maxCost.";
+		$errorMessage = "O custo de crédito não deve exceder $maxCost.";
 	}
 	elseif (!$quantity) {
-		$errorMessage = 'You must input a quantity greater than zero.';
+		$errorMessage = 'Você deve inserir uma quantidade maior que zero.';
 	}
 	elseif ($quantity > 1 && !$stackable) {
-		$errorMessage = 'This item is not stackable. Quantity must be 1.';
+		$errorMessage = 'Este item não é empilhável. A quantidade deve ser 1.';
 	}
 	elseif ($quantity > $maxQty) {
-		$errorMessage = "The item quantity must not exceed $maxQty.";
+		$errorMessage = "A quantidade do item não deve exceder $maxQty.";
 	}
 	elseif (!$info) {
-		$errorMessage = 'You must input at least some info text.';
+		$errorMessage = 'Você deve inserir pelo menos algum texto informativo.';
 	}
 	else {
 		if ($id=$shop->add($itemID, $category, $cost, $quantity, $info, $useExisting)) {
-			$message = 'Item has been successfully added to the shop';
+			$message = 'O item foi adicionado com sucesso à loja';
 			if ($image && $image->get('size') && !$shop->uploadShopItemImage($id, $image)) {
-				$message .= ', but the image failed to upload. You can re-attempt by modifying.';
+				$message .= ', mas a imagem falhou ao carregar. Você pode tentar novamente modificando.';
 			}
 			else {
 				$message .= '.';
@@ -76,7 +76,7 @@ if ($item && count($_POST)) {
 			$this->redirect($this->url('purchase'));	
 		}
 		else {
-			$errorMessage = 'Failed to add the item to the shop.';
+			$errorMessage = 'Falha ao adicionar o item à loja.';
 		}
 	}
 }

@@ -1,15 +1,15 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Re-Install Database Schemas</h2>
-<p>You may re-install your database schema files (*.sql files) from this interface. If you are absolutely sure you want to proceed with this then click "continue".</p>
-<p><strong>Note:</strong> By doing so, you may end up with duplicate indexes on your MySQL tables, but they are not harmful (this feature is highly experimental).</p>
+<h2>Reinstalar Esquemas de Banco de Dados</h2>
+<p>Você pode reinstalar seus arquivos de esquema de banco de dados (arquivos *.sql) a partir desta interface. Se você tem absoluta certeza de que deseja prosseguir, clique em "continuar".</p>
+<p><strong>Nota:</strong> Ao fazer isso, você pode acabar com índices duplicados em suas tabelas MySQL, mas eles não são prejudiciais (esta funcionalidade é altamente experimental).</p>
 <form action="<?php echo $this->urlWithQs ?>" method="post" class="generic-form">
 	<input type="hidden" name="reinstall" value="1" />
 	<table class="generic-form-table">
 		<tr>
-			<td><p>Are you absolutely sure you want to continue?</p></td>
+			<td><p>Você tem absoluta certeza de que deseja continuar?</p></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="Continue" /></td>
+			<td><input type="submit" value="Continuar" /></td>
 		</tr>
 	</table>
 </form>

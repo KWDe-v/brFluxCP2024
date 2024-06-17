@@ -14,6 +14,6 @@ require_once 'Flux/ItemShop.php';
 $shop = new Flux_ItemShop($server);
 $shop->deleteShopItemImage($shopItemID);
 
-$session->setMessageData('Shop item image has been deleted.');
+$session->setMessageData('A imagem do item da loja foi excluída.');
 $this->redirect($this->referer);
 ?>

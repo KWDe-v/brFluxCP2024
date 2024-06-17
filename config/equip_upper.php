@@ -1,17 +1,17 @@
 <?php
-return array(
-	0	=>	// Default class list
-	array(
-		'class_all' => 'All classes',
+return [
+	0 =>	// Lista de classes padrão
+	[
+		'class_all' => 'Todas as classes',
 		'class_normal' => 'Normal',
-		'class_upper' => 'Upper',
-		'class_baby' => 'Baby'
-	),
-	1	=>	// Renewal class list
-	array(
-		'class_third' => 'Third',
-		'class_third_upper' => 'Third Upper',
-		'class_third_baby' => 'Third Baby'
-	)
-)
+		'class_upper' => 'Transcendida',
+		'class_baby' => 'Bebê'
+	],
+	1 =>	// Lista de classes de Renovação
+	[
+		'class_third' => 'Terceira',
+		'class_third_upper' => 'Terceira Transcendida',
+		'class_third_baby' => 'Terceira Bebê'
+	]
+];
 ?>

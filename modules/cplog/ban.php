@@ -1,7 +1,7 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'List Account Ban History';
+$title = 'Listar histórico de banimento de conta';
 
 $banTable    = Flux::config('FluxTables.AccountBanTable');
 $sqlpartial  = "LEFT JOIN {$server->loginDatabase}.login AS l1 ON l1.account_id = a.account_id ";

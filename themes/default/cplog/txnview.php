@@ -1,12 +1,12 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
-<h2>Viewing PayPal Transaction Details</h2>
+<h2>Visualizando detalhes da transação do PayPal</h2>
 <?php if ($txn): ?>
-<p>If the transaction contains negative payment and settle amounts, it is likely there was a chargeback and the donor was reimbursed.</p>
+<p>Se a transação contiver valores negativos de pagamento e liquidação, é provável que tenha havido um estorno e o doador tenha sido reembolsado.</p>
 <table class="vertical-table">
 	<tr>
-		<th>Transaction ID</th>
+		<th>ID da Transação</th>
 		<td><?php echo htmlspecialchars($txn->txn_id) ?></td>
-		<th>Account</th>
+		<th>Conta</th>
 		<td>
 			<?php if ($txn->account_id): ?>
 				<?php if ($auth->actionAllowed('account', 'view') && $auth->allowedToViewAccount): ?>
@@ -15,40 +15,40 @@
 					<?php echo htmlspecialchars($txn->userid) ?>
 				<?php endif ?>
 			<?php else: ?>
-				<span class="not-applicable">Unknown</span>
+				<span class="not-applicable">N/A</span>
 			<?php endif ?>
 		</td>
-		<th>Credits Earned</th>
+		<th>Créditos Ganhos</th>
 		<td><?php echo number_format((int)$txn->credits) ?></td>
 	</tr>
 	<tr>
-		<th>Amount</th>
+		<th>Quantidade</th>
 		<td>
 			<?php echo $txn->mc_gross ?>
 			<?php echo $txn->mc_currency ?>
 		</td>
-		<th>Settle Amount</th>
+		<th>Valor da liquidação</th>
 		<td colspan="3">
 			<?php echo $txn->mc_gross - $txn->mc_fee ?>
 			<?php echo $txn->mc_currency ?>
 		</td>
 	</tr>
 	<tr>
-		<th>Payment Date</th>
+		<th>Data de pagamento</th>
 		<td><?php echo htmlspecialchars(date(Flux::config('DateTimeFormat'), strtotime($txn->payment_date))) ?></td>
-		<th>Date Processed</th>
+		<th>Data de Processamento</th>
 		<td colspan="3"><?php echo $this->formatDateTime($txn->process_date) ?></td>
 	</tr>
 	<tr>
 		<th>Status</th>
 		<td><?php echo htmlspecialchars($txn->payment_status) ?></td>
-		<th>Item Name</th>
+		<th>Nome do item</th>
 		<td colspan="3"><?php echo htmlspecialchars($txn->item_name) ?></td>
 	</tr>
 	<tr>
-		<th>First Name</th>
+		<th>Primeiro nome</th>
 		<td><?php echo htmlspecialchars($txn->first_name) ?></td>
-		<th rowspan="2">Address</th>
+		<th rowspan="2">Endereço</th>
 		<td colspan="3" rowspan="2">
 			<?php echo htmlspecialchars($txn->address_street) ?><br />
 			<?php echo htmlspecialchars($txn->address_city) ?>,
@@ -58,19 +58,19 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Last Name</th>
+		<th>Sobrenome</th>
 		<td><?php echo htmlspecialchars($txn->last_name) ?></td>
 	</tr>
 </table>
 <?php if ($auth->allowedToViewRawTxnLogData): ?>
-	<h3>Raw Transaction Log</h3>
+	<h3>Log de transações bruto</h3>
 	<?php if ($txnFileLog): ?>
 	<pre class="raw-txn-log"><?php echo htmlspecialchars($txnFileLog) ?></pre>
 	<?php else: ?>
-	<p>The raw log for this transaction could not be found.</p>
+	<p>O log bruto desta transação não foi encontrado.</p>
 	<?php endif ?>	
 
 	<?php else: ?>
-	<p>Records indicate that such a transaction was never recorded. <a href="javascript:history.go(-1)">Go back</a>.</p>
+	<p>Os registros indicam que tal transação nunca foi registrada. <a href="javascript:history.go(-1)">Volte</a>.</p>
 	<?php endif ?>
 <?php endif ?>

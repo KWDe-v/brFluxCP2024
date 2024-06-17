@@ -1,14 +1,14 @@
 <?php
 if (!defined('FLUX_ROOT')) exit;
 
-$title = 'Password Resets';
+$title = 'Redefinições de senha';
 
 $resetTable  = Flux::config('FluxTables.ResetPasswordTable');
 $sqlpartial  = "LEFT JOIN {$server->loginDatabase}.login ON login.account_id = log.account_id ";
 $sqlpartial .= 'WHERE 1=1 ';
 $bind        = array();
 
-// Password reset searching.
+// Pesquisa de redefinição de senha.
 $requestAfter  = $params->get('request_after_date');
 $requestBefore = $params->get('request_before_date');
 $resetAfter    = $params->get('reset_after_date');

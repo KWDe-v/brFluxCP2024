@@ -1,6 +1,6 @@
 <?php if (!defined('FLUX_ROOT')) exit; ?>
 <h2>CashShop</h2>
-<h3>Add Item to the CashShop</h3>
+<h3>Adicionar item ao CashShop</h3>
 <?php if ($item): ?>
 <?php if (!empty($errorMessage)): ?>
 <p class="red"><?php echo htmlspecialchars($errorMessage) ?></p>
@@ -8,15 +8,16 @@
 <form action="<?php echo $this->urlWithQs ?>" method="post" enctype="multipart/form-data">
 <table class="vertical-table">
 	<tr>
-		<th>Item ID</th>
+		<th>ID</th>
 		<td><?php echo $this->linkToItem($item->item_id, $item->item_id) ?></td>
 	</tr>
 	<tr>
-		<th>Name</th>
+		<th>Nome</th>
 		<td><?php echo htmlspecialchars($item->item_name) ?></td>
+		<td width="24"><img src="<?php echo htmlspecialchars($this->iconImage($item->item_id)) ?>?nocache=<?php echo rand() ?>" /></td>
 	</tr>
 	<tr>
-		<th><label for="tab">In-Game Tab</label></th>
+		<th><label for="tab">Guia no jogo</label></th>
 		<td>
 			<select name="tab" id="tab">
 				<?php foreach ($categories as $categoryID => $cat): ?>
@@ -26,16 +27,16 @@
 		</td>
 	</tr>
 	<tr>
-		<th><label for="price">CashPoints Cost</label></th>
+		<th><label for="price">Custo de CashPoints</label></th>
 		<td><input type="text" class="short" name="price" id="price" value="<?php echo htmlspecialchars($params->get('price') ?: '') ?>" /></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			<input type="submit" value="Add" />
+			<input type="submit" value="Adicionar" />
 		</td>
 	</tr>
 </table>
 </form>
 <?php else: ?>
-<p>Cannot add an unknown item to the item shop. <a href="javascript:history.go(-1)">Go back</a>.</p>
+<p>Não é possível adicionar um item desconhecido à loja de itens. <a href="javascript:history.go(-1)">Voltar</a>.</p>
 <?php endif ?>
