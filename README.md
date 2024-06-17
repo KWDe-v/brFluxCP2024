@@ -34,6 +34,19 @@ O que há de novo?
   - Google ReCaptcha
   - Funcionalidade AtCommand remota
 
+* Atualizações by KWDe-v
+
+  - Integração com MercadoPago
+  - ServiceDesk Corrigido (agora tanto players quanto ADM recebe um email toda vez que tiver uma resposta no ticket)
+  - Tradução 90% (Em breve 100%)
+  - Data base de Itens e Monstro mais rápidas
+  - Function novas para melhor funcionamento do sistema
+  - Escolhas de Gateway de Pagamentos (MercadoPago, PayPal ou ambas)
+  - Mudança no Visual do tema padrão para cores do Brasil (Verde, Amarelo e Azul) OBS: Fiz isso somente para ter novas ideias de intergração
+  - Template de E-mail's com nova estrutura de HTML e com css, tornando mais legível
+  - corrigido pasta equip_jobs
+  - Atualizado alguns módulos para maior Desempenho do sistema
+
 
 Como ... ?
 ---------
