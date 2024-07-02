@@ -53,8 +53,8 @@ Como ... ?
 Temos uma pequena biblioteca de documentos que abrange:
 * Documentação básica do usuário
  - Instalação
- - [Temas](https://github.com/rathena/FluxCP/blob/master/doc/user_theme.md)
- - [Idiomas](https://github.com/rathena/FluxCP/blob/master/doc/user_lang.md)
+ - [Temas](https://github.com/KWDe-v/brFluxCP2024/blob/master/doc/user_theme.md)
+ - [Idiomas](https://github.com/KWDe-v/brFluxCP2024/blob/master/doc/user_lang.md)
  - Instalando complementos
  - Atualizando FluxCP
 
